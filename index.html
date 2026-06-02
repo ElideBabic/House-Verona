@@ -46,6 +46,7 @@
       }
       html {
         scroll-behavior: smooth;
+        overflow-x: hidden;
       }
 
       body {
@@ -101,16 +102,24 @@
       /* Hide/show via language toggle */
       body[data-lang="en"] .lang-hr,
       body[data-lang="en"] .lang-it,
-      body[data-lang="en"] .lang-de { display: none; }
+      body[data-lang="en"] .lang-de {
+        display: none;
+      }
       body[data-lang="hr"] .lang-en,
       body[data-lang="hr"] .lang-it,
-      body[data-lang="hr"] .lang-de { display: none; }
+      body[data-lang="hr"] .lang-de {
+        display: none;
+      }
       body[data-lang="it"] .lang-en,
       body[data-lang="it"] .lang-hr,
-      body[data-lang="it"] .lang-de { display: none; }
+      body[data-lang="it"] .lang-de {
+        display: none;
+      }
       body[data-lang="de"] .lang-en,
       body[data-lang="de"] .lang-hr,
-      body[data-lang="de"] .lang-it { display: none; }
+      body[data-lang="de"] .lang-it {
+        display: none;
+      }
 
       /* ============== NAVIGATION ============== */
       nav {
@@ -214,11 +223,21 @@
         .nav-links {
           display: none;
         }
+        .btn-primary {
+          display: none;
+        }
+        .lang-toggle button {
+          padding: 4px 4px;
+          font-size: 12px;
+        }
+        .lang-toggle span {
+          display: none;
+        }
       }
 
       /* ============== HERO ============== */
       .hero {
-        padding: 100px 0 60px;
+        padding: 1px 0 48px;
         position: relative;
       }
 
@@ -229,13 +248,21 @@
         grid-template-areas:
           "text image"
           "meta image";
-        gap: 48px;
-        min-height: 70vh;
+        gap: 40px;
       }
 
-      .hero-text { grid-area: text; }
-      .hero-image { grid-area: image; }
-      .hero-meta  { grid-area: meta; }
+      .hero-text {
+        grid-area: text;
+        align-self: center;
+      }
+      .hero-image {
+        grid-area: image;
+        align-self: start;
+      }
+      .hero-meta {
+        grid-area: meta;
+        align-self: start;
+      }
 
       .hero-text {
         padding-bottom: 0;
@@ -260,7 +287,7 @@
       }
 
       .hero h1 {
-        font-size: clamp(56px, 9vw, 140px);
+        font-size: clamp(48px, 6vw, 88px);
         margin-bottom: 32px;
         color: var(--ink);
       }
@@ -352,16 +379,29 @@
           gap: 12px;
           min-height: unset;
         }
+        .hero-text {
+          align-self: auto;
+        }
         .hero-image {
+          align-self: auto;
           aspect-ratio: 4/3;
+        }
+        .hero-meta {
+          align-self: auto;
         }
         .hero h1 {
           font-size: clamp(36px, 10vw, 56px);
           margin-bottom: 0;
         }
-        .hero h1 .italic { display: inline; }
-        .hero p { display: none; }
-        .eyebrow { margin-bottom: 10px; }
+        .hero h1 .italic {
+          display: inline;
+        }
+        .hero p {
+          display: none;
+        }
+        .eyebrow {
+          margin-bottom: 10px;
+        }
         .hero-meta {
           padding-top: 14px;
           gap: 24px;
@@ -373,17 +413,42 @@
       }
 
       @media (max-width: 900px) {
-        .section { padding: 52px 0; }
-        .section-marker { margin-bottom: 28px; }
-        .direct-booking { padding: 52px 0; }
-        .cta { padding: 52px 0; }
-        footer { padding: 40px 0 24px; }
-        .footer-grid { margin-bottom: 28px; }
-        .about-grid { gap: 24px; }
-        .pullquote { font-size: 20px; padding-left: 20px; margin: 20px 0; }
-        .pricing-subtitle { margin-bottom: 24px; }
-        .benefits { gap: 16px; margin-bottom: 40px; }
-        .direct-booking h2 { margin-bottom: 20px; }
+        .section {
+          padding: 52px 0;
+        }
+        .section-marker {
+          margin-bottom: 28px;
+        }
+        .direct-booking {
+          padding: 52px 0;
+        }
+        .cta {
+          padding: 52px 0;
+        }
+        footer {
+          padding: 40px 0 24px;
+        }
+        .footer-grid {
+          margin-bottom: 28px;
+        }
+        .about-grid {
+          gap: 24px;
+        }
+        .pullquote {
+          font-size: 20px;
+          padding-left: 20px;
+          margin: 20px 0;
+        }
+        .pricing-subtitle {
+          margin-bottom: 24px;
+        }
+        .benefits {
+          gap: 16px;
+          margin-bottom: 40px;
+        }
+        .direct-booking h2 {
+          margin-bottom: 20px;
+        }
       }
 
       /* ============== ABOUT ============== */
@@ -522,27 +587,41 @@
       .carousel-main {
         position: relative;
         aspect-ratio: 16/9;
+        max-height: 62vh;
         background: var(--bg-deep);
         border-radius: 4px;
         overflow: hidden;
       }
 
+      @media (max-width: 600px) {
+        .carousel-main {
+          aspect-ratio: 4/3;
+        }
+      }
+
       .carousel-track-wrap {
         width: 100%;
         height: 100%;
-        overflow: hidden;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
       }
+
+      .carousel-track-wrap::-webkit-scrollbar { display: none; }
 
       .carousel-track {
         display: flex;
         height: 100%;
-        transition: transform 0.4s ease;
       }
 
       .carousel-slide {
+        width: 100%;
         min-width: 100%;
         height: 100%;
         flex-shrink: 0;
+        scroll-snap-align: start;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -580,8 +659,12 @@
         background: rgba(27, 24, 20, 0.85);
       }
 
-      .carousel-prev { left: 16px; }
-      .carousel-next { right: 16px; }
+      .carousel-prev {
+        left: 16px;
+      }
+      .carousel-next {
+        right: 16px;
+      }
 
       .carousel-counter {
         position: absolute;
@@ -605,9 +688,16 @@
         scrollbar-color: var(--bg-deep) transparent;
       }
 
-      .carousel-thumbs::-webkit-scrollbar { height: 4px; }
-      .carousel-thumbs::-webkit-scrollbar-track { background: transparent; }
-      .carousel-thumbs::-webkit-scrollbar-thumb { background: var(--bg-deep); border-radius: 2px; }
+      .carousel-thumbs::-webkit-scrollbar {
+        height: 4px;
+      }
+      .carousel-thumbs::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .carousel-thumbs::-webkit-scrollbar-thumb {
+        background: var(--bg-deep);
+        border-radius: 2px;
+      }
 
       .carousel-thumb {
         min-width: 80px;
@@ -622,15 +712,24 @@
         flex-shrink: 0;
       }
 
-      .carousel-thumb:hover { opacity: 0.85; }
+      .carousel-thumb:hover {
+        opacity: 0.85;
+      }
       .carousel-thumb.active {
         opacity: 1;
         border-color: var(--terra);
       }
 
       @media (max-width: 600px) {
-        .carousel-btn { width: 36px; height: 36px; font-size: 16px; }
-        .carousel-thumb { min-width: 60px; height: 42px; }
+        .carousel-btn {
+          width: 36px;
+          height: 36px;
+          font-size: 16px;
+        }
+        .carousel-thumb {
+          min-width: 60px;
+          height: 42px;
+        }
       }
 
       /* ============== LOCATION ============== */
@@ -638,15 +737,21 @@
         background: var(--sea);
         color: var(--bg);
       }
-      .location .section-marker .num { color: #e8a77f; }
-      .location .section-marker .label { color: rgba(242, 235, 222, 0.6); }
+      .location .section-marker .num {
+        color: #e8a77f;
+      }
+      .location .section-marker .label {
+        color: rgba(242, 235, 222, 0.6);
+      }
 
       .location h2 {
         font-size: clamp(36px, 5vw, 64px);
         margin-bottom: 32px;
       }
 
-      .location h2 .italic { color: #e8a77f; }
+      .location h2 .italic {
+        color: #e8a77f;
+      }
 
       .location-grid {
         display: grid;
@@ -742,7 +847,9 @@
         margin-bottom: 8px;
       }
 
-      .pricing-title .italic { color: var(--sea); }
+      .pricing-title .italic {
+        color: var(--sea);
+      }
 
       .pricing-subtitle {
         color: var(--ink-muted);
@@ -770,7 +877,9 @@
         gap: 16px;
       }
 
-      .pricing-card:last-child { border-right: none; }
+      .pricing-card:last-child {
+        border-right: none;
+      }
 
       .pricing-season {
         font-size: 11px;
@@ -804,14 +913,24 @@
         font-weight: 400;
       }
 
-      .pricing-card.pricing-high { background: var(--bg-alt); }
-      .pricing-card.pricing-peak { background: var(--sea); }
+      .pricing-card.pricing-high {
+        background: var(--bg-alt);
+      }
+      .pricing-card.pricing-peak {
+        background: var(--sea);
+      }
 
       .pricing-card.pricing-peak .pricing-season,
-      .pricing-card.pricing-peak .pricing-dates { color: rgba(242, 235, 222, 0.65); }
+      .pricing-card.pricing-peak .pricing-dates {
+        color: rgba(242, 235, 222, 0.65);
+      }
 
-      .pricing-card.pricing-peak .pricing-price { color: var(--bg); }
-      .pricing-card.pricing-peak .pricing-price span { color: rgba(242, 235, 222, 0.6); }
+      .pricing-card.pricing-peak .pricing-price {
+        color: var(--bg);
+      }
+      .pricing-card.pricing-peak .pricing-price span {
+        color: rgba(242, 235, 222, 0.6);
+      }
 
       .pricing-note {
         font-size: 13px;
@@ -820,20 +939,37 @@
       }
 
       @media (max-width: 900px) {
-        .pricing-grid { grid-template-columns: repeat(3, 1fr); }
-        .pricing-card:nth-child(3) { border-right: none; }
+        .pricing-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .pricing-card:nth-child(3) {
+          border-right: none;
+        }
         .pricing-card:nth-child(4),
-        .pricing-card:nth-child(5) { border-top: 1px solid var(--line); }
+        .pricing-card:nth-child(5) {
+          border-top: 1px solid var(--line);
+        }
       }
 
       @media (max-width: 600px) {
-        .pricing-grid { grid-template-columns: 1fr 1fr; }
-        .pricing-card:nth-child(2n) { border-right: none; }
+        .pricing-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .pricing-card:nth-child(2n) {
+          border-right: none;
+        }
         .pricing-card:nth-child(3),
         .pricing-card:nth-child(4),
-        .pricing-card:nth-child(5) { border-top: 1px solid var(--line); }
-        .pricing-card:nth-child(3) { border-right: 1px solid var(--line); }
-        .pricing-card:nth-child(5) { grid-column: span 2; border-right: none; }
+        .pricing-card:nth-child(5) {
+          border-top: 1px solid var(--line);
+        }
+        .pricing-card:nth-child(3) {
+          border-right: 1px solid var(--line);
+        }
+        .pricing-card:nth-child(5) {
+          grid-column: span 2;
+          border-right: none;
+        }
       }
 
       /* ============== DIRECT BOOKING ============== */
@@ -860,7 +996,9 @@
         margin: 0 auto 32px;
       }
 
-      .direct-booking h2 .italic { color: var(--terra); }
+      .direct-booking h2 .italic {
+        color: var(--terra);
+      }
 
       .direct-booking .subtitle {
         font-size: 19px;
@@ -907,7 +1045,9 @@
       }
 
       @media (max-width: 700px) {
-        .benefits { grid-template-columns: 1fr; }
+        .benefits {
+          grid-template-columns: 1fr;
+        }
       }
 
       /* ============== CTA ============== */
@@ -924,7 +1064,9 @@
         color: var(--bg);
       }
 
-      .cta h2 .italic { color: #e8a77f; }
+      .cta h2 .italic {
+        color: #e8a77f;
+      }
 
       .cta-subtitle {
         color: rgba(242, 235, 222, 0.7);
@@ -953,7 +1095,10 @@
         box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
       }
 
-      .btn-whatsapp svg { width: 24px; height: 24px; }
+      .btn-whatsapp svg {
+        width: 24px;
+        height: 24px;
+      }
 
       .cta-alt {
         margin-top: 24px;
@@ -1014,8 +1159,12 @@
         line-height: 1.5;
       }
 
-      .footer-col a:hover { color: var(--ink); }
-      .footer-col p { margin-bottom: 8px; }
+      .footer-col a:hover {
+        color: var(--ink);
+      }
+      .footer-col p {
+        margin-bottom: 8px;
+      }
 
       .footer-bottom {
         padding-top: 32px;
@@ -1029,7 +1178,10 @@
       }
 
       @media (max-width: 700px) {
-        .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
       }
 
       /* ============== FLOATING WHATSAPP ============== */
@@ -1050,13 +1202,25 @@
         text-decoration: none;
       }
 
-      .wa-float:hover { transform: scale(1.08); }
-      .wa-float svg { width: 28px; height: 28px; color: white; }
+      .wa-float:hover {
+        transform: scale(1.08);
+      }
+      .wa-float svg {
+        width: 28px;
+        height: 28px;
+        color: white;
+      }
 
       /* ============== ANIMATIONS ============== */
       @keyframes fadeUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       .hero h1,
@@ -1066,10 +1230,18 @@
         animation: fadeUp 0.9s ease both;
       }
 
-      .hero .eyebrow { animation-delay: 0.05s; }
-      .hero h1 { animation-delay: 0.15s; }
-      .hero-meta { animation-delay: 0.4s; }
-      .hero-image { animation-delay: 0.25s; }
+      .hero .eyebrow {
+        animation-delay: 0.05s;
+      }
+      .hero h1 {
+        animation-delay: 0.15s;
+      }
+      .hero-meta {
+        animation-delay: 0.4s;
+      }
+      .hero-image {
+        animation-delay: 0.25s;
+      }
     </style>
   </head>
   <body data-lang="en">
@@ -1128,7 +1300,9 @@
         </ul>
         <div style="display: flex; align-items: center; gap: 20px">
           <div class="lang-toggle">
-            <button onclick="setLang('en')" id="btn-en" class="active">EN</button>
+            <button onclick="setLang('en')" id="btn-en" class="active">
+              EN
+            </button>
             <span>/</span>
             <button onclick="setLang('hr')" id="btn-hr">HR</button>
             <span>/</span>
@@ -1156,16 +1330,40 @@
             <span class="lang-de">Insel Cres · Adriaküste</span>
           </div>
           <h1>
-            <span class="lang-en">Stone, sea, <span class="display italic">stillness.</span></span>
-            <span class="lang-hr">Kamen, more, <span class="display italic">tišina.</span></span>
-            <span class="lang-it">Pietra, mare, <span class="display italic">silenzio.</span></span>
-            <span class="lang-de">Stein, Meer, <span class="display italic">Stille.</span></span>
+            <span class="lang-en"
+              >Stone, sea, <span class="display italic">stillness.</span></span
+            >
+            <span class="lang-hr"
+              >Kamen, more, <span class="display italic">tišina.</span></span
+            >
+            <span class="lang-it"
+              >Pietra, mare, <span class="display italic">silenzio.</span></span
+            >
+            <span class="lang-de"
+              >Stein, Meer, <span class="display italic">Stille.</span></span
+            >
           </h1>
           <p style="font-size: 19px; color: var(--ink-soft); max-width: 480px">
-            <span class="lang-en">A traditional holiday house with sea views, less than a minute on foot to the nearest beach. Built for slow mornings and long dinners under the pergola.</span>
-            <span class="lang-hr">Tradicionalna kuća za odmor s pogledom na more, svega minutu pješice do najbliže plaže. Stvorena za spore jutra i duge večere pod pergolom.</span>
-            <span class="lang-it">Una tradizionale casa vacanze con vista mare, a meno di un minuto a piedi dalla spiaggia più vicina. Pensata per le mattine lente e le cene lunghe sotto il pergolato.</span>
-            <span class="lang-de">Ein traditionelles Ferienhaus mit Meerblick, weniger als eine Minute zu Fuß zum nächsten Strand. Geschaffen für langsame Morgen und lange Abendessen unter der Pergola.</span>
+            <span class="lang-en"
+              >A traditional holiday house with sea views, less than a minute on
+              foot to the nearest beach. Built for slow mornings and long
+              dinners under the pergola.</span
+            >
+            <span class="lang-hr"
+              >Tradicionalna kuća za odmor s pogledom na more, svega minutu
+              pješice do najbliže plaže. Stvorena za spore jutra i duge večere
+              pod pergolom.</span
+            >
+            <span class="lang-it"
+              >Una tradizionale casa vacanze con vista mare, a meno di un minuto
+              a piedi dalla spiaggia più vicina. Pensata per le mattine lente e
+              le cene lunghe sotto il pergolato.</span
+            >
+            <span class="lang-de"
+              >Ein traditionelles Ferienhaus mit Meerblick, weniger als eine
+              Minute zu Fuß zum nächsten Strand. Geschaffen für langsame Morgen
+              und lange Abendessen unter der Pergola.</span
+            >
           </p>
         </div>
         <div class="hero-image"></div>
@@ -1177,7 +1375,12 @@
               <span class="lang-it">Ospiti</span>
               <span class="lang-de">Schlafplätze</span>
             </small>
-            <strong>6 <span class="lang-en">guests</span><span class="lang-hr">osoba</span><span class="lang-it">ospiti</span><span class="lang-de">Gäste</span></strong>
+            <strong
+              >6 <span class="lang-en">guests</span
+              ><span class="lang-hr">osoba</span
+              ><span class="lang-it">ospiti</span
+              ><span class="lang-de">Gäste</span></strong
+            >
           </div>
           <div class="hero-meta-item">
             <small>
@@ -1206,57 +1409,121 @@
         <div class="about-grid">
           <div>
             <h2>
-              <span class="lang-en">A quiet retreat <span class="italic">on the wild island.</span></span>
-              <span class="lang-hr">Mirno utočište <span class="italic">na otoku tišine.</span></span>
-              <span class="lang-it">Un rifugio tranquillo <span class="italic">sull'isola selvaggia.</span></span>
-              <span class="lang-de">Ein ruhiger Rückzugsort <span class="italic">auf der wilden Insel.</span></span>
+              <span class="lang-en"
+                >A quiet retreat
+                <span class="italic">on the wild island.</span></span
+              >
+              <span class="lang-hr"
+                >Mirno utočište
+                <span class="italic">na otoku tišine.</span></span
+              >
+              <span class="lang-it"
+                >Un rifugio tranquillo
+                <span class="italic">sull'isola selvaggia.</span></span
+              >
+              <span class="lang-de"
+                >Ein ruhiger Rückzugsort
+                <span class="italic">auf der wilden Insel.</span></span
+              >
             </h2>
           </div>
           <div class="about-text">
             <p class="lang-en">
-              House Verona is a thoughtfully restored house on the island of Cres, designed for families and small groups who want the island at its calmest — olive trees, dry stone walls, the sound of cicadas, and the sea always close.
+              House Verona is a thoughtfully restored house on the island of
+              Cres, designed for families and small groups who want the island
+              at its calmest — olive trees, dry stone walls, the sound of
+              cicadas, and the sea always close.
             </p>
             <p class="lang-hr">
-              House Verona je pažljivo obnovljena kuća na otoku Cresu, namijenjena obiteljima i manjim grupama koje žele otok u njegovom najmirnijem izdanju — masline, suhozidi, cvrčci i more uvijek u blizini.
+              House Verona je pažljivo obnovljena kuća na otoku Cresu,
+              namijenjena obiteljima i manjim grupama koje žele otok u njegovom
+              najmirnijem izdanju — masline, suhozidi, cvrčci i more uvijek u
+              blizini.
             </p>
             <p class="lang-it">
-              House Verona è una casa accuratamente restaurata sull'isola di Cres, pensata per famiglie e piccoli gruppi che vogliono vivere l'isola nella sua versione più tranquilla — ulivi, muretti a secco, il canto delle cicale e il mare sempre vicino.
+              House Verona è una casa accuratamente restaurata sull'isola di
+              Cres, pensata per famiglie e piccoli gruppi che vogliono vivere
+              l'isola nella sua versione più tranquilla — ulivi, muretti a
+              secco, il canto delle cicale e il mare sempre vicino.
             </p>
             <p class="lang-de">
-              House Verona ist ein sorgfältig restauriertes Haus auf der Insel Cres, das für Familien und kleine Gruppen gedacht ist, die die Insel von ihrer ruhigsten Seite erleben möchten — Olivenbäume, Trockensteinmauern, das Zirpen der Zikaden und das Meer immer in der Nähe.
+              House Verona ist ein sorgfältig restauriertes Haus auf der Insel
+              Cres, das für Familien und kleine Gruppen gedacht ist, die die
+              Insel von ihrer ruhigsten Seite erleben möchten — Olivenbäume,
+              Trockensteinmauern, das Zirpen der Zikaden und das Meer immer in
+              der Nähe.
             </p>
 
             <p class="lang-en">
-              Three bedrooms, two bathrooms, a fully equipped kitchen, and a generous outdoor terrace with a stone BBQ are arranged for easy living. Mornings begin with coffee on the terrace; evenings end with grilled fish, wine, and conversations that don't watch the clock.
+              Three bedrooms, two bathrooms, a fully equipped kitchen, and a
+              generous outdoor terrace with a stone BBQ are arranged for easy
+              living. Mornings begin with coffee on the terrace; evenings end
+              with grilled fish, wine, and conversations that don't watch the
+              clock.
             </p>
             <p class="lang-hr">
-              Tri spavaće sobe, dvije kupaonice, potpuno opremljena kuhinja i prostrana vanjska terasa s kamenim roštiljem raspoređeni su za bezbrižan boravak. Jutra počinju kavom na terasi, večeri završavaju pečenom ribom, vinom i razgovorima koji ne gledaju na sat.
+              Tri spavaće sobe, dvije kupaonice, potpuno opremljena kuhinja i
+              prostrana vanjska terasa s kamenim roštiljem raspoređeni su za
+              bezbrižan boravak. Jutra počinju kavom na terasi, večeri
+              završavaju pečenom ribom, vinom i razgovorima koji ne gledaju na
+              sat.
             </p>
             <p class="lang-it">
-              Tre camere da letto, due bagni, una cucina completamente attrezzata e un'ampia terrazza esterna con barbecue in pietra sono organizzati per un soggiorno senza pensieri. Le mattine iniziano con il caffè in terrazza; le serate finiscono con pesce alla griglia, vino e conversazioni senza guardare l'orologio.
+              Tre camere da letto, due bagni, una cucina completamente
+              attrezzata e un'ampia terrazza esterna con barbecue in pietra sono
+              organizzati per un soggiorno senza pensieri. Le mattine iniziano
+              con il caffè in terrazza; le serate finiscono con pesce alla
+              griglia, vino e conversazioni senza guardare l'orologio.
             </p>
             <p class="lang-de">
-              Drei Schlafzimmer, zwei Badezimmer, eine voll ausgestattete Küche und eine großzügige Außenterrasse mit Steingrill sind für ein entspanntes Leben eingerichtet. Die Morgen beginnen mit Kaffee auf der Terrasse; die Abende enden mit gegrilltem Fisch, Wein und Gesprächen ohne Blick auf die Uhr.
+              Drei Schlafzimmer, zwei Badezimmer, eine voll ausgestattete Küche
+              und eine großzügige Außenterrasse mit Steingrill sind für ein
+              entspanntes Leben eingerichtet. Die Morgen beginnen mit Kaffee auf
+              der Terrasse; die Abende enden mit gegrilltem Fisch, Wein und
+              Gesprächen ohne Blick auf die Uhr.
             </p>
 
             <div class="pullquote">
-              <span class="lang-en">"The kind of place where you stop checking your phone by the second day."</span>
-              <span class="lang-hr">"Vrsta mjesta gdje već drugi dan prestaneš gledati u telefon."</span>
-              <span class="lang-it">"Il tipo di posto dove smetti di guardare il telefono già dal secondo giorno."</span>
-              <span class="lang-de">"Der Ort, an dem man spätestens am zweiten Tag aufhört, aufs Handy zu schauen."</span>
+              <span class="lang-en"
+                >"The kind of place where you stop checking your phone by the
+                second day."</span
+              >
+              <span class="lang-hr"
+                >"Vrsta mjesta gdje već drugi dan prestaneš gledati u
+                telefon."</span
+              >
+              <span class="lang-it"
+                >"Il tipo di posto dove smetti di guardare il telefono già dal
+                secondo giorno."</span
+              >
+              <span class="lang-de"
+                >"Der Ort, an dem man spätestens am zweiten Tag aufhört, aufs
+                Handy zu schauen."</span
+              >
             </div>
 
             <p class="lang-en">
-              Cres is the wilder neighbour to its more famous cousins — quieter coves, fewer crowds, and some of the cleanest sea in the Adriatic. The house sits within easy reach of village center, and many beaches.
+              Cres is the wilder neighbour to its more famous cousins — quieter
+              coves, fewer crowds, and some of the cleanest sea in the Adriatic.
+              The house sits within easy reach of village center, and many
+              beaches.
             </p>
             <p class="lang-hr">
-              Cres je divlji susjed poznatijih jadranskih otoka — tiše uvale, manje gužve i jedno od najčišćih mora na Jadranu. Kuća je u malom selu prepunom predivnih plaža i pješačkih staza.
+              Cres je divlji susjed poznatijih jadranskih otoka — tiše uvale,
+              manje gužve i jedno od najčišćih mora na Jadranu. Kuća je u malom
+              selu prepunom predivnih plaža i pješačkih staza.
             </p>
             <p class="lang-it">
-              Cres è il vicino più selvaggio delle sue sorelle più famose — calette più silenziose, meno folla e uno dei mari più puliti dell'Adriatico. La casa si trova a breve distanza dal centro del villaggio e da molte spiagge.
+              Cres è il vicino più selvaggio delle sue sorelle più famose —
+              calette più silenziose, meno folla e uno dei mari più puliti
+              dell'Adriatico. La casa si trova a breve distanza dal centro del
+              villaggio e da molte spiagge.
             </p>
             <p class="lang-de">
-              Cres ist der wildere Nachbar seiner bekannteren Schwesterninseln — ruhigere Buchten, weniger Touristen und eines der saubersten Meere der Adria. Das Haus liegt in der Nähe des Dorfzentrums und vieler Strände.
+              Cres ist der wildere Nachbar seiner bekannteren Schwesterninseln —
+              ruhigere Buchten, weniger Touristen und eines der saubersten Meere
+              der Adria. Das Haus liegt in der Nähe des Dorfzentrums und vieler
+              Strände.
             </p>
           </div>
         </div>
@@ -1276,7 +1543,13 @@
         </div>
         <div class="features-grid">
           <div class="feature">
-            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <svg
+              class="feature-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
               <path d="M2 18s2-2 4-2 4 2 6 2 4-2 6-2 4 2 4 2" />
               <path d="M2 22s2-2 4-2 4 2 6 2 4-2 6-2 4 2 4 2" />
               <path d="M5 14V8a7 7 0 0114 0v6" />
@@ -1288,35 +1561,57 @@
               <span class="lang-de">Meerblick</span>
             </h3>
             <p>
-              <span class="lang-en">Open Adriatic views from the terrace and main bedroom.</span>
-              <span class="lang-hr">Otvoren pogled na Jadran s terase i glavne spavaće sobe.</span>
-              <span class="lang-it">Vista aperta sull'Adriatico dalla terrazza e dalla camera principale.</span>
-              <span class="lang-de">Offener Adriablick von der Terrasse und dem Hauptschlafzimmer.</span>
+              <span class="lang-en"
+                >Open Adriatic views from the terrace and main bedroom.</span
+              >
+              <span class="lang-hr"
+                >Otvoren pogled na Jadran s terase i glavne spavaće sobe.</span
+              >
+              <span class="lang-it"
+                >Vista aperta sull'Adriatico dalla terrazza e dalla camera
+                principale.</span
+              >
+              <span class="lang-de"
+                >Offener Adriablick von der Terrasse und dem
+                Hauptschlafzimmer.</span
+              >
             </p>
           </div>
 
           <div class="feature">
-            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <svg
+              class="feature-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
               <path d="M3 21V11a4 4 0 014-4h10a4 4 0 014 4v10" />
               <path d="M7 21v-6h10v6" />
               <path d="M9 3v4M15 3v4" />
             </svg>
             <h3>
-              <span class="lang-en">Outdoor kitchen &amp; BBQ</span>
-              <span class="lang-hr">Vanjska kuhinja s roštiljem</span>
-              <span class="lang-it">Cucina esterna &amp; barbecue</span>
-              <span class="lang-de">Außenküche &amp; Grill</span>
+              <span class="lang-en">Outdoor dining area</span>
+              <span class="lang-hr">Vanjska terasa za objedovanje</span>
+              <span class="lang-it">Area pranzo esterna</span>
+              <span class="lang-de">Außen-Essbereich</span>
             </h3>
             <p>
-              <span class="lang-en">Stone BBQ, dining table for 8, shaded by a wooden pergola.</span>
-              <span class="lang-hr">Kameni roštilj, vanjski stol za 8, natkriven drvenom pergolom.</span>
-              <span class="lang-it">Barbecue in pietra, tavolo da pranzo per 8, ombreggiato da un pergolato in legno.</span>
-              <span class="lang-de">Steingrill, Esstisch für 8 Personen, überdacht von einer Holzpergola.</span>
+              <span class="lang-en">BBQ grill, sink, dining table and chairs under a wooden pergola.</span>
+              <span class="lang-hr">Roštilj, sudoper, stol i stolice pod drvenom pergolom.</span>
+              <span class="lang-it">Barbecue, lavello, tavolo e sedie sotto un pergolato in legno.</span>
+              <span class="lang-de">Grill, Spüle, Tisch und Stühle unter einer Holzpergola.</span>
             </p>
           </div>
 
           <div class="feature">
-            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <svg
+              class="feature-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
               <path d="M12 2C8 6 6 9 6 13a6 6 0 0012 0c0-4-2-7-6-11z" />
             </svg>
             <h3>
@@ -1326,15 +1621,30 @@
               <span class="lang-de">Strand &lt;1 min entfernt</span>
             </h3>
             <p>
-              <span class="lang-en">Walking distance to a quiet cove with crystal-clear water.</span>
-              <span class="lang-hr">Pješice do mirne uvale s kristalno čistim morem.</span>
-              <span class="lang-it">A piedi fino a una tranquilla baia con acque cristalline.</span>
-              <span class="lang-de">Zu Fuß zu einer ruhigen Bucht mit kristallklarem Wasser.</span>
+              <span class="lang-en"
+                >Walking distance to a quiet cove with crystal-clear
+                water.</span
+              >
+              <span class="lang-hr"
+                >Pješice do mirne uvale s kristalno čistim morem.</span
+              >
+              <span class="lang-it"
+                >A piedi fino a una tranquilla baia con acque cristalline.</span
+              >
+              <span class="lang-de"
+                >Zu Fuß zu einer ruhigen Bucht mit kristallklarem Wasser.</span
+              >
             </p>
           </div>
 
           <div class="feature">
-            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <svg
+              class="feature-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
               <rect x="3" y="11" width="18" height="9" rx="1" />
               <path d="M6 11V7a3 3 0 013-3h6a3 3 0 013 3v4" />
               <circle cx="8" cy="16" r="1.5" />
@@ -1347,15 +1657,29 @@
               <span class="lang-de">Privatparkplatz</span>
             </h3>
             <p>
-              <span class="lang-en">Off-street parking for two cars on the property.</span>
-              <span class="lang-hr">Parking za dva automobila u dvorištu kuće.</span>
-              <span class="lang-it">Parcheggio privato per due auto nel cortile.</span>
-              <span class="lang-de">Privater Stellplatz für zwei Autos auf dem Grundstück.</span>
+              <span class="lang-en"
+                >Off-street parking for two cars on the property.</span
+              >
+              <span class="lang-hr"
+                >Parking za dva automobila u dvorištu kuće.</span
+              >
+              <span class="lang-it"
+                >Parcheggio privato per due auto nel cortile.</span
+              >
+              <span class="lang-de"
+                >Privater Stellplatz für zwei Autos auf dem Grundstück.</span
+              >
             </p>
           </div>
 
           <div class="feature">
-            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <svg
+              class="feature-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
               <rect x="3" y="11" width="18" height="9" rx="1" />
               <path d="M6 11V7a3 3 0 013-3h6a3 3 0 013 3v4" />
               <circle cx="8" cy="16" r="1.5" />
@@ -1368,15 +1692,33 @@
               <span class="lang-de">3 Schlafzimmer, 6 Schlafplätze</span>
             </h3>
             <p>
-              <span class="lang-en">Two double bedrooms, two singles in the attic. Two bathrooms.</span>
-              <span class="lang-hr">Dvije sobe s bračnim krevetima, dva jednokrevetna u potkrovlju. Dvije kupaonice.</span>
-              <span class="lang-it">Due camere matrimoniali, due letti singoli in mansarda. Due bagni.</span>
-              <span class="lang-de">Zwei Doppelzimmer, zwei Einzelbetten im Dachgeschoss. Zwei Badezimmer.</span>
+              <span class="lang-en"
+                >Two double bedrooms, two singles in the attic. Two
+                bathrooms.</span
+              >
+              <span class="lang-hr"
+                >Dvije sobe s bračnim krevetima, dva jednokrevetna u potkrovlju.
+                Dvije kupaonice.</span
+              >
+              <span class="lang-it"
+                >Due camere matrimoniali, due letti singoli in mansarda. Due
+                bagni.</span
+              >
+              <span class="lang-de"
+                >Zwei Doppelzimmer, zwei Einzelbetten im Dachgeschoss. Zwei
+                Badezimmer.</span
+              >
             </p>
           </div>
 
           <div class="feature">
-            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <svg
+              class="feature-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
               <circle cx="12" cy="12" r="9" />
               <path d="M8 12h8M12 8v8" />
             </svg>
@@ -1387,18 +1729,41 @@
               <span class="lang-de">Voll ausgestattet</span>
             </h3>
             <p>
-              <span class="lang-en">Air conditioning, Wi-Fi, washing machine, dishwasher, hairdryer.</span>
-              <span class="lang-hr">Klima, Wi-Fi, perilica rublja, perilica posuđa, sušilo za kosu.</span>
-              <span class="lang-it">Aria condizionata, Wi-Fi, lavatrice, lavastoviglie, asciugacapelli.</span>
-              <span class="lang-de">Klimaanlage, WLAN, Waschmaschine, Geschirrspüler, Föhn.</span>
+              <span class="lang-en"
+                >Air conditioning, Wi-Fi, washing machine, dishwasher,
+                hairdryer.</span
+              >
+              <span class="lang-hr"
+                >Klima, Wi-Fi, perilica rublja, perilica posuđa, sušilo za
+                kosu.</span
+              >
+              <span class="lang-it"
+                >Aria condizionata, Wi-Fi, lavatrice, lavastoviglie,
+                asciugacapelli.</span
+              >
+              <span class="lang-de"
+                >Klimaanlage, WLAN, Waschmaschine, Geschirrspüler, Föhn.</span
+              >
             </p>
           </div>
 
           <div class="feature">
-            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M10 5.172C10 3.782 8.423 2.679 6.5 3c-2 .336-3.5 2-3.5 4 0 .829.188 1.386.5 1.8M14 5.172C14 3.782 15.577 2.679 17.5 3c2 .336 3.5 2 3.5 4 0 .829-.188 1.386-.5 1.8" />
-              <path d="M8 14v.5M16 14v.5M11.25 16.25c.417.417 1.083.417 1.5 0" />
-              <path d="M4.42 11.247A13.152 13.152 0 004 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444c0-1.061-.162-2.2-.493-3.309m-9.243-6.082A8.801 8.801 0 0112 5c.78 0 1.5.108 2.161.306" />
+            <svg
+              class="feature-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path
+                d="M10 5.172C10 3.782 8.423 2.679 6.5 3c-2 .336-3.5 2-3.5 4 0 .829.188 1.386.5 1.8M14 5.172C14 3.782 15.577 2.679 17.5 3c2 .336 3.5 2 3.5 4 0 .829-.188 1.386-.5 1.8"
+              />
+              <path
+                d="M8 14v.5M16 14v.5M11.25 16.25c.417.417 1.083.417 1.5 0"
+              />
+              <path
+                d="M4.42 11.247A13.152 13.152 0 004 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444c0-1.061-.162-2.2-.493-3.309m-9.243-6.082A8.801 8.801 0 0112 5c.78 0 1.5.108 2.161.306"
+              />
             </svg>
             <h3>
               <span class="lang-en">Pets on request</span>
@@ -1407,16 +1772,36 @@
               <span class="lang-de">Haustiere auf Anfrage</span>
             </h3>
             <p>
-              <span class="lang-en">Dogs are welcome on request — just let us know in advance.</span>
-              <span class="lang-hr">Psi su dobrodošli na upit — samo nas unaprijed obavijesti.</span>
-              <span class="lang-it">I cani sono benvenuti su richiesta — faccelo sapere in anticipo.</span>
-              <span class="lang-de">Hunde sind auf Anfrage willkommen — bitte im Voraus mitteilen.</span>
+              <span class="lang-en"
+                >Dogs are welcome on request — just let us know in
+                advance.</span
+              >
+              <span class="lang-hr"
+                >Psi su dobrodošli na upit — samo nas unaprijed
+                obavijesti.</span
+              >
+              <span class="lang-it"
+                >I cani sono benvenuti su richiesta — faccelo sapere in
+                anticipo.</span
+              >
+              <span class="lang-de"
+                >Hunde sind auf Anfrage willkommen — bitte im Voraus
+                mitteilen.</span
+              >
             </p>
           </div>
 
           <div class="feature">
-            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M3 9h18M3 9a2 2 0 012-2h14a2 2 0 012 2M3 9v9a2 2 0 002 2h14a2 2 0 002-2V9" />
+            <svg
+              class="feature-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path
+                d="M3 9h18M3 9a2 2 0 012-2h14a2 2 0 012 2M3 9v9a2 2 0 002 2h14a2 2 0 002-2V9"
+              />
               <path d="M9 13h6M12 13v4" />
             </svg>
             <h3>
@@ -1426,10 +1811,20 @@
               <span class="lang-de">Kostenloses Babybett</span>
             </h3>
             <p>
-              <span class="lang-en">A travel cot is available for infants at no extra charge.</span>
-              <span class="lang-hr">Dječji krevetić dostupan za bebe, bez dodatne naknade.</span>
-              <span class="lang-it">Un lettino da viaggio disponibile per i bambini piccoli, senza costi aggiuntivi.</span>
-              <span class="lang-de">Ein Reisebett steht für Kleinkinder kostenlos zur Verfügung.</span>
+              <span class="lang-en"
+                >A travel cot is available for infants at no extra charge.</span
+              >
+              <span class="lang-hr"
+                >Dječji krevetić dostupan za bebe, bez dodatne naknade.</span
+              >
+              <span class="lang-it"
+                >Un lettino da viaggio disponibile per i bambini piccoli, senza
+                costi aggiuntivi.</span
+              >
+              <span class="lang-de"
+                >Ein Reisebett steht für Kleinkinder kostenlos zur
+                Verfügung.</span
+              >
             </p>
           </div>
         </div>
@@ -1449,11 +1844,15 @@
         </div>
         <div class="carousel">
           <div class="carousel-main">
-            <button class="carousel-btn carousel-prev" aria-label="Previous">&#8592;</button>
+            <button class="carousel-btn carousel-prev" aria-label="Previous">
+              &#8592;
+            </button>
             <div class="carousel-track-wrap">
               <div class="carousel-track" id="carouselTrack"></div>
             </div>
-            <button class="carousel-btn carousel-next" aria-label="Next">&#8594;</button>
+            <button class="carousel-btn carousel-next" aria-label="Next">
+              &#8594;
+            </button>
             <div class="carousel-counter" id="carouselCounter">1 / 28</div>
           </div>
           <div class="carousel-thumbs" id="carouselThumbs"></div>
@@ -1475,16 +1874,42 @@
         <div class="location-grid">
           <div class="location-text">
             <h2>
-              <span class="lang-en">Cres, <span class="italic">unhurried.</span></span>
-              <span class="lang-hr">Cres, <span class="italic">u svome tempu.</span></span>
-              <span class="lang-it">Cres, <span class="italic">senza fretta.</span></span>
-              <span class="lang-de">Cres, <span class="italic">unaufgeregt.</span></span>
+              <span class="lang-en"
+                >Cres, <span class="italic">unhurried.</span></span
+              >
+              <span class="lang-hr"
+                >Cres, <span class="italic">u svome tempu.</span></span
+              >
+              <span class="lang-it"
+                >Cres, <span class="italic">senza fretta.</span></span
+              >
+              <span class="lang-de"
+                >Cres, <span class="italic">unaufgeregt.</span></span
+              >
             </h2>
             <p>
-              <span class="lang-en">The island is famous for its empty beaches, griffon vultures circling over cliffs, ancient olive groves, and tiny stone villages that have barely changed in a century.</span>
-              <span class="lang-hr">Otok je poznat po praznim plažama, bjeloglavim supovima koji kruže iznad litica, drevnim maslinicima i sićušnim kamenim selima koja se stoljećima nisu mijenjala.</span>
-              <span class="lang-it">L'isola è famosa per le sue spiagge deserte, i grifoni che volteggiano sulle scogliere, gli antichi oliveti e i minuscoli villaggi di pietra rimasti quasi immutati nel corso dei secoli.</span>
-              <span class="lang-de">Die Insel ist berühmt für ihre menschenleeren Strände, Gänsegeier über den Klippen, alte Olivenhaine und winzige Steindörfer, die sich seit Jahrhunderten kaum verändert haben.</span>
+              <span class="lang-en"
+                >The island is famous for its empty beaches, griffon vultures
+                circling over cliffs, ancient olive groves, and tiny stone
+                villages that have barely changed in a century.</span
+              >
+              <span class="lang-hr"
+                >Otok je poznat po praznim plažama, bjeloglavim supovima koji
+                kruže iznad litica, drevnim maslinicima i sićušnim kamenim
+                selima koja se stoljećima nisu mijenjala.</span
+              >
+              <span class="lang-it"
+                >L'isola è famosa per le sue spiagge deserte, i grifoni che
+                volteggiano sulle scogliere, gli antichi oliveti e i minuscoli
+                villaggi di pietra rimasti quasi immutati nel corso dei
+                secoli.</span
+              >
+              <span class="lang-de"
+                >Die Insel ist berühmt für ihre menschenleeren Strände,
+                Gänsegeier über den Klippen, alte Olivenhaine und winzige
+                Steindörfer, die sich seit Jahrhunderten kaum verändert
+                haben.</span
+              >
             </p>
             <ul class="location-list">
               <li>
@@ -1560,8 +1985,17 @@
               rel="noopener"
               class="maps-btn"
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                width="20"
+                height="20"
+              >
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+                />
                 <circle cx="12" cy="9" r="2.5" />
               </svg>
               <span class="lang-en">Get directions</span>
@@ -1586,10 +2020,18 @@
           </span>
         </div>
         <h2 class="pricing-title">
-          <span class="lang-en">Rates <span class="italic">2025 / 2026</span></span>
-          <span class="lang-hr">Cijene <span class="italic">2025 / 2026</span></span>
-          <span class="lang-it">Tariffe <span class="italic">2025 / 2026</span></span>
-          <span class="lang-de">Preise <span class="italic">2025 / 2026</span></span>
+          <span class="lang-en"
+            >Rates <span class="italic">2025 / 2026</span></span
+          >
+          <span class="lang-hr"
+            >Cijene <span class="italic">2025 / 2026</span></span
+          >
+          <span class="lang-it"
+            >Tariffe <span class="italic">2025 / 2026</span></span
+          >
+          <span class="lang-de"
+            >Preise <span class="italic">2025 / 2026</span></span
+          >
         </h2>
         <p class="pricing-subtitle">
           <span class="lang-en">House Verona · 6 guests · ★★★★</span>
@@ -1606,7 +2048,15 @@
               <span class="lang-de">Nebensaison</span>
             </div>
             <div class="pricing-dates">01.01 – 26.06.<br />19.09 – 31.12.</div>
-            <div class="pricing-price">160 <span>€ / <span class="lang-en">night</span><span class="lang-hr">noć</span><span class="lang-it">notte</span><span class="lang-de">Nacht</span></span></div>
+            <div class="pricing-price">
+              160
+              <span
+                >€ / <span class="lang-en">night</span
+                ><span class="lang-hr">noć</span
+                ><span class="lang-it">notte</span
+                ><span class="lang-de">Nacht</span></span
+              >
+            </div>
           </div>
           <div class="pricing-card">
             <div class="pricing-season">
@@ -1616,7 +2066,15 @@
               <span class="lang-de">Schulterzeit</span>
             </div>
             <div class="pricing-dates">29.08 – 18.09.</div>
-            <div class="pricing-price">230 <span>€ / <span class="lang-en">night</span><span class="lang-hr">noć</span><span class="lang-it">notte</span><span class="lang-de">Nacht</span></span></div>
+            <div class="pricing-price">
+              230
+              <span
+                >€ / <span class="lang-en">night</span
+                ><span class="lang-hr">noć</span
+                ><span class="lang-it">notte</span
+                ><span class="lang-de">Nacht</span></span
+              >
+            </div>
           </div>
           <div class="pricing-card">
             <div class="pricing-season">
@@ -1626,7 +2084,15 @@
               <span class="lang-de">Früh- &amp; Spätsommer</span>
             </div>
             <div class="pricing-dates">27.06 – 10.07.<br />22.08 – 28.08.</div>
-            <div class="pricing-price">275 <span>€ / <span class="lang-en">night</span><span class="lang-hr">noć</span><span class="lang-it">notte</span><span class="lang-de">Nacht</span></span></div>
+            <div class="pricing-price">
+              275
+              <span
+                >€ / <span class="lang-en">night</span
+                ><span class="lang-hr">noć</span
+                ><span class="lang-it">notte</span
+                ><span class="lang-de">Nacht</span></span
+              >
+            </div>
           </div>
           <div class="pricing-card pricing-high">
             <div class="pricing-season">
@@ -1636,7 +2102,15 @@
               <span class="lang-de">Hochsaison</span>
             </div>
             <div class="pricing-dates">11.07 – 31.07.<br />15.08 – 21.08.</div>
-            <div class="pricing-price">315 <span>€ / <span class="lang-en">night</span><span class="lang-hr">noć</span><span class="lang-it">notte</span><span class="lang-de">Nacht</span></span></div>
+            <div class="pricing-price">
+              315
+              <span
+                >€ / <span class="lang-en">night</span
+                ><span class="lang-hr">noć</span
+                ><span class="lang-it">notte</span
+                ><span class="lang-de">Nacht</span></span
+              >
+            </div>
           </div>
           <div class="pricing-card pricing-peak">
             <div class="pricing-season">
@@ -1646,14 +2120,31 @@
               <span class="lang-de">Hauptsaison</span>
             </div>
             <div class="pricing-dates">01.08 – 14.08.</div>
-            <div class="pricing-price">350 <span>€ / <span class="lang-en">night</span><span class="lang-hr">noć</span><span class="lang-it">notte</span><span class="lang-de">Nacht</span></span></div>
+            <div class="pricing-price">
+              350
+              <span
+                >€ / <span class="lang-en">night</span
+                ><span class="lang-hr">noć</span
+                ><span class="lang-it">notte</span
+                ><span class="lang-de">Nacht</span></span
+              >
+            </div>
           </div>
         </div>
         <p class="pricing-note">
-          <span class="lang-en">Tourist tax included. Prices are per unit per day.</span>
-          <span class="lang-hr">Boravišna pristojba uključena u cijenu. Cijene su izražene po jedinici dnevno.</span>
-          <span class="lang-it">Tassa di soggiorno inclusa. Prezzi per unità al giorno.</span>
-          <span class="lang-de">Kurtaxe inklusive. Preise pro Einheit und Tag.</span>
+          <span class="lang-en"
+            >Tourist tax included. Prices are per unit per day.</span
+          >
+          <span class="lang-hr"
+            >Boravišna pristojba uključena u cijenu. Cijene su izražene po
+            jedinici dnevno.</span
+          >
+          <span class="lang-it"
+            >Tassa di soggiorno inclusa. Prezzi per unità al giorno.</span
+          >
+          <span class="lang-de"
+            >Kurtaxe inklusive. Preise pro Einheit und Tag.</span
+          >
         </p>
       </div>
     </section>
@@ -1667,16 +2158,39 @@
           <span class="lang-de">Direkt buchen &amp; sparen</span>
         </div>
         <h2>
-          <span class="lang-en">Skip the agencies. <span class="italic">Save 10%.</span></span>
-          <span class="lang-hr">Bez agencija. <span class="italic">10% jeftinije.</span></span>
-          <span class="lang-it">Senza agenzie. <span class="italic">Risparmia il 10%.</span></span>
-          <span class="lang-de">Ohne Agenturen. <span class="italic">10% günstiger.</span></span>
+          <span class="lang-en"
+            >Skip the agencies. <span class="italic">Save 10%.</span></span
+          >
+          <span class="lang-hr"
+            >Bez agencija. <span class="italic">10% jeftinije.</span></span
+          >
+          <span class="lang-it"
+            >Senza agenzie. <span class="italic">Risparmia il 10%.</span></span
+          >
+          <span class="lang-de"
+            >Ohne Agenturen. <span class="italic">10% günstiger.</span></span
+          >
         </h2>
         <p class="subtitle">
-          <span class="lang-en">Get in touch directly via WhatsApp or email — the same house, the same dates, just without the booking platform commission. We pass the savings to you.</span>
-          <span class="lang-hr">Javi se direktno preko WhatsAppa ili maila — ista kuća, isti termini, bez provizije platformi. Uštedu prosljeđujemo tebi.</span>
-          <span class="lang-it">Contattaci direttamente via WhatsApp o email — la stessa casa, le stesse date, solo senza la commissione della piattaforma. Il risparmio va a te.</span>
-          <span class="lang-de">Kontaktiere uns direkt per WhatsApp oder E-Mail — dasselbe Haus, dieselben Daten, nur ohne die Buchungsplattform-Provision. Die Ersparnis gehört dir.</span>
+          <span class="lang-en"
+            >Get in touch directly via WhatsApp or email — the same house, the
+            same dates, just without the booking platform commission. We pass
+            the savings to you.</span
+          >
+          <span class="lang-hr"
+            >Javi se direktno preko WhatsAppa ili maila — ista kuća, isti
+            termini, bez provizije platformi. Uštedu prosljeđujemo tebi.</span
+          >
+          <span class="lang-it"
+            >Contattaci direttamente via WhatsApp o email — la stessa casa, le
+            stesse date, solo senza la commissione della piattaforma. Il
+            risparmio va a te.</span
+          >
+          <span class="lang-de"
+            >Kontaktiere uns direkt per WhatsApp oder E-Mail — dasselbe Haus,
+            dieselben Daten, nur ohne die Buchungsplattform-Provision. Die
+            Ersparnis gehört dir.</span
+          >
         </p>
         <div class="benefits">
           <div class="benefit">
@@ -1688,10 +2202,18 @@
               <span class="lang-de">10% günstigerer Preis</span>
             </h4>
             <p>
-              <span class="lang-en">Compared to online booking platforms, every time.</span>
-              <span class="lang-hr">U odnosu na online platforme za rezervacije, uvijek.</span>
-              <span class="lang-it">Rispetto alle piattaforme di prenotazione online, sempre.</span>
-              <span class="lang-de">Im Vergleich zu Online-Buchungsplattformen, jedes Mal.</span>
+              <span class="lang-en"
+                >Compared to online booking platforms, every time.</span
+              >
+              <span class="lang-hr"
+                >U odnosu na online platforme za rezervacije, uvijek.</span
+              >
+              <span class="lang-it"
+                >Rispetto alle piattaforme di prenotazione online, sempre.</span
+              >
+              <span class="lang-de"
+                >Im Vergleich zu Online-Buchungsplattformen, jedes Mal.</span
+              >
             </p>
           </div>
           <div class="benefit">
@@ -1703,10 +2225,19 @@
               <span class="lang-de">Direkt zur Eigentümerin</span>
             </h4>
             <p>
-              <span class="lang-en">Local tips, questions, special requests — no middleman.</span>
-              <span class="lang-hr">Lokalni savjeti, pitanja, posebne želje — bez posrednika.</span>
-              <span class="lang-it">Consigli locali, domande, richieste speciali — senza intermediari.</span>
-              <span class="lang-de">Lokale Tipps, Fragen, Sonderwünsche — ohne Vermittler.</span>
+              <span class="lang-en"
+                >Local tips, questions, special requests — no middleman.</span
+              >
+              <span class="lang-hr"
+                >Lokalni savjeti, pitanja, posebne želje — bez posrednika.</span
+              >
+              <span class="lang-it"
+                >Consigli locali, domande, richieste speciali — senza
+                intermediari.</span
+              >
+              <span class="lang-de"
+                >Lokale Tipps, Fragen, Sonderwünsche — ohne Vermittler.</span
+              >
             </p>
           </div>
           <div class="benefit">
@@ -1719,9 +2250,15 @@
             </h4>
             <p>
               <span class="lang-en">Homemade olive oil waiting for you.</span>
-              <span class="lang-hr">Domaće maslinovo ulje čeka te po dolasku.</span>
-              <span class="lang-it">Olio d'oliva fatto in casa ad aspettarti.</span>
-              <span class="lang-de">Hausgemachtes Olivenöl wartet auf dich.</span>
+              <span class="lang-hr"
+                >Domaće maslinovo ulje čeka te po dolasku.</span
+              >
+              <span class="lang-it"
+                >Olio d'oliva fatto in casa ad aspettarti.</span
+              >
+              <span class="lang-de"
+                >Hausgemachtes Olivenöl wartet auf dich.</span
+              >
             </p>
           </div>
         </div>
@@ -1730,8 +2267,12 @@
           class="btn-whatsapp"
         >
           <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.9-2-.2-.5-.5-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2 0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.7.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z" />
-            <path d="M20.5 3.5C18.3 1.2 15.3 0 12 0 5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12 0-3.2-1.3-6.2-3.5-8.3zM12 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.5 4.5-10 10-10s10 4.5 10 10c-.1 5.4-4.6 9.9-10.1 9.9z" />
+            <path
+              d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.9-2-.2-.5-.5-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2 0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.7.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z"
+            />
+            <path
+              d="M20.5 3.5C18.3 1.2 15.3 0 12 0 5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12 0-3.2-1.3-6.2-3.5-8.3zM12 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.5 4.5-10 10-10s10 4.5 10 10c-.1 5.4-4.6 9.9-10.1 9.9z"
+            />
           </svg>
           <span class="lang-en">Message on WhatsApp</span>
           <span class="lang-hr">Pošalji poruku na WhatsApp</span>
@@ -1739,10 +2280,30 @@
           <span class="lang-de">WhatsApp schreiben</span>
         </a>
         <p class="cta-alt">
-          <span class="lang-en">Or email <a href="mailto:filipas.ana@gmail.com">filipas.ana@gmail.com</a></span>
-          <span class="lang-hr">Ili pošalji mail na <a href="mailto:filipas.ana@gmail.com">filipas.ana@gmail.com</a></span>
-          <span class="lang-it">O scrivi a <a href="mailto:filipas.ana@gmail.com">filipas.ana@gmail.com</a></span>
-          <span class="lang-de">Oder E-Mail an <a href="mailto:filipas.ana@gmail.com">filipas.ana@gmail.com</a></span>
+          <span class="lang-en"
+            >Or email
+            <a href="mailto:filipas.ana@gmail.com"
+              >filipas.ana@gmail.com</a
+            ></span
+          >
+          <span class="lang-hr"
+            >Ili pošalji mail na
+            <a href="mailto:filipas.ana@gmail.com"
+              >filipas.ana@gmail.com</a
+            ></span
+          >
+          <span class="lang-it"
+            >O scrivi a
+            <a href="mailto:filipas.ana@gmail.com"
+              >filipas.ana@gmail.com</a
+            ></span
+          >
+          <span class="lang-de"
+            >Oder E-Mail an
+            <a href="mailto:filipas.ana@gmail.com"
+              >filipas.ana@gmail.com</a
+            ></span
+          >
         </p>
       </div>
     </section>
@@ -1750,24 +2311,45 @@
     <section class="cta">
       <div class="container">
         <h2>
-          <span class="lang-en">Ready when <span class="italic">you are.</span></span>
+          <span class="lang-en"
+            >Ready when <span class="italic">you are.</span></span
+          >
           <span class="lang-hr">Čekamo <span class="italic">tebe.</span></span>
-          <span class="lang-it">Pronti quando <span class="italic">vuoi.</span></span>
-          <span class="lang-de">Bereit, wenn <span class="italic">du es bist.</span></span>
+          <span class="lang-it"
+            >Pronti quando <span class="italic">vuoi.</span></span
+          >
+          <span class="lang-de"
+            >Bereit, wenn <span class="italic">du es bist.</span></span
+          >
         </h2>
         <p class="cta-subtitle">
-          <span class="lang-en">A quick message is all it takes. We'll get back to you within a few hours.</span>
-          <span class="lang-hr">Dovoljna je kratka poruka. Javljamo se u roku od nekoliko sati.</span>
-          <span class="lang-it">Basta un breve messaggio. Ti risponderemo entro poche ore.</span>
-          <span class="lang-de">Eine kurze Nachricht genügt. Wir melden uns innerhalb weniger Stunden.</span>
+          <span class="lang-en"
+            >A quick message is all it takes. We'll get back to you within a few
+            hours.</span
+          >
+          <span class="lang-hr"
+            >Dovoljna je kratka poruka. Javljamo se u roku od nekoliko
+            sati.</span
+          >
+          <span class="lang-it"
+            >Basta un breve messaggio. Ti risponderemo entro poche ore.</span
+          >
+          <span class="lang-de"
+            >Eine kurze Nachricht genügt. Wir melden uns innerhalb weniger
+            Stunden.</span
+          >
         </p>
         <a
           href="https://wa.me/385911260214?text=Hi%21%20I%27d%20like%20to%20enquire%20about%20availability%20at%20House%20Verona%20for%20%5Bdates%5D.%20Thanks%21"
           class="btn-whatsapp"
         >
           <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.9-2-.2-.5-.5-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2 0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.7.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z" />
-            <path d="M20.5 3.5C18.3 1.2 15.3 0 12 0 5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12 0-3.2-1.3-6.2-3.5-8.3zM12 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.5 4.5-10 10-10s10 4.5 10 10c-.1 5.4-4.6 9.9-10.1 9.9z" />
+            <path
+              d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.9-2-.2-.5-.5-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2 0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.7.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z"
+            />
+            <path
+              d="M20.5 3.5C18.3 1.2 15.3 0 12 0 5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12 0-3.2-1.3-6.2-3.5-8.3zM12 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.5 4.5-10 10-10s10 4.5 10 10c-.1 5.4-4.6 9.9-10.1 9.9z"
+            />
           </svg>
           <span class="lang-en">Check availability</span>
           <span class="lang-hr">Provjeri slobodne termine</span>
@@ -1785,10 +2367,21 @@
               House Verona<span style="color: var(--terra)">.</span>
             </div>
             <p class="footer-tagline">
-              <span class="lang-en">A family-run holiday house on the island of Cres, Croatia.</span>
-              <span class="lang-hr">Obiteljska kuća za odmor na otoku Cresu.</span>
-              <span class="lang-it">Una casa vacanze a conduzione familiare sull'isola di Cres, Croazia.</span>
-              <span class="lang-de">Ein familiengeführtes Ferienhaus auf der Insel Cres, Kroatien.</span>
+              <span class="lang-en"
+                >A family-run holiday house on the island of Cres,
+                Croatia.</span
+              >
+              <span class="lang-hr"
+                >Obiteljska kuća za odmor na otoku Cresu.</span
+              >
+              <span class="lang-it"
+                >Una casa vacanze a conduzione familiare sull'isola di Cres,
+                Croazia.</span
+              >
+              <span class="lang-de"
+                >Ein familiengeführtes Ferienhaus auf der Insel Cres,
+                Kroatien.</span
+              >
             </p>
           </div>
           <div class="footer-col">
@@ -1813,7 +2406,8 @@
           </div>
         </div>
         <div class="footer-bottom">
-          <span>© 2026 House Verona.
+          <span
+            >© 2026 House Verona.
             <span class="lang-en">All rights reserved.</span>
             <span class="lang-hr">Sva prava pridržana.</span>
             <span class="lang-it">Tutti i diritti riservati.</span>
@@ -1829,24 +2423,34 @@
       aria-label="WhatsApp"
     >
       <svg viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.9-2-.2-.5-.5-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2 0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.7.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z" />
-        <path d="M20.5 3.5C18.3 1.2 15.3 0 12 0 5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12 0-3.2-1.3-6.2-3.5-8.3zM12 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.5 4.5-10 10-10s10 4.5 10 10c-.1 5.4-4.6 9.9-10.1 9.9z" />
+        <path
+          d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.9-2-.2-.5-.5-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2 0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.7.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z"
+        />
+        <path
+          d="M20.5 3.5C18.3 1.2 15.3 0 12 0 5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12 0-3.2-1.3-6.2-3.5-8.3zM12 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.5 4.5-10 10-10s10 4.5 10 10c-.1 5.4-4.6 9.9-10.1 9.9z"
+        />
       </svg>
     </a>
 
     <script>
       // Hero slideshow — slika1 do slika5, crossfade svake 4.5s
       (function () {
-        const heroImages = ['slika1.jpg', 'slika2.jpg', 'slika3.jpg', 'slika4.jpg', 'slika5.jpg'];
-        const heroEl = document.querySelector('.hero-image');
+        const heroImages = [
+          "slika1.jpg",
+          "slika2.jpg",
+          "slika3.jpg",
+          "slika4.jpg",
+          "slika5.jpg",
+        ];
+        const heroEl = document.querySelector(".hero-image");
 
         const slides = heroImages.map((src, i) => {
-          const div = document.createElement('div');
-          div.className = 'hero-slide' + (i === 0 ? ' active' : '');
-          const img = document.createElement('img');
+          const div = document.createElement("div");
+          div.className = "hero-slide" + (i === 0 ? " active" : "");
+          const img = document.createElement("img");
           img.src = src;
-          img.alt = '';
-          img.loading = i === 0 ? 'eager' : 'lazy';
+          img.alt = "";
+          img.loading = i === 0 ? "eager" : "lazy";
           div.appendChild(img);
           heroEl.appendChild(div);
           return div;
@@ -1854,72 +2458,97 @@
 
         let current = 0;
         setInterval(() => {
-          slides[current].classList.remove('active');
+          slides[current].classList.remove("active");
           current = (current + 1) % slides.length;
-          slides[current].classList.add('active');
+          slides[current].classList.add("active");
         }, 4500);
       })();
 
       // Carousel — slika2.jpg do slika29.jpg
       (function () {
-        const images = Array.from({ length: 28 }, (_, i) => `slika${i + 2}.jpg`);
-        const track = document.getElementById('carouselTrack');
-        const thumbsEl = document.getElementById('carouselThumbs');
-        const counter = document.getElementById('carouselCounter');
+        const images = Array.from(
+          { length: 28 },
+          (_, i) => `slika${i + 2}.jpg`,
+        );
+        const track = document.getElementById("carouselTrack");
+        const thumbsEl = document.getElementById("carouselThumbs");
+        const counter = document.getElementById("carouselCounter");
         let current = 0;
 
         images.forEach((src, i) => {
-          const slide = document.createElement('div');
-          slide.className = 'carousel-slide';
-          const img = document.createElement('img');
+          const slide = document.createElement("div");
+          slide.className = "carousel-slide";
+          const img = document.createElement("img");
           img.src = src;
           img.alt = `House Verona — slika ${i + 1}`;
-          img.loading = i === 0 ? 'eager' : 'lazy';
+          img.loading = i < 4 ? "eager" : "lazy";
           slide.appendChild(img);
           track.appendChild(slide);
 
-          const thumb = document.createElement('div');
-          thumb.className = 'carousel-thumb' + (i === 0 ? ' active' : '');
+          const thumb = document.createElement("div");
+          thumb.className = "carousel-thumb" + (i === 0 ? " active" : "");
           thumb.style.backgroundImage = `url("${src}")`;
-          thumb.addEventListener('click', () => goTo(i));
+          thumb.addEventListener("click", () => goTo(i));
           thumbsEl.appendChild(thumb);
         });
 
-        function goTo(n) {
-          current = (n + images.length) % images.length;
-          track.style.transform = `translateX(-${current * 100}%)`;
+        const wrap = track.parentElement;
+
+        function updateUI() {
           counter.textContent = `${current + 1} / ${images.length}`;
-          thumbsEl.querySelectorAll('.carousel-thumb').forEach((t, i) => {
-            t.classList.toggle('active', i === current);
+          thumbsEl.querySelectorAll(".carousel-thumb").forEach((t, i) => {
+            t.classList.toggle("active", i === current);
           });
-          thumbsEl.children[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          const thumb = thumbsEl.children[current];
+          thumbsEl.scrollTo({
+            left: thumb.offsetLeft - thumbsEl.offsetWidth / 2 + thumb.offsetWidth / 2,
+            behavior: "smooth",
+          });
         }
 
-        document.querySelector('.carousel-prev').addEventListener('click', () => goTo(current - 1));
-        document.querySelector('.carousel-next').addEventListener('click', () => goTo(current + 1));
+        function goTo(n) {
+          current = (n + images.length) % images.length;
+          wrap.scrollTo({ left: current * wrap.offsetWidth, behavior: "smooth" });
+          updateUI();
+        }
 
-        let startX = 0;
-        track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-        track.addEventListener('touchend', e => {
-          const diff = startX - e.changedTouches[0].clientX;
-          if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+        // Sinkronizacija kad korisnik swipeom dođe do nove slike
+        let scrollTimer;
+        wrap.addEventListener("scroll", () => {
+          clearTimeout(scrollTimer);
+          scrollTimer = setTimeout(() => {
+            const w = wrap.offsetWidth;
+            if (!w) return;
+            const n = Math.round(wrap.scrollLeft / w);
+            if (n !== current && n >= 0 && n < images.length) {
+              current = n;
+              updateUI();
+            }
+          }, 120);
         });
 
-        document.addEventListener('keydown', e => {
-          if (e.key === 'ArrowLeft') goTo(current - 1);
-          if (e.key === 'ArrowRight') goTo(current + 1);
+        document.querySelector(".carousel-prev").addEventListener("click", () => goTo(current - 1));
+        document.querySelector(".carousel-next").addEventListener("click", () => goTo(current + 1));
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowLeft") goTo(current - 1);
+          if (e.key === "ArrowRight") goTo(current + 1);
         });
       })();
 
       function setLang(lang) {
-        document.body.setAttribute('data-lang', lang);
-        ['en', 'hr', 'it', 'de'].forEach(l => {
-          document.getElementById('btn-' + l).classList.toggle('active', l === lang);
+        document.body.setAttribute("data-lang", lang);
+        ["en", "hr", "it", "de"].forEach((l) => {
+          document
+            .getElementById("btn-" + l)
+            .classList.toggle("active", l === lang);
         });
-        try { localStorage.setItem('lang', lang); } catch (e) {}
+        try {
+          localStorage.setItem("lang", lang);
+        } catch (e) {}
       }
       try {
-        const saved = localStorage.getItem('lang');
+        const saved = localStorage.getItem("lang");
         if (saved) setLang(saved);
       } catch (e) {}
     </script>
