@@ -237,17 +237,14 @@
 
       /* ============== HERO ============== */
       .hero {
-        padding: 1px 0 48px;
+        padding: 1px 0 0;
         position: relative;
       }
 
       .hero-grid {
         display: grid;
         grid-template-columns: 1fr 1.2fr;
-        grid-template-rows: 1fr auto;
-        grid-template-areas:
-          "text image"
-          "meta image";
+        grid-template-areas: "text image";
         gap: 40px;
       }
 
@@ -257,10 +254,6 @@
       }
       .hero-image {
         grid-area: image;
-        align-self: start;
-      }
-      .hero-meta {
-        grid-area: meta;
         align-self: start;
       }
 
@@ -371,11 +364,10 @@
       @media (max-width: 900px) {
         .hero-grid {
           grid-template-columns: 1fr;
-          grid-template-rows: auto auto auto;
+          grid-template-rows: auto auto;
           grid-template-areas:
             "text"
-            "image"
-            "meta";
+            "image";
           gap: 12px;
           min-height: unset;
         }
@@ -385,9 +377,6 @@
         .hero-image {
           align-self: auto;
           aspect-ratio: 4/3;
-        }
-        .hero-meta {
-          align-self: auto;
         }
         .hero h1 {
           font-size: clamp(36px, 10vw, 56px);
@@ -609,7 +598,9 @@
         -ms-overflow-style: none;
       }
 
-      .carousel-track-wrap::-webkit-scrollbar { display: none; }
+      .carousel-track-wrap::-webkit-scrollbar {
+        display: none;
+      }
 
       .carousel-track {
         display: flex;
@@ -1351,7 +1342,7 @@
             >
             <span class="lang-hr"
               >Tradicionalna kuća za odmor s pogledom na more, svega minutu
-              pješice do najbliže plaže. Stvorena za spore jutra i duge večere
+              pješice do najbliže plaže. Stvorena za spora jutra i duge večere
               pod pergolom.</span
             >
             <span class="lang-it"
@@ -1365,33 +1356,33 @@
               und lange Abendessen unter der Pergola.</span
             >
           </p>
+          <div class="hero-meta">
+            <div class="hero-meta-item">
+              <small>
+                <span class="lang-en">Sleeps</span>
+                <span class="lang-hr">Prima</span>
+                <span class="lang-it">Ospiti</span>
+                <span class="lang-de">Schlafplätze</span>
+              </small>
+              <strong
+                >6 <span class="lang-en">guests</span
+                ><span class="lang-hr">osoba</span
+                ><span class="lang-it">ospiti</span
+                ><span class="lang-de">Gäste</span></strong
+              >
+            </div>
+            <div class="hero-meta-item">
+              <small>
+                <span class="lang-en">Beach</span>
+                <span class="lang-hr">Plaža</span>
+                <span class="lang-it">Spiaggia</span>
+                <span class="lang-de">Strand</span>
+              </small>
+              <strong>&lt;1 min</strong>
+            </div>
+          </div>
         </div>
         <div class="hero-image"></div>
-        <div class="hero-meta">
-          <div class="hero-meta-item">
-            <small>
-              <span class="lang-en">Sleeps</span>
-              <span class="lang-hr">Prima</span>
-              <span class="lang-it">Ospiti</span>
-              <span class="lang-de">Schlafplätze</span>
-            </small>
-            <strong
-              >6 <span class="lang-en">guests</span
-              ><span class="lang-hr">osoba</span
-              ><span class="lang-it">ospiti</span
-              ><span class="lang-de">Gäste</span></strong
-            >
-          </div>
-          <div class="hero-meta-item">
-            <small>
-              <span class="lang-en">Beach</span>
-              <span class="lang-hr">Plaža</span>
-              <span class="lang-it">Spiaggia</span>
-              <span class="lang-de">Strand</span>
-            </small>
-            <strong>&lt;1 min</strong>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -1597,10 +1588,20 @@
               <span class="lang-de">Außen-Essbereich</span>
             </h3>
             <p>
-              <span class="lang-en">BBQ grill, sink, dining table and chairs under a wooden pergola.</span>
-              <span class="lang-hr">Roštilj, sudoper, stol i stolice pod drvenom pergolom.</span>
-              <span class="lang-it">Barbecue, lavello, tavolo e sedie sotto un pergolato in legno.</span>
-              <span class="lang-de">Grill, Spüle, Tisch und Stühle unter einer Holzpergola.</span>
+              <span class="lang-en"
+                >BBQ grill, sink, dining table and chairs under a wooden
+                pergola.</span
+              >
+              <span class="lang-hr"
+                >Roštilj, sudoper, stol i stolice pod drvenom pergolom.</span
+              >
+              <span class="lang-it"
+                >Barbecue, lavello, tavolo e sedie sotto un pergolato in
+                legno.</span
+              >
+              <span class="lang-de"
+                >Grill, Spüle, Tisch und Stühle unter einer Holzpergola.</span
+              >
             </p>
           </div>
 
@@ -2047,9 +2048,9 @@
               <span class="lang-it">Bassa stagione</span>
               <span class="lang-de">Nebensaison</span>
             </div>
-            <div class="pricing-dates">01.01 – 26.06.<br />19.09 – 31.12.</div>
+            <div class="pricing-dates">01.01 – 19.06.<br />19.09 – 31.12.</div>
             <div class="pricing-price">
-              160
+              220
               <span
                 >€ / <span class="lang-en">night</span
                 ><span class="lang-hr">noć</span
@@ -2083,7 +2084,7 @@
               <span class="lang-it">Inizio e fine estate</span>
               <span class="lang-de">Früh- &amp; Spätsommer</span>
             </div>
-            <div class="pricing-dates">27.06 – 10.07.<br />22.08 – 28.08.</div>
+            <div class="pricing-dates">20.06 – 10.07.<br />22.08 – 28.08.</div>
             <div class="pricing-price">
               275
               <span
@@ -2501,14 +2502,20 @@
           });
           const thumb = thumbsEl.children[current];
           thumbsEl.scrollTo({
-            left: thumb.offsetLeft - thumbsEl.offsetWidth / 2 + thumb.offsetWidth / 2,
+            left:
+              thumb.offsetLeft -
+              thumbsEl.offsetWidth / 2 +
+              thumb.offsetWidth / 2,
             behavior: "smooth",
           });
         }
 
         function goTo(n) {
           current = (n + images.length) % images.length;
-          wrap.scrollTo({ left: current * wrap.offsetWidth, behavior: "smooth" });
+          wrap.scrollTo({
+            left: current * wrap.offsetWidth,
+            behavior: "smooth",
+          });
           updateUI();
         }
 
@@ -2527,8 +2534,12 @@
           }, 120);
         });
 
-        document.querySelector(".carousel-prev").addEventListener("click", () => goTo(current - 1));
-        document.querySelector(".carousel-next").addEventListener("click", () => goTo(current + 1));
+        document
+          .querySelector(".carousel-prev")
+          .addEventListener("click", () => goTo(current - 1));
+        document
+          .querySelector(".carousel-next")
+          .addEventListener("click", () => goTo(current + 1));
 
         document.addEventListener("keydown", (e) => {
           if (e.key === "ArrowLeft") goTo(current - 1);
