@@ -15,6 +15,51 @@
       content="Stone holiday house with sea view, walking distance to the beach. Book directly for the best rate."
     />
     <meta property="og:type" content="website" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VacationRental",
+      "name": "House Verona",
+      "description": "Traditional stone holiday house on the island of Cres, Croatia. Sea views, less than 1 minute walk to the beach. Sleeps 6 guests across 3 bedrooms and 2 bathrooms. Private parking, BBQ terrace under wooden pergola, air conditioning, Wi-Fi. Book direct and save 10%.",
+      "url": "https://house-verona.vercel.app/",
+      "telephone": "+385911260214",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Martinšćica 47",
+        "addressLocality": "Martinšćica",
+        "postalCode": "51556",
+        "addressCountry": "HR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 44.8190117,
+        "longitude": 14.3528908
+      },
+      "starRating": {
+        "@type": "Rating",
+        "ratingValue": "4"
+      },
+      "numberOfRooms": 3,
+      "occupancy": {
+        "@type": "QuantitativeValue",
+        "maxValue": 6
+      },
+      "amenityFeature": [
+        { "@type": "LocationFeatureSpecification", "name": "Sea view", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Beach access (under 1 min walk)", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Wi-Fi", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Air conditioning", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Private parking", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "BBQ grill", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Outdoor dining terrace with pergola", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Washing machine", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Dishwasher", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Fully equipped kitchen", "value": true }
+      ],
+      "priceRange": "€230–€350 per night"
+    }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -851,7 +896,7 @@
 
       .pricing-grid {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 0;
         border: 1px solid var(--line);
         border-radius: 4px;
@@ -931,13 +976,13 @@
 
       @media (max-width: 900px) {
         .pricing-grid {
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(2, 1fr);
         }
-        .pricing-card:nth-child(3) {
+        .pricing-card:nth-child(2n) {
           border-right: none;
         }
-        .pricing-card:nth-child(4),
-        .pricing-card:nth-child(5) {
+        .pricing-card:nth-child(3),
+        .pricing-card:nth-child(4) {
           border-top: 1px solid var(--line);
         }
       }
@@ -950,16 +995,8 @@
           border-right: none;
         }
         .pricing-card:nth-child(3),
-        .pricing-card:nth-child(4),
-        .pricing-card:nth-child(5) {
+        .pricing-card:nth-child(4) {
           border-top: 1px solid var(--line);
-        }
-        .pricing-card:nth-child(3) {
-          border-right: 1px solid var(--line);
-        }
-        .pricing-card:nth-child(5) {
-          grid-column: span 2;
-          border-right: none;
         }
       }
 
@@ -2022,16 +2059,16 @@
         </div>
         <h2 class="pricing-title">
           <span class="lang-en"
-            >Rates <span class="italic">2025 / 2026</span></span
+            >Rates <span class="italic">2026</span></span
           >
           <span class="lang-hr"
-            >Cijene <span class="italic">2025 / 2026</span></span
+            >Cijene <span class="italic">2026</span></span
           >
           <span class="lang-it"
-            >Tariffe <span class="italic">2025 / 2026</span></span
+            >Tariffe <span class="italic">2026</span></span
           >
           <span class="lang-de"
-            >Preise <span class="italic">2025 / 2026</span></span
+            >Preise <span class="italic">2026</span></span
           >
         </h2>
         <p class="pricing-subtitle">
@@ -2048,25 +2085,7 @@
               <span class="lang-it">Bassa stagione</span>
               <span class="lang-de">Nebensaison</span>
             </div>
-            <div class="pricing-dates">01.01 – 19.06.<br />19.09 – 31.12.</div>
-            <div class="pricing-price">
-              220
-              <span
-                >€ / <span class="lang-en">night</span
-                ><span class="lang-hr">noć</span
-                ><span class="lang-it">notte</span
-                ><span class="lang-de">Nacht</span></span
-              >
-            </div>
-          </div>
-          <div class="pricing-card">
-            <div class="pricing-season">
-              <span class="lang-en">Shoulder</span>
-              <span class="lang-hr">Predsezone</span>
-              <span class="lang-it">Mezza stagione</span>
-              <span class="lang-de">Schulterzeit</span>
-            </div>
-            <div class="pricing-dates">29.08 – 18.09.</div>
+            <div class="pricing-dates">04.04 – 19.06.<br />29.08 – 31.10.</div>
             <div class="pricing-price">
               230
               <span
@@ -2283,27 +2302,19 @@
         <p class="cta-alt">
           <span class="lang-en"
             >Or email
-            <a href="mailto:filipas.ana@gmail.com"
-              >filipas.ana@gmail.com</a
-            ></span
+            <a class="email-link" data-u="filipas.ana" data-d="gmail.com"></a></span
           >
           <span class="lang-hr"
             >Ili pošalji mail na
-            <a href="mailto:filipas.ana@gmail.com"
-              >filipas.ana@gmail.com</a
-            ></span
+            <a class="email-link" data-u="filipas.ana" data-d="gmail.com"></a></span
           >
           <span class="lang-it"
             >O scrivi a
-            <a href="mailto:filipas.ana@gmail.com"
-              >filipas.ana@gmail.com</a
-            ></span
+            <a class="email-link" data-u="filipas.ana" data-d="gmail.com"></a></span
           >
           <span class="lang-de"
             >Oder E-Mail an
-            <a href="mailto:filipas.ana@gmail.com"
-              >filipas.ana@gmail.com</a
-            ></span
+            <a class="email-link" data-u="filipas.ana" data-d="gmail.com"></a></span
           >
         </p>
       </div>
@@ -2562,6 +2573,12 @@
         const saved = localStorage.getItem("lang");
         if (saved) setLang(saved);
       } catch (e) {}
+
+      document.querySelectorAll(".email-link").forEach(function (el) {
+        var email = el.dataset.u + "\x40" + el.dataset.d;
+        el.href = "mailto:" + email;
+        el.textContent = email;
+      });
     </script>
   </body>
 </html>
