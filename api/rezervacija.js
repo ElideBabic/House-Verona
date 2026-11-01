@@ -8,7 +8,7 @@ import { FieldValue } from "firebase-admin/firestore";
 import { getStripe, json, SITE_URL, payMethods, sendMail, adminEmail } from "./_lib/servisi.js";
 import { bookedWeeks, pendingWeeks, bookingsCol } from "./_lib/rezervacije.js";
 import { guestMail, adminMail } from "./_lib/mailovi.js";
-import { stayPrice, isBookableOnline, weekEnd, weekList, formatDate, MAX_GUESTS } from "../cijene.js";
+import { stayPrice, priceFor, isBookableOnline, weekEnd, weekList, formatDate, MAX_GUESTS } from "../cijene.js";
 
 const LANGS = ["hr", "en", "it", "de"];
 const ERR = {
@@ -61,7 +61,7 @@ export async function POST(request) {
   }
   if (!methods[method]) return json({ error: ERR.notOnline }, 409);
 
-  let price = stayPrice(week, weeks);
+  let price = priceFor(stayPrice(week, weeks), method);
   if (!price || !isBookableOnline(week)) return json({ error: ERR.notOnline }, 409);
 
   // Probno plaćanje: na testnoj (preview) objavi TEST_PRICE_EUR zamjenjuje iznos, npr. 5 €.
@@ -92,6 +92,7 @@ export async function POST(request) {
       full: price.full,
       total: price.total,
       amount: price.deposit,
+      ...(price.bankDiscount ? { bankDiscount: price.bankDiscount } : {}),
       currency: "eur",
       paymentMethod: method,
       createdAt: FieldValue.serverTimestamp(),

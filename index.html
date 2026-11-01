@@ -706,6 +706,12 @@
         color: var(--terra);
         margin-bottom: 10px;
       }
+      .summary-discount + .summary-discount {
+        margin-top: -6px;
+      }
+      .summary-discount[hidden] {
+        display: none;
+      }
       .summary-old {
         color: var(--ink-muted);
       }
@@ -885,6 +891,131 @@
         }
         .direct-booking h2 {
           margin-bottom: 20px;
+        }
+      }
+
+      /* ============== RECENZIJE ============== */
+      .reviews-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 18px 40px;
+        margin-bottom: 40px;
+      }
+      .reviews-title {
+        font-family: "EB Garamond", Georgia, serif;
+        font-weight: 400;
+        font-size: clamp(32px, 4.4vw, 52px);
+        line-height: 1.08;
+        margin: 0;
+      }
+      .reviews-title .italic {
+        font-style: italic;
+        color: var(--terra);
+      }
+      .reviews-summary {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 6px 12px;
+        color: var(--ink-soft);
+        font-size: 14px;
+      }
+      .reviews-summary strong {
+        font-family: "EB Garamond", Georgia, serif;
+        font-weight: 400;
+        font-size: 40px;
+        line-height: 1;
+        color: var(--ink);
+      }
+      .reviews-stars,
+      .review-stars {
+        color: var(--terra);
+        letter-spacing: 0.12em;
+      }
+      .reviews-summary[hidden],
+      .reviews[hidden],
+      .side-nav a[hidden] {
+        display: none;
+      }
+      .reviews-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+      }
+      .review {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin: 0;
+        padding: 26px 26px 22px;
+        background: var(--card);
+        border: 1px solid var(--line);
+      }
+      .review-stars {
+        font-size: 15px;
+      }
+      .review blockquote {
+        margin: 0;
+        white-space: pre-line;
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 19px;
+        line-height: 1.5;
+        color: var(--ink);
+      }
+      .review.is-long:not(.is-open) blockquote {
+        display: -webkit-box;
+        -webkit-line-clamp: 8;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .review-more {
+        align-self: flex-start;
+        padding: 0;
+        border: 0;
+        background: none;
+        font: inherit;
+        font-size: 13px;
+        color: var(--terra);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      .review figcaption {
+        margin-top: auto;
+        padding-top: 14px;
+        border-top: 1px solid var(--line);
+        font-size: 13px;
+        color: var(--ink-muted);
+      }
+      .review figcaption strong {
+        display: block;
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--ink);
+      }
+      .reviews-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 14px 28px;
+        margin-top: 36px;
+      }
+      .reviews-write {
+        font-size: 14px;
+        color: var(--ink-soft);
+      }
+      @media (max-width: 1000px) {
+        .reviews-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 640px) {
+        .reviews-grid {
+          grid-template-columns: 1fr;
+        }
+        .review {
+          padding: 22px 20px 18px;
         }
       }
 
@@ -1526,6 +1657,13 @@
       .booking .is-invalid {
         border-color: var(--terra) !important;
       }
+      .booking-terms.is-invalid {
+        color: var(--terra);
+      }
+      .booking-terms.is-invalid input {
+        outline: 2px solid var(--terra);
+        outline-offset: 2px;
+      }
       .guests {
         display: flex;
         flex-direction: column;
@@ -1637,6 +1775,17 @@
       .pay-opt[hidden] {
         display: none;
       }
+      .pay-badge {
+        display: inline-block;
+        margin-top: 5px;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #fff;
+        background: var(--sea);
+      }
       @media (max-width: 640px) {
         .paychoice {
           grid-template-columns: 1fr;
@@ -1644,6 +1793,7 @@
       }
       .booking-terms {
         display: flex;
+        margin-top: 22px;
         gap: 10px;
         align-items: flex-start;
         font-size: 14px;
@@ -2270,6 +2420,10 @@
           ><span class="lang-en">Why book direct</span><span class="lang-hr">Zašto direktno</span
           ><span class="lang-it">Perché prenotare diretto</span><span class="lang-de">Warum direkt</span></a
         >
+        <a href="#recenzije" class="nav-reviews" hidden
+          ><span class="lang-en">Reviews</span><span class="lang-hr">Recenzije</span
+          ><span class="lang-it">Recensioni</span><span class="lang-de">Bewertungen</span></a
+        >
         <a href="#kontakt"
           ><span class="lang-en">Contact</span><span class="lang-hr">Kontakt</span
           ><span class="lang-it">Contatto</span><span class="lang-de">Kontakt</span></a
@@ -2337,35 +2491,6 @@
           </p>
         </div>
 
-        <ol class="steps" id="steps">
-          <li class="is-active">
-            <span class="lang-en">Choose dates</span><span class="lang-hr">Odaberite termin</span
-            ><span class="lang-it">Scegliete le date</span><span class="lang-de">Termin wählen</span>
-          </li>
-          <li>
-            <span class="lang-en">Your details</span><span class="lang-hr">Vaši podaci</span
-            ><span class="lang-it">I vostri dati</span><span class="lang-de">Ihre Angaben</span>
-          </li>
-          <li>
-            <span class="pay-card"
-              ><span class="lang-en">Card hold</span><span class="lang-hr">Rezervacija na kartici</span
-              ><span class="lang-it">Blocco sulla carta</span><span class="lang-de">Kartenreservierung</span></span
-            ><span class="pay-bank"
-              ><span class="lang-en">Confirmation within 24 h</span><span class="lang-hr">Potvrda unutar 24 h</span
-              ><span class="lang-it">Conferma entro 24 h</span><span class="lang-de">Bestätigung in 24 Std.</span></span
-            >
-          </li>
-          <li>
-            <span class="pay-card"
-              ><span class="lang-en">Confirmation within 24 h</span><span class="lang-hr">Potvrda unutar 24 h</span
-              ><span class="lang-it">Conferma entro 24 h</span><span class="lang-de">Bestätigung in 24 Std.</span></span
-            ><span class="pay-bank"
-              ><span class="lang-en">Bank transfer</span><span class="lang-hr">Uplata na račun</span
-              ><span class="lang-it">Bonifico</span><span class="lang-de">Überweisung</span></span
-            >
-          </li>
-        </ol>
-
         <div class="planner-grid">
           <div class="planner-cal">
             <div id="calendar"><p class="cal-loading">…</p></div>
@@ -2426,6 +2551,11 @@
                 <span class="lang-en">Direct booking −10%</span><span class="lang-hr">Popust za direktnu rezervaciju −10%</span
                 ><span class="lang-it">Sconto prenotazione diretta −10%</span><span class="lang-de">Direktbuchung −10%</span>
                 <span id="sumSave"></span>
+              </div>
+              <div class="summary-discount" id="sumBankRow" hidden>
+                <span class="lang-en">Bank transfer</span><span class="lang-hr">Uplata na račun</span
+                ><span class="lang-it">Bonifico bancario</span><span class="lang-de">Banküberweisung</span>
+                <span id="sumBank"></span>
               </div>
               <div class="summary-total">
                 <span class="lang-en">Total</span><span class="lang-hr">Ukupno</span
@@ -2505,87 +2635,50 @@
               <span class="lang-en">Payment</span><span class="lang-hr">Način plaćanja</span
               ><span class="lang-it">Pagamento</span><span class="lang-de">Zahlungsart</span>
             </legend>
+            <label class="pay-opt" id="payOptBank">
+              <input type="radio" name="payment" value="bank" checked />
+              <span class="pay-opt-body">
+                <strong
+                  ><span class="lang-en">Bank transfer</span><span class="lang-hr">Uplata na račun</span
+                  ><span class="lang-it">Bonifico bancario</span><span class="lang-de">Banküberweisung</span></strong
+                >
+                <span class="pay-badge"
+                  ><span class="lang-en">Recommended</span><span class="lang-hr">Preporučeno</span
+                  ><span class="lang-it">Consigliato</span><span class="lang-de">Empfohlen</span
+                  ><span class="bank-save"> · −<span class="bank-discount">10 €</span></span></span
+                >
+                <small>
+                  <span class="lang-en"><span class="bank-save"><span class="bank-discount">10 €</span> cheaper. </span>You pay after we confirm, within <span class="bank-days">5</span> days.</span>
+                  <span class="lang-hr"><span class="bank-save"><span class="bank-discount">10 €</span> jeftinije. </span>Plaćate nakon naše potvrde, u roku od <span class="bank-days">5</span> dana.</span>
+                  <span class="lang-it"><span class="bank-save"><span class="bank-discount">10 €</span> in meno. </span>Pagate dopo la nostra conferma, entro <span class="bank-days">5</span> giorni.</span>
+                  <span class="lang-de"><span class="bank-save"><span class="bank-discount">10 €</span> günstiger. </span>Sie zahlen nach unserer Bestätigung, innerhalb von <span class="bank-days">5</span> Tagen.</span>
+                </small>
+              </span>
+            </label>
             <label class="pay-opt" id="payOptCard">
-              <input type="radio" name="payment" value="card" checked />
+              <input type="radio" name="payment" value="card" />
               <span class="pay-opt-body">
                 <strong
                   ><span class="lang-en">Card</span><span class="lang-hr">Kartica</span
                   ><span class="lang-it">Carta</span><span class="lang-de">Karte</span></strong
                 >
                 <small>
-                  <span class="lang-en">Reserved now, charged only after we confirm.</span>
-                  <span class="lang-hr">Iznos se odmah rezervira, a naplaćuje tek nakon potvrde.</span>
-                  <span class="lang-it">Bloccato subito, addebitato solo dopo la conferma.</span>
-                  <span class="lang-de">Sofort reserviert, abgebucht erst nach Bestätigung.</span>
-                </small>
-              </span>
-            </label>
-            <label class="pay-opt" id="payOptBank">
-              <input type="radio" name="payment" value="bank" />
-              <span class="pay-opt-body">
-                <strong
-                  ><span class="lang-en">Bank transfer</span><span class="lang-hr">Uplata na račun</span
-                  ><span class="lang-it">Bonifico bancario</span><span class="lang-de">Banküberweisung</span></strong
-                >
-                <small>
-                  <span class="lang-en">Nothing to pay now. Bank details arrive with the confirmation.</span>
-                  <span class="lang-hr">Sada ništa ne plaćate. Podatke za uplatu dobivate uz potvrdu.</span>
-                  <span class="lang-it">Ora non pagate nulla. I dati bancari arrivano con la conferma.</span>
-                  <span class="lang-de">Jetzt nichts zu zahlen. Die Bankdaten kommen mit der Bestätigung.</span>
+                  <span class="lang-en">Pay now, securely via Stripe.</span>
+                  <span class="lang-hr">Platite odmah, sigurno preko Stripea.</span>
+                  <span class="lang-it">Pagate subito, in modo sicuro con Stripe.</span>
+                  <span class="lang-de">Jetzt bezahlen, sicher über Stripe.</span>
                 </small>
               </span>
             </label>
           </fieldset>
 
-          <ol class="booking-steps pay-bank">
-            <li>
-              <span class="lang-en">Send the request — nothing is paid at this point.</span>
-              <span class="lang-hr">Pošaljite zahtjev — u ovom koraku ništa se ne plaća.</span>
-              <span class="lang-it">Inviate la richiesta — in questo momento non si paga nulla.</span>
-              <span class="lang-de">Senden Sie die Anfrage — jetzt wird nichts bezahlt.</span>
-            </li>
-            <li>
-              <span class="lang-en">We confirm by e-mail within 24 hours and send the bank details.</span>
-              <span class="lang-hr">Unutar 24 sata potvrđujemo mailom i šaljemo podatke za uplatu.</span>
-              <span class="lang-it">Entro 24 ore confermiamo via e-mail e inviamo i dati per il bonifico.</span>
-              <span class="lang-de">Innerhalb von 24 Stunden bestätigen wir per E-Mail und senden die Bankdaten.</span>
-            </li>
-            <li>
-              <span class="lang-en">Transfer the amount within <span class="bank-days">5</span> days of confirmation.</span>
-              <span class="lang-hr">Iznos uplaćujete u roku od <span class="bank-days">5</span> dana od potvrde.</span>
-              <span class="lang-it">Effettuate il bonifico entro <span class="bank-days">5</span> giorni dalla conferma.</span>
-              <span class="lang-de">Überweisen Sie den Betrag innerhalb von <span class="bank-days">5</span> Tagen nach Bestätigung.</span>
-            </li>
-          </ol>
-
-          <ol class="booking-steps pay-card">
-            <li>
-              <span class="lang-en">On the next page (Stripe) enter your card. The amount is only <strong>reserved</strong>, not charged.</span>
-              <span class="lang-hr">Na sljedećoj stranici (Stripe) unosite karticu. Iznos se samo <strong>rezervira</strong>, ne naplaćuje.</span>
-              <span class="lang-it">Nella pagina successiva (Stripe) inserite la carta. L'importo viene solo <strong>bloccato</strong>, non addebitato.</span>
-              <span class="lang-de">Auf der nächsten Seite (Stripe) geben Sie Ihre Karte ein. Der Betrag wird nur <strong>reserviert</strong>, nicht abgebucht.</span>
-            </li>
-            <li>
-              <span class="lang-en">We confirm your booking by e-mail within 24 hours — only then is the amount charged.</span>
-              <span class="lang-hr">Rezervaciju potvrđujemo mailom unutar 24 sata — tek tada se iznos naplaćuje.</span>
-              <span class="lang-it">Confermiamo la prenotazione via e-mail entro 24 ore — solo allora l'importo viene addebitato.</span>
-              <span class="lang-de">Wir bestätigen Ihre Buchung innerhalb von 24 Stunden per E-Mail — erst dann wird abgebucht.</span>
-            </li>
-            <li>
-              <span class="lang-en">If the dates are no longer available, the hold is released and nothing is charged.</span>
-              <span class="lang-hr">Ako termin ipak nije slobodan, rezervacija se poništava i ništa se ne naplaćuje.</span>
-              <span class="lang-it">Se la settimana non è più disponibile, il blocco viene annullato e nulla viene addebitato.</span>
-              <span class="lang-de">Ist die Woche nicht mehr frei, wird die Reservierung aufgehoben und nichts abgebucht.</span>
-            </li>
-          </ol>
-
           <label class="booking-terms"
             ><input type="checkbox" name="terms" required />
             <span class="pay-card">
-              <span class="lang-en">I agree that the amount is reserved on my card and charged once the booking is confirmed.</span>
-              <span class="lang-hr">Slažem se da se iznos rezervira na mojoj kartici i naplati nakon potvrde rezervacije.</span>
-              <span class="lang-it">Accetto che l'importo venga bloccato sulla mia carta e addebitato alla conferma.</span>
-              <span class="lang-de">Ich bin einverstanden, dass der Betrag reserviert und nach Bestätigung abgebucht wird.</span>
+              <span class="lang-en">I agree that the amount is reserved on my card.</span>
+              <span class="lang-hr">Slažem se da se iznos rezervira na mojoj kartici.</span>
+              <span class="lang-it">Accetto che l'importo venga bloccato sulla mia carta.</span>
+              <span class="lang-de">Ich bin einverstanden, dass der Betrag auf meiner Karte reserviert wird.</span>
             </span>
             <span class="pay-bank">
               <span class="lang-en">I agree to transfer the full amount within <span class="bank-days">5</span> days of confirmation, otherwise the booking may be cancelled.</span>
@@ -2600,8 +2693,8 @@
           <div class="booking-actions">
             <button type="submit" class="btn-primary booking-submit" id="bookingSubmit">
               <span class="pay-card"
-                ><span class="lang-en">Continue to payment</span><span class="lang-hr">Nastavi na plaćanje</span
-                ><span class="lang-it">Procedi al pagamento</span><span class="lang-de">Weiter zur Zahlung</span></span
+                ><span class="lang-en">Pay now</span><span class="lang-hr">Plati sada</span
+                ><span class="lang-it">Paga ora</span><span class="lang-de">Jetzt bezahlen</span></span
               ><span class="pay-bank"
                 ><span class="lang-en">Send request</span><span class="lang-hr">Pošalji zahtjev</span
                 ><span class="lang-it">Invia richiesta</span><span class="lang-de">Anfrage senden</span></span
@@ -3567,56 +3660,48 @@
       </div>
     </section>
 
-    <section class="cta">
+    <section class="section reviews" id="recenzije" hidden>
       <div class="container">
-        <h2>
-          <span class="lang-en"
-            >Ready when <span class="italic">you are.</span></span
+        <div class="section-marker">
+          <span class="num">06</span>
+          <span class="label">
+            <span class="lang-en">— Reviews</span>
+            <span class="lang-hr">— Recenzije</span>
+            <span class="lang-it">— Recensioni</span>
+            <span class="lang-de">— Bewertungen</span>
+          </span>
+        </div>
+        <div class="reviews-head">
+          <h2 class="reviews-title">
+            <span class="lang-en">What our <span class="italic">guests say</span></span>
+            <span class="lang-hr">Što kažu <span class="italic">naši gosti</span></span>
+            <span class="lang-it">Cosa dicono <span class="italic">i nostri ospiti</span></span>
+            <span class="lang-de">Was unsere <span class="italic">Gäste sagen</span></span>
+          </h2>
+          <div class="reviews-summary" id="reviewsSummary" hidden>
+            <strong id="reviewsScore"></strong>
+            <span class="reviews-stars" aria-hidden="true">★★★★★</span>
+            <span class="reviews-count"
+              ><span id="reviewsCount"></span>
+              <span class="lang-en">reviews on Google</span><span class="lang-hr">recenzija na Googleu</span
+              ><span class="lang-it">recensioni su Google</span><span class="lang-de">Bewertungen auf Google</span></span
+            >
+          </div>
+        </div>
+        <div class="reviews-grid" id="reviewsGrid"></div>
+        <div class="reviews-actions">
+          <a class="btn-primary" id="reviewsAll" href="https://g.page/r/CVJh7TzP9WhKEAE" target="_blank" rel="noopener"
+            ><span class="lang-en">See all reviews on Google</span><span class="lang-hr">Pogledaj sve na Googleu</span
+            ><span class="lang-it">Tutte le recensioni su Google</span><span class="lang-de">Alle Bewertungen auf Google</span></a
           >
-          <span class="lang-hr">Čekamo <span class="italic">tebe.</span></span>
-          <span class="lang-it"
-            >Pronti quando <span class="italic">vuoi.</span></span
+          <a class="reviews-write" id="reviewsWrite" href="/recenzija.html" target="_blank" rel="noopener"
+            ><span class="lang-en">Stayed with us? Leave a review</span><span class="lang-hr">Bili ste kod nas? Ostavite recenziju</span
+            ><span class="lang-it">Siete stati da noi? Lasciate una recensione</span><span class="lang-de">Waren Sie bei uns? Schreiben Sie eine Bewertung</span></a
           >
-          <span class="lang-de"
-            >Bereit, wenn <span class="italic">du es bist.</span></span
-          >
-        </h2>
-        <p class="cta-subtitle">
-          <span class="lang-en"
-            >A quick message is all it takes. We'll get back to you within a few
-            hours.</span
-          >
-          <span class="lang-hr"
-            >Dovoljna je kratka poruka. Javljamo se u roku od nekoliko
-            sati.</span
-          >
-          <span class="lang-it"
-            >Basta un breve messaggio. Ti risponderemo entro poche ore.</span
-          >
-          <span class="lang-de"
-            >Eine kurze Nachricht genügt. Wir melden uns innerhalb weniger
-            Stunden.</span
-          >
-        </p>
-        <a
-          href="https://wa.me/385911260214?text=Hi%21%20I%27d%20like%20to%20enquire%20about%20availability%20at%20House%20Verona%20for%20%5Bdates%5D.%20Thanks%21"
-          class="btn-whatsapp"
-        >
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.9-2-.2-.5-.5-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2 0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.7.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z"
-            />
-            <path
-              d="M20.5 3.5C18.3 1.2 15.3 0 12 0 5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12 0-3.2-1.3-6.2-3.5-8.3zM12 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.5 4.5-10 10-10s10 4.5 10 10c-.1 5.4-4.6 9.9-10.1 9.9z"
-            />
-          </svg>
-          <span class="lang-en">Check availability</span>
-          <span class="lang-hr">Provjeri slobodne termine</span>
-          <span class="lang-it">Verifica disponibilità</span>
-          <span class="lang-de">Verfügbarkeit prüfen</span>
-        </a>
+        </div>
       </div>
     </section>
+
 
     <footer id="kontakt">
       <div class="container">
@@ -3872,6 +3957,8 @@
       import { firebaseConfig, isConfigured } from "./firebase-config.js";
       import {
         stayPrice,
+        priceFor,
+        BANK_DISCOUNT_EUR,
         isBookableOnline,
         formatEur,
         formatDate,
@@ -3881,6 +3968,36 @@
       } from "./cijene.js";
 
       const T = {
+        noName: {
+          en: "Please enter your full name.",
+          hr: "Upišite ime i prezime.",
+          it: "Inserite nome e cognome.",
+          de: "Bitte geben Sie Ihren Namen ein.",
+        },
+        noEmail: {
+          en: "Please enter your e-mail address.",
+          hr: "Upišite e-mail adresu.",
+          it: "Inserite il vostro indirizzo e-mail.",
+          de: "Bitte geben Sie Ihre E-Mail-Adresse ein.",
+        },
+        badEmail: {
+          en: "The e-mail address doesn't look right (e.g. name@gmail.com).",
+          hr: "E-mail adresa nije ispravna (npr. ime@gmail.com).",
+          it: "L'indirizzo e-mail non sembra corretto (es. nome@gmail.com).",
+          de: "Die E-Mail-Adresse scheint nicht korrekt zu sein (z. B. name@gmail.com).",
+        },
+        noTermsCard: {
+          en: "Please tick the box to agree that the amount is reserved on your card.",
+          hr: "Označite kvačicu da se slažete da se iznos rezervira na kartici.",
+          it: "Spuntate la casella per accettare il blocco dell'importo sulla carta.",
+          de: "Bitte setzen Sie das Häkchen, dass der Betrag auf Ihrer Karte reserviert wird.",
+        },
+        noTermsBank: {
+          en: "Please tick the box to agree to the payment terms.",
+          hr: "Označite kvačicu da se slažete s uvjetima uplate.",
+          it: "Spuntate la casella per accettare le condizioni di pagamento.",
+          de: "Bitte setzen Sie das Häkchen, um den Zahlungsbedingungen zuzustimmen.",
+        },
         invalid: {
           en: "Please fill in your name, a valid e-mail and accept the conditions.",
           hr: "Upišite ime, ispravan e-mail i prihvatite uvjete.",
@@ -3969,16 +4086,29 @@
       // Način plaćanja: kartica (Stripe) ili uplata na račun — nudi se samo ono što je uključeno.
       const planner = $("dostupnost");
       const payment = () => form.elements.payment.value || "card";
+      let bankOn = false;
       function setupPayment(methods, bankDays) {
+        bankOn = Boolean(methods.bank);
         $("payOptCard").hidden = !methods.card;
         $("payOptBank").hidden = !methods.bank;
         $("payChoice").hidden = !(methods.card && methods.bank);
-        form.elements.payment.value = methods.card ? "card" : "bank";
+        // Uplata na račun je zadana kad je uključena (bez Stripe naknade).
+        form.elements.payment.value = methods.bank ? "bank" : "card";
         document.querySelectorAll(".bank-days").forEach((el) => (el.textContent = bankDays));
+        document.querySelectorAll(".bank-discount").forEach((el) => (el.textContent = formatEur(BANK_DISCOUNT_EUR)));
+        document.querySelectorAll(".bank-save").forEach((el) => (el.hidden = !BANK_DISCOUNT_EUR));
         planner.dataset.pay = payment();
+        renderSummary();
       }
+      form.elements.terms.addEventListener("change", () => {
+        form.elements.terms.classList.remove("is-invalid");
+        form.elements.terms.closest(".booking-terms").classList.remove("is-invalid");
+      });
       form.querySelectorAll('input[name="payment"]').forEach((r) =>
-        r.addEventListener("change", () => (planner.dataset.pay = payment())),
+        r.addEventListener("change", () => {
+          planner.dataset.pay = payment();
+          renderSummary();
+        }),
       );
 
       async function loadAvailability() {
@@ -4029,7 +4159,8 @@
         const first = selection[0];
         const last = selection[n - 1];
         const ok = contiguous(selection);
-        const price = ok ? stayPrice(first, n) : null;
+        const base = ok ? stayPrice(first, n) : null;
+        const price = priceFor(base, bankOn ? payment() : "card");
         const money = (v) => (price ? formatEur(v) : "—");
         const dow = T.dow[lang()];
         $("sumFrom").textContent = `${dow} ${formatDate(first)}`;
@@ -4037,7 +4168,9 @@
         $("sumNights").textContent = T.weeks[lang()](n);
         $("sumTotal").textContent = money(price?.deposit);
         $("sumFull").textContent = money(price?.full);
-        $("sumSave").textContent = price ? "−" + formatEur(Math.round((price.full - price.total) * 100) / 100) : "—";
+        $("sumSave").textContent = base ? "−" + formatEur(Math.round((base.full - base.total) * 100) / 100) : "—";
+        $("sumBankRow").hidden = !price?.bankDiscount;
+        $("sumBank").textContent = price?.bankDiscount ? "−" + formatEur(price.bankDiscount) : "";
         $("miniDates").textContent = `${formatDate(first)} – ${formatDate(weekEnd(last))}`;
         $("miniTotal").textContent = money(price?.deposit);
         $("sumGo").disabled = !ok;
@@ -4081,15 +4214,22 @@
         e.preventDefault();
         errorEl.hidden = true;
         const fields = form.elements;
-        let ok = true;
+        // Svaka greška ima svoju poruku: ime, prazan / neispravan e-mail, kvačica.
+        const email = fields.email.value.trim();
+        const problems = [];
+        if (!fields.name.value.trim()) problems.push(["name", "noName"]);
+        if (!email) problems.push(["email", "noEmail"]);
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) problems.push(["email", "badEmail"]);
+        if (!fields.terms.checked) problems.push(["terms", payment() === "bank" ? "noTermsBank" : "noTermsCard"]);
         ["name", "email", "terms"].forEach((n) => {
-          const valid = fields[n].checkValidity() && (n !== "name" || fields[n].value.trim());
-          fields[n].classList.toggle("is-invalid", !valid);
-          ok &&= Boolean(valid);
+          const bad = problems.some(([f]) => f === n);
+          fields[n].classList.toggle("is-invalid", bad);
+          if (n === "terms") fields[n].closest(".booking-terms").classList.toggle("is-invalid", bad);
         });
-        if (!ok || !selection.length || !contiguous(selection)) {
-          errorEl.textContent = t("invalid");
+        if (problems.length || !selection.length || !contiguous(selection)) {
+          errorEl.textContent = problems.length ? problems.map(([, key]) => t(key)).join(" ") : t("invalid");
           errorEl.hidden = false;
+          if (problems.length) fields[problems[0][0]].focus();
           return;
         }
 
@@ -4163,6 +4303,70 @@
       } catch (err) {
         console.error("Kalendar nije dostupan", err);
         $("calendar").innerHTML = "";
+      }
+    </script>
+    <script type="module">
+      // Recenzije gostiju — sadržaj je u recenzije.js; bez recenzija odjeljak ostaje skriven.
+      import { REVIEWS, GOOGLE_SUMMARY, GOOGLE_PROFILE_URL, GOOGLE_REVIEW_URL } from "./recenzije.js";
+
+      const esc = (v) =>
+        String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+      const stars = (n) => {
+        const k = Math.max(0, Math.min(5, Math.round(Number(n) || 0)));
+        return "★".repeat(k) + "☆".repeat(5 - k);
+      };
+      const more =
+        '<span class="lang-en">Read more</span><span class="lang-hr">Pročitaj više</span>' +
+        '<span class="lang-it">Leggi tutto</span><span class="lang-de">Weiterlesen</span>';
+
+      const list = (REVIEWS || []).filter((r) => r && r.text && r.name);
+      if (list.length) {
+        const section = document.getElementById("recenzije");
+        document.getElementById("reviewsAll").href = GOOGLE_PROFILE_URL;
+        document.getElementById("reviewsWrite").href = GOOGLE_REVIEW_URL;
+        if (GOOGLE_SUMMARY && GOOGLE_SUMMARY.rating) {
+          document.getElementById("reviewsScore").textContent = Number(GOOGLE_SUMMARY.rating).toLocaleString("hr-HR", {
+            minimumFractionDigits: 1,
+            maximumFractionDigits: 1,
+          });
+          if (GOOGLE_SUMMARY.count) document.getElementById("reviewsCount").textContent = GOOGLE_SUMMARY.count;
+          else document.querySelector(".reviews-count").textContent = "Google";
+          document.getElementById("reviewsSummary").hidden = false;
+        }
+        document.getElementById("reviewsGrid").innerHTML = list
+          .map((r) => {
+            const meta = [r.source, r.date].filter(Boolean).map(esc).join(" · ");
+            return (
+              `<figure class="review is-long">` +
+              (r.rating ? `<div class="review-stars" aria-label="${esc(r.rating)}/5">${stars(r.rating)}</div>` : "") +
+              `<blockquote>${esc(r.text)}</blockquote>` +
+              `<button type="button" class="review-more" hidden>${more}</button>` +
+              `<figcaption><strong>${esc(r.name)}</strong>${meta}</figcaption>` +
+              `</figure>`
+            );
+          })
+          .join("");
+        section.hidden = false;
+        document.querySelectorAll(".nav-reviews").forEach((a) => (a.hidden = false));
+
+        // Duge recenzije se skrate na 7 redaka, s gumbom "Pročitaj više".
+        const fit = () =>
+          document.querySelectorAll(".review").forEach((el) => {
+            if (el.classList.contains("is-open")) return;
+            el.classList.add("is-long");
+            const q = el.querySelector("blockquote");
+            const long = q.scrollHeight > q.clientHeight + 2;
+            el.classList.toggle("is-long", long);
+            el.querySelector(".review-more").hidden = !long;
+          });
+        fit();
+        addEventListener("resize", fit);
+        document.getElementById("reviewsGrid").addEventListener("click", (e) => {
+          const btn = e.target.closest(".review-more");
+          if (!btn) return;
+          btn.closest(".review").classList.add("is-open");
+          btn.hidden = true;
+        });
       }
     </script>
   </body>

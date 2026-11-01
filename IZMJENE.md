@@ -16,6 +16,36 @@ odabir tjedna), `vercel.json` (dnevni cron), `robots.txt`, `llms.txt`,
 Nepromijenjeno (nisu u ovoj mapi): slike. Nepromijenjeno: `firebase-config.js`, `firestore.rules`,
 `recenzija.html`, `sitemap.xml`.
 
+## 01.11.2026. (kasno) — sitnice
+
+- Maknut odjeljak "Čekamo tebe / Ready when you are" iznad podnožja.
+- Nova fotografija maslina kod poklona dobrodošlice (`maslinovo-ulje.jpg`).
+
+## 01.11.2026. (kasno) — odjeljak s recenzijama
+
+- Novi odjeljak "Što kažu naši gosti" (06 — Recenzije) pri dnu, iznad poziva na kontakt,
+  i stavka "Recenzije" u izborniku. Gumbi "Pogledaj sve na Googleu" i "Ostavite recenziju".
+- Recenzije se upisuju u novu datoteku `recenzije.js` (ime, tekst, ocjena, izvor, datum)
+  i ukupna ocjena s Googlea. Dok je popis prazan, odjeljak se ne prikazuje.
+
+## 01.11.2026. (kasno) — manje teksta kod plaćanja karticom
+
+- Kartica: "Platite odmah, sigurno preko Stripea", gumb "Plati sada", korak "Plaćanje".
+  Maknuta objašnjenja o rezerviranju/naplati i popisi koraka ispod načina plaćanja.
+- Kvačica uvjeta za karticu: "Slažem se da se iznos rezervira na mojoj kartici."
+- Poruke o greškama u obrascu su posebne za svaki slučaj: nedostaje ime, prazan e-mail,
+  neispravan e-mail, nije označena kvačica (tekst ovisi o načinu plaćanja). Kursor skoči na prvo polje s greškom.
+- Stranica "Hvala" i mail gostu nakon plaćanja: samo "Hvala na rezervaciji, potvrdu dobivate unutar 24 sata".
+  Ako termin ne možemo potvrditi, gost i dalje dobiva mail s objašnjenjem (kao prije).
+
+## 01.11.2026. (kasno) — poticaj za uplatu na račun
+
+- Uplata na račun je prva i unaprijed odabrana opcija, s oznakom
+  "Preporučeno · −10 €" i prednostima (bez kartice, bez blokiranja iznosa).
+- Dodatnih 10 € popusta po rezervaciji za uplatu na račun (`BANK_DISCOUNT_EUR`
+  u `cijene.js`, 0 = isključeno). Sažetak cijene pokazuje redak "Uplata na račun −10 €",
+  server sam računa umanjeni iznos, a vlasnica u mailu vidi da je popust uključen.
+
 ## 01.11.2026. (prije objave) — adresa stranice
 
 - `index.html`, `llms.txt`, `recenzija.html`, `robots.txt`, `sitemap.xml`:
@@ -45,3 +75,4 @@ Nepromijenjeno (nisu u ovoj mapi): slike. Nepromijenjeno: `firebase-config.js`, 
   unutar dijela „Zašto direktno” (uz 10% popusta). Slika se učitava iz
   `maslinovo-ulje.jpg` u istoj mapi kao `index.html`. Dok te datoteke nema,
   prikazuje se nacrtana grančica masline.
+- Maknut i red s koracima rezervacije iznad kalendara (Odaberite termin · Vaši podaci · …).

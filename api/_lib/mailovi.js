@@ -39,15 +39,12 @@ function dates(b) {
 const GUEST = {
   received: {
     hr: (b) => ({
-      subject: "House Verona — zahtjev za rezervaciju je primljen",
+      subject: "House Verona — hvala na rezervaciji",
       text: `Poštovani/a ${b.name},
 
-hvala na zahtjevu za boravak u House Verona od ${dates(b)} (subota – subota).
+hvala na rezervaciji za House Verona od ${dates(b)} (subota – subota)!
 
-Iznos od ${formatEur(b.amount)} rezerviran je na vašoj kartici, ali još NIJE naplaćen.
 Potvrdu rezervacije poslat ćemo vam na ovaj mail unutar 24 sata.
-
-Ako termin ipak nije slobodan, rezervacija na kartici se poništava i ništa vam neće biti naplaćeno.
 
 Za pitanja nam se slobodno javite — ${CONTACT}
 
@@ -55,15 +52,12 @@ Srdačan pozdrav,
 House Verona`,
     }),
     en: (b) => ({
-      subject: "House Verona — booking request received",
+      subject: "House Verona — thank you for your booking",
       text: `Dear ${b.name},
 
-thank you for your request to stay at House Verona from ${dates(b)} (Saturday to Saturday).
+thank you for booking House Verona from ${dates(b)} (Saturday to Saturday)!
 
-${formatEur(b.amount)} has been reserved on your card but has NOT been charged yet.
 We will send your booking confirmation to this address within 24 hours.
-
-If the dates turn out to be unavailable, the hold on your card is released and nothing is charged.
 
 Questions? Just get in touch — ${CONTACT}
 
@@ -71,15 +65,12 @@ Kind regards,
 House Verona`,
     }),
     it: (b) => ({
-      subject: "House Verona — richiesta di prenotazione ricevuta",
+      subject: "House Verona — grazie per la prenotazione",
       text: `Gentile ${b.name},
 
-grazie per la richiesta di soggiorno a House Verona dal ${dates(b)} (da sabato a sabato).
+grazie per aver prenotato House Verona dal ${dates(b)} (da sabato a sabato)!
 
-L'importo di ${formatEur(b.amount)} è stato bloccato sulla sua carta ma NON è ancora stato addebitato.
 Le invieremo la conferma della prenotazione a questo indirizzo entro 24 ore.
-
-Se le date non fossero più disponibili, il blocco sulla carta viene annullato e non le verrà addebitato nulla.
 
 Per qualsiasi domanda — ${CONTACT}
 
@@ -87,15 +78,12 @@ Cordiali saluti,
 House Verona`,
     }),
     de: (b) => ({
-      subject: "House Verona — Buchungsanfrage erhalten",
+      subject: "House Verona — vielen Dank für Ihre Buchung",
       text: `Guten Tag ${b.name},
 
-vielen Dank für Ihre Anfrage für House Verona vom ${dates(b)} (Samstag bis Samstag).
+vielen Dank für Ihre Buchung von House Verona vom ${dates(b)} (Samstag bis Samstag)!
 
-Der Betrag von ${formatEur(b.amount)} wurde auf Ihrer Karte reserviert, aber NOCH NICHT abgebucht.
 Die Buchungsbestätigung senden wir Ihnen innerhalb von 24 Stunden an diese Adresse.
-
-Sollte der Termin nicht mehr frei sein, wird die Reservierung auf Ihrer Karte aufgehoben und nichts abgebucht.
 
 Bei Fragen melden Sie sich gerne — ${CONTACT}
 
@@ -499,7 +487,7 @@ export function guestMail(kind, booking) {
 
 function details(b) {
   return `Termin: ${dates(b)} (${b.weeks || 1} ${(b.weeks || 1) === 1 ? "tjedan" : "tjedna"})
-Iznos: ${formatEur(b.amount)}${b.total && b.total !== b.amount ? ` (od ukupno ${formatEur(b.total)})` : ""}
+Iznos: ${formatEur(b.amount)}${b.total && b.total !== b.amount ? ` (od ukupno ${formatEur(b.total)})` : ""}${b.bankDiscount ? ` (uključen popust ${formatEur(b.bankDiscount)} za uplatu na račun)` : ""}
 Gost: ${b.name}
 Email: ${b.email}
 Telefon: ${b.phone || "—"}

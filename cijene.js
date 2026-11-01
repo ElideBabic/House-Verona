@@ -21,6 +21,9 @@ export const SEASONS = [
 /** Popust za direktnu rezervaciju preko stranice (0.1 = 10%). Cijene u SEASONS su pune cijene. */
 export const DIRECT_DISCOUNT = 0.1;
 
+/** Dodatni popust u eurima za uplatu na račun (po rezervaciji, bez obzira na broj tjedana). 0 = bez popusta. */
+export const BANK_DISCOUNT_EUR = 10;
+
 /** Koliki dio cijene se rezervira i naplaćuje online (1 = cijeli iznos, 0.3 = 30% predujam). */
 export const DEPOSIT_SHARE = 1;
 
@@ -101,6 +104,17 @@ export function stayPrice(iso, weeks = 1) {
     full += p.full;
   }
   return withDiscount(full);
+}
+
+/** Cijena za odabrani način plaćanja: kod uplate na račun oduzima BANK_DISCOUNT_EUR. */
+export function priceFor(price, method) {
+  if (!price || method !== "bank" || !BANK_DISCOUNT_EUR) return price;
+  return {
+    ...price,
+    total: round2(price.total - BANK_DISCOUNT_EUR),
+    deposit: round2(price.deposit - BANK_DISCOUNT_EUR),
+    bankDiscount: BANK_DISCOUNT_EUR,
+  };
 }
 
 /** Može li se tjedan rezervirati online s obzirom na datum (ne gleda zauzetost). */
