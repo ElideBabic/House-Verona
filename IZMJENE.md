@@ -16,6 +16,36 @@ odabir tjedna), `vercel.json` (dnevni cron), `robots.txt`, `llms.txt`,
 Nepromijenjeno (nisu u ovoj mapi): slike. Nepromijenjeno: `firebase-config.js`, `firestore.rules`,
 `recenzija.html`, `sitemap.xml`.
 
+## 01.11.2026. (kasno) — sitnice
+
+- Maknut odjeljak "Čekamo tebe / Ready when you are" iznad podnožja.
+- Nova fotografija maslina kod poklona dobrodošlice (`maslinovo-ulje.jpg`).
+
+## 01.11.2026. (kasno) — odjeljak s recenzijama
+
+- Novi odjeljak "Što kažu naši gosti" (06 — Recenzije) pri dnu, iznad poziva na kontakt,
+  i stavka "Recenzije" u izborniku. Gumbi "Pogledaj sve na Googleu" i "Ostavite recenziju".
+- Recenzije se upisuju u novu datoteku `recenzije.js` (ime, tekst, ocjena, izvor, datum)
+  i ukupna ocjena s Googlea. Dok je popis prazan, odjeljak se ne prikazuje.
+
+## 01.11.2026. (kasno) — manje teksta kod plaćanja karticom
+
+- Kartica: "Platite odmah, sigurno preko Stripea", gumb "Plati sada", korak "Plaćanje".
+  Maknuta objašnjenja o rezerviranju/naplati i popisi koraka ispod načina plaćanja.
+- Kvačica uvjeta za karticu: "Slažem se da se iznos rezervira na mojoj kartici."
+- Poruke o greškama u obrascu su posebne za svaki slučaj: nedostaje ime, prazan e-mail,
+  neispravan e-mail, nije označena kvačica (tekst ovisi o načinu plaćanja). Kursor skoči na prvo polje s greškom.
+- Stranica "Hvala" i mail gostu nakon plaćanja: samo "Hvala na rezervaciji, potvrdu dobivate unutar 24 sata".
+  Ako termin ne možemo potvrditi, gost i dalje dobiva mail s objašnjenjem (kao prije).
+
+## 01.11.2026. (kasno) — poticaj za uplatu na račun
+
+- Uplata na račun je prva i unaprijed odabrana opcija, s oznakom
+  "Preporučeno · −10 €" i prednostima (bez kartice, bez blokiranja iznosa).
+- Dodatnih 10 € popusta po rezervaciji za uplatu na račun (`BANK_DISCOUNT_EUR`
+  u `cijene.js`, 0 = isključeno). Sažetak cijene pokazuje redak "Uplata na račun −10 €",
+  server sam računa umanjeni iznos, a vlasnica u mailu vidi da je popust uključen.
+
 ## 01.11.2026. (prije objave) — adresa stranice
 
 - `index.html`, `llms.txt`, `recenzija.html`, `robots.txt`, `sitemap.xml`:
@@ -45,3 +75,11 @@ Nepromijenjeno (nisu u ovoj mapi): slike. Nepromijenjeno: `firebase-config.js`, 
   unutar dijela „Zašto direktno” (uz 10% popusta). Slika se učitava iz
   `maslinovo-ulje.jpg` u istoj mapi kao `index.html`. Dok te datoteke nema,
   prikazuje se nacrtana grančica masline.
+- Maknut i red s koracima rezervacije iznad kalendara (Odaberite termin · Vaši podaci · …).
+- Manje praznog prostora: razmaci između odjeljaka smanjeni (100 → 64 px na računalu, 40 px na mobitelu). Dio „Kuća” je kraći: ispod naslova je slika terase (slika3.jpg), citat o telefonu je maknut, a tekst je malo manji.
+- Na mobitelu se slika terase ispod naslova „Kuća” ne prikazuje (samo na računalu).
+- Odjeljak „Rezerviraj ovdje. 10% jeftinije.” (prije „Skip the agencies”) je sažet: samo −10% i maslinovo ulje, ispod gumb za rezervaciju, a WhatsApp je ispod kao „Imaš pitanje? Uvijek nam se možeš javiti”. Mail adresa je sad vidljiva (prije je bila svijetla na svijetloj pozadini).
+- Popust od 10 € za uplatu na račun više se ne oduzima čim gost klikne tjedan. Sažetak tada pokazuje običnu cijenu (s 10% popusta), a −10 € se pojavi tek kad gost otvori obrazac i odabere uplatu na račun.
+- Gumbi Potvrdi / Odbij u mailu su maknuti: mail za novi zahtjev i podsjetnik imaju samo poveznicu na admin, gdje se sve odlučuje. Poveznice iz starih mailova (`api/odluka.js`) sad samo upućuju na admin i ništa ne mijenjaju.
+- „Što kuća nudi” je kompaktniji: na računalu 4 kockice u redu umjesto 3, na mobitelu 2 u redu umjesto 1, s manjim ikonama i razmacima (na mobitelu je dio više nego upola kraći).
+- Na stranici zahvale nakon zahtjeva s uplatom na račun maknuta je rečenica „Ako termin ipak nije slobodan, javit ćemo vam i ništa ne uplaćujete” (sva 4 jezika).
