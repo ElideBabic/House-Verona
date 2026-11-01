@@ -1,0 +1,35 @@
+rules_version = '2';
+
+// Zalijepi ovo u Firebase konzoli: Firestore Database → Rules → Publish.
+// Popis UID-ova mora biti isti kao ADMIN_UIDS u firebase-config.js.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null && request.auth.uid in [
+        '9lS4aRecbLdOMX5Npn27KuCYfLH3', // house.verona.cres@gmail.com
+        'zNjquEvSvQbsIllqMspJ6EJMy8L2'  // Elidin osobni Gmail
+      ];
+    }
+
+    function validWeeks() {
+      return request.resource.data.keys().hasOnly(['booked', 'updatedAt', 'updatedBy'])
+        && request.resource.data.booked is list
+        && request.resource.data.booked.size() <= 520
+        && request.resource.data.updatedBy == request.auth.uid
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    // Kalendar je javno čitljiv, mijenjati ga smije samo vlasnički račun.
+    match /availability/weeks {
+      allow read: if true;
+      allow create, update: if isAdmin() && validWeeks();
+      allow delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="hr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Admin — House Verona</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="kalendar.css" />
+    <style>
+      :root {
+        --bg: #f2ebde;
+        --bg-alt: #e8dfcc;
+        --ink: #1b1814;
+        --ink-soft: #5c544a;
+        --ink-muted: #8a8074;
+        --sea: #1b3a4b;
+        --terra: #b85d3e;
+        --line: rgba(27, 24, 20, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "DM Sans", sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .wrap {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 48px 24px 80px;
+      }
+
+      header.bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+        padding-bottom: 24px;
+        margin-bottom: 40px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .logo {
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 22px;
+        letter-spacing: -0.01em;
+      }
+      .logo span {
+        color: var(--terra);
+      }
+
+      .who {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 13px;
+        color: var(--ink-muted);
+      }
+
+      h1 {
+        font-family: "EB Garamond", Georgia, serif;
+        font-weight: 400;
+        font-size: clamp(28px, 4vw, 42px);
+        line-height: 1.15;
+        margin-bottom: 10px;
+      }
+
+      .lead {
+        color: var(--ink-soft);
+        margin-bottom: 36px;
+        max-width: 60ch;
+      }
+
+      .card {
+        background: var(--bg-alt);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 40px;
+        max-width: 520px;
+      }
+
+      .card h2 {
+        font-family: "EB Garamond", Georgia, serif;
+        font-weight: 400;
+        font-size: 26px;
+        margin-bottom: 12px;
+      }
+
+      .card p {
+        color: var(--ink-soft);
+        font-size: 15px;
+        margin-bottom: 24px;
+      }
+
+      .card ol {
+        color: var(--ink-soft);
+        font-size: 15px;
+        margin: 0 0 8px 20px;
+      }
+      .card li {
+        margin-bottom: 8px;
+      }
+
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 13px;
+        background: rgba(27, 24, 20, 0.07);
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+
+      button.btn {
+        font-family: inherit;
+        font-size: 14px;
+        letter-spacing: 0.04em;
+        padding: 13px 26px;
+        border: none;
+        border-radius: 999px;
+        background: var(--sea);
+        color: #f2ebde;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.15s;
+      }
+
+      button.btn:hover {
+        background: #0f2632;
+        transform: translateY(-1px);
+      }
+
+      button.btn.ghost {
+        background: transparent;
+        color: var(--ink-soft);
+        border: 1px solid var(--line);
+        padding: 8px 18px;
+        font-size: 13px;
+      }
+
+      button.btn.ghost:hover {
+        background: rgba(27, 24, 20, 0.06);
+        color: var(--ink);
+      }
+
+      .hint {
+        font-size: 13px;
+        color: var(--ink-muted);
+        margin-bottom: 28px;
+      }
+
+      .error {
+        color: #9c3b21;
+        font-size: 14px;
+        margin-top: 16px;
+      }
+
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 28px;
+        transform: translateX(-50%) translateY(20px);
+        background: var(--sea);
+        color: #f2ebde;
+        font-size: 14px;
+        padding: 12px 24px;
+        border-radius: 999px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s, transform 0.25s;
+      }
+
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      .toast.is-error {
+        background: #9c3b21;
+      }
+
+      h2.section {
+        font-family: "EB Garamond", Georgia, serif;
+        font-weight: 400;
+        font-size: 26px;
+        margin: 0 0 8px;
+      }
+
+      .requests {
+        display: grid;
+        gap: 16px;
+        margin-bottom: 64px;
+      }
+
+      .req {
+        background: var(--bg-alt);
+        border: 1px solid var(--line);
+        border-left: 4px solid #c4963c;
+        border-radius: 12px;
+        padding: 22px 24px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px 24px;
+        align-items: start;
+      }
+
+      .req-dates {
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 22px;
+        line-height: 1.2;
+      }
+
+      .req-meta {
+        font-size: 14px;
+        color: var(--ink-soft);
+        margin-top: 6px;
+      }
+      .req-meta a {
+        color: var(--sea);
+      }
+
+      .req-note {
+        font-size: 14px;
+        color: var(--ink-soft);
+        font-style: italic;
+        margin-top: 8px;
+        white-space: pre-wrap;
+      }
+
+      .req-side {
+        text-align: right;
+      }
+
+      .req-amount {
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 24px;
+        color: var(--sea);
+      }
+
+      .req-age {
+        font-size: 12px;
+        color: var(--ink-muted);
+        margin-bottom: 14px;
+      }
+      .req-age.is-late {
+        color: #9c3b21;
+        font-weight: 600;
+      }
+
+      .pay-tag {
+        display: inline-block;
+        margin-top: 4px;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink-muted);
+      }
+      .pay-tag.bank {
+        color: var(--terra, #9a6b3f);
+        font-weight: 600;
+      }
+      .req-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+      }
+
+      button.btn.ok {
+        background: #5f7a4a;
+      }
+      button.btn.ok:hover {
+        background: #4b6239;
+      }
+      button.btn.no {
+        background: transparent;
+        color: #9c3b21;
+        border: 1px solid rgba(156, 59, 33, 0.4);
+      }
+      button.btn.no:hover {
+        background: rgba(156, 59, 33, 0.08);
+      }
+      button.btn[disabled] {
+        opacity: 0.5;
+        cursor: wait;
+        transform: none;
+      }
+
+      .empty {
+        color: var(--ink-muted);
+        font-size: 15px;
+        padding: 18px 0;
+      }
+
+      details.history {
+        margin-top: 56px;
+      }
+      details.history summary {
+        cursor: pointer;
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 20px;
+        margin-bottom: 16px;
+      }
+
+      table.hist {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      table.hist th,
+      table.hist td {
+        text-align: left;
+        padding: 9px 10px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      table.hist th {
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-muted);
+        font-weight: 500;
+      }
+      table.hist a {
+        color: var(--sea);
+      }
+      .tag {
+        display: inline-block;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        padding: 2px 9px;
+        border-radius: 999px;
+        background: rgba(27, 24, 20, 0.07);
+      }
+      .tag.confirmed {
+        background: rgba(95, 122, 74, 0.16);
+        color: #4b6239;
+      }
+      .tag.released,
+      .tag.cancelled {
+        background: rgba(184, 93, 62, 0.13);
+        color: #8e4128;
+      }
+      .table-wrap {
+        overflow-x: auto;
+      }
+
+      @media (max-width: 640px) {
+        .req {
+          grid-template-columns: 1fr;
+        }
+        .req-side {
+          text-align: left;
+        }
+        .req-actions {
+          justify-content: flex-start;
+        }
+      }
+
+      .uid-hint {
+        font-size: 14px;
+        color: var(--ink-soft);
+        margin: 14px 0 18px;
+      }
+      .uid-hint code {
+        font-size: 13px;
+        background: rgba(27, 24, 20, 0.07);
+        padding: 2px 6px;
+        user-select: all;
+        word-break: break-all;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="bar">
+        <div class="logo">House Verona<span>.</span></div>
+        <div class="who" id="who" hidden>
+          <span id="whoEmail"></span>
+          <button type="button" class="btn ghost" id="logout">Odjava</button>
+        </div>
+      </header>
+
+      <section id="viewLoading">
+        <p class="lead">Učitavanje…</p>
+      </section>
+
+      <section id="viewSetup" hidden>
+        <h1>Kalendar još nije povezan</h1>
+        <p class="lead">
+          Potrebno je jednom ispuniti podatke Firebase projekta u datoteci
+          <code>firebase-config.js</code>. Cijeli postupak je opisan u
+          <code>POSTAVLJANJE.md</code>.
+        </p>
+      </section>
+
+      <section id="viewLogin" hidden>
+        <div class="card">
+          <h2>Prijava</h2>
+          <p>
+            Uređivanje kalendara dopušteno je samo vlasničkom Google računu.
+            Prijava se pamti do zatvaranja preglednika.
+          </p>
+          <button type="button" class="btn" id="login">
+            Prijavi se Google računom
+          </button>
+          <p class="error" id="loginError" hidden></p>
+        </div>
+      </section>
+
+      <section id="viewDenied" hidden>
+        <div class="card">
+          <h2>Nemate ovlasti</h2>
+          <p>
+            Ovaj račun nije vlasnik kalendara. Odjavite se i pokušajte s ispravnim
+            Google računom.
+          </p>
+          <p class="uid-hint">
+            Ako je ovo tvoj račun za upravljanje, njegov UID je:<br />
+            <code id="deniedUid"></code><br />
+            Dodaj ga na popis <code>ADMIN_UIDS</code> u <code>firebase-config.js</code>,
+            u <code>firestore.rules</code> i u Vercel varijablu <code>ADMIN_UID</code>
+            (više UID-ova odvoji zarezom; vidi POSTAVLJANJE.md).
+          </p>
+          <button type="button" class="btn" id="logoutDenied">Odjava</button>
+        </div>
+      </section>
+
+      <section id="viewApp" hidden>
+        <div id="requestsBlock">
+          <h1>Zahtjevi za rezervaciju</h1>
+          <p class="lead">
+            <strong>Potvrdi</strong> zatvara tjedan u kalendaru i gostu šalje potvrdu. Kod
+            plaćanja karticom iznos se tada naplaćuje, a kod uplate na račun gost uz potvrdu
+            dobiva podatke za uplatu. <strong>Odbij</strong> javlja gostu da termin nije dostupan
+            i ništa se ne naplaćuje. Gostu je obećana potvrda unutar 24 sata.
+          </p>
+          <div class="requests" id="requests"><p class="empty">Učitavanje…</p></div>
+          <p class="error" id="requestsError" hidden></p>
+        </div>
+
+        <div id="awaitingBlock" hidden>
+          <h2 class="section">Čekaju uplatu na račun</h2>
+          <p class="lead">
+            Potvrđene rezervacije za koje gost još treba uplatiti. Kad novac stigne (provjeri
+            oznaku u opisu uplate), klikni <strong>Označi plaćeno</strong> — gost dobiva potvrdu
+            primitka. Ako uplata ne stigne, <strong>Otkaži</strong> oslobađa tjedne i javlja gostu.
+          </p>
+          <div class="requests" id="awaiting"></div>
+        </div>
+
+        <h2 class="section">Kalendar</h2>
+        <p class="lead">
+          Svaki red je jedan termin, subota → subota. Klikom na red termin se
+          prebacuje između <strong>slobodno</strong> i <strong>zauzeto</strong>.
+          Promjena se sprema odmah i istog trena je vidljiva na stranici.
+        </p>
+        <div id="calendar"></div>
+        <p class="error" id="appError" hidden></p>
+
+        <details class="history" id="historyBlock" hidden>
+          <summary>Povijest zahtjeva</summary>
+          <div class="table-wrap">
+            <table class="hist">
+              <thead>
+                <tr><th>Termin</th><th>Gost</th><th>Iznos</th><th>Stanje</th><th>Odluka</th></tr>
+              </thead>
+              <tbody id="history"></tbody>
+            </table>
+          </div>
+        </details>
+      </section>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+      import {
+        getAuth,
+        GoogleAuthProvider,
+        signInWithPopup,
+        signOut,
+        onAuthStateChanged,
+        setPersistence,
+        browserSessionPersistence,
+      } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+      import {
+        getFirestore,
+        doc,
+        getDoc,
+        setDoc,
+        serverTimestamp,
+        arrayUnion,
+        arrayRemove,
+      } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+      import { Calendar } from "./kalendar.js";
+      import { formatDate, formatEur, weekEnd } from "./cijene.js";
+      import { firebaseConfig, ADMIN_UIDS, isConfigured } from "./firebase-config.js";
+
+      const views = {
+        loading: document.getElementById("viewLoading"),
+        setup: document.getElementById("viewSetup"),
+        login: document.getElementById("viewLogin"),
+        denied: document.getElementById("viewDenied"),
+        app: document.getElementById("viewApp"),
+      };
+      const who = document.getElementById("who");
+      const toastEl = document.getElementById("toast");
+
+      function show(name) {
+        Object.entries(views).forEach(([key, el]) => (el.hidden = key !== name));
+        who.hidden = name !== "app";
+      }
+
+      let toastTimer;
+      function toast(message, isError = false) {
+        toastEl.textContent = message;
+        toastEl.classList.toggle("is-error", isError);
+        toastEl.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toastEl.classList.remove("show"), 2600);
+      }
+
+      if (!isConfigured()) {
+        show("setup");
+      } else {
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const weeksRef = doc(db, "availability", "weeks");
+
+        await setPersistence(auth, browserSessionPersistence);
+
+        const calendar = new Calendar(document.getElementById("calendar"), {
+          lang: "hr",
+          editable: true,
+          onToggle: async (_booked, week, isBooked) => {
+            // Mijenja se samo kliknuti tjedan, da se ne prebriše tjedan koji je
+            // u međuvremenu zatvorila potvrđena online rezervacija.
+            await setDoc(
+              weeksRef,
+              {
+                booked: isBooked ? arrayUnion(week) : arrayRemove(week),
+                updatedAt: serverTimestamp(),
+                updatedBy: auth.currentUser.uid,
+              },
+              { merge: true },
+            );
+            toast("Spremljeno");
+          },
+          onError: (err) => {
+            toast("Spremanje nije uspjelo — pokušajte ponovno", true);
+            console.error(err);
+          },
+        });
+
+        document.getElementById("login").addEventListener("click", async () => {
+          const error = document.getElementById("loginError");
+          error.hidden = true;
+          try {
+            const provider = new GoogleAuthProvider();
+            provider.setCustomParameters({ prompt: "select_account" });
+            await signInWithPopup(auth, provider);
+          } catch (err) {
+            if (err.code === "auth/popup-closed-by-user") return;
+            error.textContent = "Prijava nije uspjela: " + err.code;
+            error.hidden = false;
+          }
+        });
+
+        [document.getElementById("logout"), document.getElementById("logoutDenied")].forEach(
+          (btn) => btn.addEventListener("click", () => signOut(auth)),
+        );
+
+        onAuthStateChanged(auth, async (user) => {
+          if (!user) {
+            show("login");
+            return;
+          }
+          if (!ADMIN_UIDS.includes(user.uid)) {
+            document.getElementById("deniedUid").textContent = user.uid;
+            show("denied");
+            return;
+          }
+          document.getElementById("whoEmail").textContent = user.email ?? "";
+          show("app");
+
+          await loadCalendar();
+          await loadRequests();
+        });
+
+        async function loadCalendar() {
+          const appError = document.getElementById("appError");
+          try {
+            const snap = await getDoc(weeksRef);
+            calendar.setBooked(
+              new Set(snap.exists() ? (snap.data().booked ?? []) : []),
+              new Set(pendingWeeks),
+            );
+            appError.hidden = true;
+          } catch (err) {
+            appError.textContent = "Kalendar se ne može učitati: " + err.code;
+            appError.hidden = false;
+          }
+        }
+
+        // ---------- Zahtjevi za rezervaciju (serverski dio, /api/admin) ----------
+
+        let pendingWeeks = [];
+
+        async function api(body) {
+          const token = await auth.currentUser.getIdToken();
+          const res = await fetch("/api/admin", {
+            method: "POST",
+            headers: { "content-type": "application/json", authorization: `Bearer ${token}` },
+            body: JSON.stringify(body),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok) throw new Error(data.error || `Greška ${res.status}`);
+          return data;
+        }
+
+        const esc = (v) =>
+          String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+        const range = (w, n = 1) => `${formatDate(w)} – ${formatDate(weekEnd(w, n))}`;
+        const weeksLabel = (n = 1) => (n === 1 ? "1 tjedan" : `${n} tjedna`);
+        const when = (iso) =>
+          iso ? new Date(iso).toLocaleString("hr-HR", { dateStyle: "short", timeStyle: "short" }) : "—";
+
+        const STATUS = {
+          pending: "čeka potvrdu",
+          confirmed: "potvrđeno",
+          released: "odbijeno",
+          cancelled: "poništeno",
+        };
+        const REASON = {
+          rejected: "ručno",
+          unavailable: "tjedan zauzet",
+          timeout: "isteklo vrijeme",
+          unpaid: "nije plaćeno",
+          stripe: "u Stripeu",
+        };
+        const reasonText = (r) => (r ? REASON[r] ?? (r.startsWith("stripe") ? REASON.stripe : "") : "");
+        const PAY = { card: "kartica", bank: "uplata na račun" };
+        const today = () => new Date().toISOString().slice(0, 10);
+
+        function hoursSince(iso) {
+          return iso ? (Date.now() - new Date(iso).getTime()) / 3600000 : 0;
+        }
+
+        function renderRequests(bookings) {
+          const list = document.getElementById("requests");
+          const pending = bookings.filter((b) => b.status === "pending").sort((a, b) => a.week.localeCompare(b.week));
+          const stay = (b) =>
+            Array.from({ length: b.weeks || 1 }, (_, i) => {
+              const [y, m, d] = b.week.split("-").map(Number);
+              return new Date(Date.UTC(y, m - 1, d + 7 * i)).toISOString().slice(0, 10);
+            });
+          pendingWeeks = pending.flatMap(stay);
+
+          list.innerHTML = pending.length
+            ? pending
+                .map((b) => {
+                  const h = hoursSince(b.authorizedAt);
+                  const mine = stay(b);
+                  const others = pending.filter((o) => o !== b && stay(o).some((w) => mine.includes(w))).length;
+                  return `<article class="req">
+                    <div>
+                      <div class="req-dates">${range(b.week, b.weeks)}</div>
+                      <div class="req-meta">
+                        <strong>${esc(b.name)}</strong> · ${weeksLabel(b.weeks)} · ${esc(b.guests)} os.${b.children ? ` (${esc(b.children)} djece)` : ""} · ${esc(b.lang).toUpperCase()}<br />
+                        <span class="pay-tag ${esc(b.paymentMethod)}">${PAY[b.paymentMethod] ?? PAY.card}</span><br />
+                        <a href="mailto:${esc(b.email)}">${esc(b.email)}</a>${b.phone ? ` · <a href="tel:${esc(b.phone)}">${esc(b.phone)}</a>` : ""}
+                        ${others > 0 ? `<br /><strong>Još ${others} zahtjev(a) za iste tjedne</strong> — potvrdom ovog ostali se automatski odbijaju.` : ""}
+                      </div>
+                      ${b.note ? `<div class="req-note">„${esc(b.note)}”</div>` : ""}
+                    </div>
+                    <div class="req-side">
+                      <div class="req-amount">${formatEur(b.amount)}</div>
+                      <div class="req-age${h > 20 ? " is-late" : ""}">stiglo ${when(b.authorizedAt)} (prije ${Math.floor(h)} h)</div>
+                      <div class="req-actions">
+                        <button type="button" class="btn no" data-act="reject" data-id="${esc(b.id)}">Odbij</button>
+                        <button type="button" class="btn ok" data-act="confirm" data-id="${esc(b.id)}">${
+                          b.paymentMethod === "bank" ? "Potvrdi i pošalji podatke za uplatu" : "Potvrdi i naplati"
+                        }</button>
+                      </div>
+                    </div>
+                  </article>`;
+                })
+                .join("")
+            : `<p class="empty">Nema zahtjeva koji čekaju potvrdu.</p>`;
+
+          const awaiting = bookings
+            .filter((b) => b.status === "confirmed" && b.paymentMethod === "bank" && !b.paidAt)
+            .sort((a, b) => (a.payBy || "").localeCompare(b.payBy || ""));
+          document.getElementById("awaitingBlock").hidden = !awaiting.length;
+          document.getElementById("awaiting").innerHTML = awaiting
+            .map((b) => {
+              const late = b.payBy && b.payBy < today();
+              return `<article class="req">
+                <div>
+                  <div class="req-dates">${range(b.week, b.weeks)}</div>
+                  <div class="req-meta">
+                    <strong>${esc(b.name)}</strong> · ${weeksLabel(b.weeks)} · ${esc(b.guests)} os.<br />
+                    <a href="mailto:${esc(b.email)}">${esc(b.email)}</a>${b.phone ? ` · <a href="tel:${esc(b.phone)}">${esc(b.phone)}</a>` : ""}<br />
+                    Oznaka u opisu uplate: <strong>${esc(b.ref)}</strong>
+                  </div>
+                </div>
+                <div class="req-side">
+                  <div class="req-amount">${formatEur(b.amount)}</div>
+                  <div class="req-age${late ? " is-late" : ""}">rok uplate ${b.payBy ? formatDate(b.payBy) : "—"}${late ? " — prošao" : ""}</div>
+                  <div class="req-actions">
+                    <button type="button" class="btn no" data-act="cancelUnpaid" data-id="${esc(b.id)}">Otkaži — nije plaćeno</button>
+                    <button type="button" class="btn ok" data-act="paid" data-id="${esc(b.id)}">Označi plaćeno</button>
+                  </div>
+                </div>
+              </article>`;
+            })
+            .join("");
+
+          const done = bookings.filter((b) => b.status !== "pending");
+          document.getElementById("historyBlock").hidden = !done.length;
+          document.getElementById("history").innerHTML = done
+            .map(
+              (b) => `<tr>
+                <td>${range(b.week, b.weeks)}<br /><small>${weeksLabel(b.weeks)}</small></td>
+                <td>${esc(b.name)}<br /><a href="mailto:${esc(b.email)}">${esc(b.email)}</a></td>
+                <td>${formatEur(b.amount)}<br /><small>${PAY[b.paymentMethod] ?? PAY.card}${
+                  b.paymentMethod === "bank" && b.status === "confirmed"
+                    ? b.paidAt
+                      ? ` · plaćeno ${when(b.paidAt)}`
+                      : " · čeka uplatu"
+                    : ""
+                }</small></td>
+                <td><span class="tag ${esc(b.status)}">${STATUS[b.status] ?? esc(b.status)}</span>${
+                  reasonText(b.reason) ? `<br /><small>${reasonText(b.reason)}</small>` : ""
+                }</td>
+                <td>${when(b.decidedAt)}</td>
+              </tr>`,
+            )
+            .join("");
+        }
+
+        async function loadRequests() {
+          const errorEl = document.getElementById("requestsError");
+          try {
+            const { bookings } = await api({ action: "list" });
+            renderRequests(bookings);
+            errorEl.hidden = true;
+            await loadCalendar();
+          } catch (err) {
+            document.getElementById("requests").innerHTML = "";
+            errorEl.textContent =
+              "Zahtjevi se ne mogu učitati (" + err.message + "). Ako online rezervacije još nisu postavljene, to je očekivano — vidi POSTAVLJANJE.md.";
+            errorEl.hidden = false;
+          }
+        }
+
+        async function onAction(e) {
+          const btn = e.target.closest("button[data-act]");
+          if (!btn) return;
+          const card = btn.closest(".req");
+          const dates = card.querySelector(".req-dates").textContent;
+          const bank = btn.textContent.includes("uplat");
+          const QUESTION = {
+            confirm: bank
+              ? `Potvrditi rezervaciju ${dates}?\n\nTjedan se zatvara u kalendaru, a gost mailom dobiva potvrdu s podacima za uplatu na račun.`
+              : `Potvrditi rezervaciju ${dates}?\n\nIznos se odmah naplaćuje s gostove kartice, tjedan se zatvara u kalendaru, a gost dobiva potvrdu mailom.`,
+            reject: `Odbiti zahtjev ${dates}?\n\nNišta se ne naplaćuje (rezervacija na kartici se poništava), a gost dobiva mail da termin nije dostupan.`,
+            paid: `Označiti da je uplata za ${dates} stigla?\n\nGost dobiva mail da je uplata zaprimljena.`,
+            cancelUnpaid: `Otkazati rezervaciju ${dates} jer uplata nije stigla?\n\nTjedni se oslobađaju u kalendaru, a gost dobiva mail o otkazu.`,
+          };
+          const DONE = {
+            confirm: "Potvrđeno",
+            reject: "Odbijeno",
+            paid: "Uplata označena, gost obaviješten",
+            cancelUnpaid: "Otkazano, tjedni slobodni",
+          };
+          const confirmText = QUESTION[btn.dataset.act];
+          if (!window.confirm(confirmText)) return;
+
+          card.querySelectorAll("button").forEach((b) => (b.disabled = true));
+          try {
+            await api({ action: btn.dataset.act, id: btn.dataset.id });
+            toast(DONE[btn.dataset.act]);
+          } catch (err) {
+            toast(err.message, true);
+          }
+          await loadRequests();
+        }
+        document.getElementById("requests").addEventListener("click", onAction);
+        document.getElementById("awaiting").addEventListener("click", onAction);
+      }
+    </script>
+  </body>
+</html>

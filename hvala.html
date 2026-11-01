@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="hr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Zahtjev poslan — House Verona</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300..700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #efe7d8;
+        --bg-alt: #e6dcc9;
+        --ink: #1b1814;
+        --ink-soft: #5c544a;
+        --ink-muted: #8a8074;
+        --sea: #2d3b38;
+        --terra: #9a6b3f;
+        --line: rgba(27, 24, 20, 0.12);
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "DM Sans", sans-serif;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 40px 20px;
+      }
+      .card {
+        max-width: 560px;
+        background: var(--bg-alt);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 44px 40px;
+      }
+      .logo { font-family: "EB Garamond", Georgia, serif; font-size: 20px; margin-bottom: 28px; }
+      .logo span { color: var(--terra); }
+      h1 { font-family: "EB Garamond", Georgia, serif; font-weight: 400; font-size: clamp(28px, 5vw, 38px); line-height: 1.15; margin-bottom: 16px; }
+      p { color: var(--ink-soft); margin-bottom: 14px; }
+      a.btn {
+        display: inline-block; margin-top: 18px; padding: 13px 26px; border-radius: 999px;
+        background: var(--sea); color: #f2ebde; text-decoration: none; font-size: 14px; letter-spacing: 0.04em;
+      }
+      [data-l] { display: none; }
+      .bank-only, body.bank .card-only { display: none; }
+      body.bank .bank-only { display: block; }
+      body[data-lang="en"] [data-l="en"], body[data-lang="hr"] [data-l="hr"],
+      body[data-lang="it"] [data-l="it"], body[data-lang="de"] [data-l="de"] { display: block; }
+    </style>
+  </head>
+  <body data-lang="en">
+    <div class="card">
+      <div class="logo">House Verona<span>.</span></div>
+      <div data-l="hr">
+        <h1>Hvala! Zahtjev je poslan.</h1>
+        <p class="card-only">Iznos je <strong>rezerviran</strong> na vašoj kartici, ali još nije naplaćen.</p>
+        <p class="card-only">Potvrdu rezervacije dobit ćete na e-mail <strong>unutar 24 sata</strong>. Ako termin ipak nije slobodan, rezervacija na kartici se poništava i ništa vam se ne naplaćuje.</p>
+        <p class="bank-only">Zasad ne trebate ništa plaćati.</p>
+        <p class="bank-only">Potvrdu rezervacije s <strong>podacima za uplatu</strong> dobit ćete na e-mail <strong>unutar 24 sata</strong>. Ako termin ipak nije slobodan, javit ćemo vam i ništa ne uplaćujete.</p>
+        <a class="btn" href="/">Natrag na stranicu</a>
+      </div>
+      <div data-l="en">
+        <h1>Thank you! Your request is on its way.</h1>
+        <p class="card-only">The amount has been <strong>reserved</strong> on your card but not charged yet.</p>
+        <p class="card-only">You will receive your booking confirmation by e-mail <strong>within 24 hours</strong>. If the week turns out to be unavailable, the hold is released and nothing is charged.</p>
+        <p class="bank-only">There is nothing to pay yet.</p>
+        <p class="bank-only">You will receive your booking confirmation with the <strong>bank details</strong> by e-mail <strong>within 24 hours</strong>. If the week turns out to be unavailable, we will let you know and you pay nothing.</p>
+        <a class="btn" href="/">Back to the website</a>
+      </div>
+      <div data-l="it">
+        <h1>Grazie! La richiesta è stata inviata.</h1>
+        <p class="card-only">L'importo è stato <strong>bloccato</strong> sulla vostra carta ma non ancora addebitato.</p>
+        <p class="card-only">Riceverete la conferma della prenotazione via e-mail <strong>entro 24 ore</strong>. Se la settimana non fosse disponibile, il blocco viene annullato e non viene addebitato nulla.</p>
+        <p class="bank-only">Per ora non dovete pagare nulla.</p>
+        <p class="bank-only">Entro 24 ore riceverete via e-mail la conferma con i <strong>dati per il bonifico</strong>. Se la settimana non fosse disponibile, vi avviseremo e non pagate nulla.</p>
+        <a class="btn" href="/">Torna al sito</a>
+      </div>
+      <div data-l="de">
+        <h1>Danke! Ihre Anfrage ist unterwegs.</h1>
+        <p class="card-only">Der Betrag wurde auf Ihrer Karte <strong>reserviert</strong>, aber noch nicht abgebucht.</p>
+        <p class="card-only">Die Buchungsbestätigung erhalten Sie <strong>innerhalb von 24 Stunden</strong> per E-Mail. Ist die Woche nicht mehr frei, wird die Reservierung aufgehoben und nichts abgebucht.</p>
+        <p class="bank-only">Sie müssen jetzt noch nichts bezahlen.</p>
+        <p class="bank-only">Die Buchungsbestätigung mit den <strong>Bankdaten</strong> erhalten Sie <strong>innerhalb von 24 Stunden</strong> per E-Mail. Ist die Woche nicht mehr frei, melden wir uns und Sie zahlen nichts.</p>
+        <a class="btn" href="/">Zurück zur Website</a>
+      </div>
+    </div>
+    <script>
+      try {
+        const lang = localStorage.getItem("lang");
+        if (["en", "hr", "it", "de"].includes(lang)) document.body.dataset.lang = lang;
+      } catch (e) {}
+      if (new URLSearchParams(location.search).get("nacin") === "racun") document.body.classList.add("bank");
+    </script>
+  </body>
+</html>
