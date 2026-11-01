@@ -6,7 +6,6 @@ import { initializeApp, getApps, cert } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 import { getAuth } from "firebase-admin/auth";
 import nodemailer from "nodemailer";
-import { createHmac, timingSafeEqual } from "node:crypto";
 
 function env(name) {
   const value = process.env[name];
@@ -97,26 +96,4 @@ export function json(data, status = 200, headers = {}) {
     status,
     headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", ...headers },
   });
-}
-
-/* Potpisane poveznice "Potvrdi / Odbij" u mailu vlasnici. Potpis se radi tajnim
-   ključem (LINK_SECRET, ili CRON_SECRET ako LINK_SECRET nije postavljen), pa
-   poveznicu nitko ne može sastaviti sam. Bez ključa mail ima samo link na admin. */
-const linkSecret = () => process.env.LINK_SECRET || process.env.CRON_SECRET || "";
-
-function sign(id, action) {
-  return createHmac("sha256", linkSecret()).update(`odluka:${id}:${action}`).digest("base64url");
-}
-
-export function actionLink(id, action) {
-  if (!linkSecret()) return null;
-  const q = new URLSearchParams({ id, a: action, t: sign(id, action) });
-  return `${SITE_URL()}/api/odluka?${q}`;
-}
-
-export function verifyAction(id, action, token) {
-  if (!linkSecret() || !id || !action || typeof token !== "string") return false;
-  const a = Buffer.from(sign(id, action));
-  const b = Buffer.from(token);
-  return a.length === b.length && timingSafeEqual(a, b);
 }

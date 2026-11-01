@@ -857,13 +857,13 @@
 
       @media (max-width: 900px) {
         .section {
-          padding: 52px 0;
+          padding: 40px 0;
         }
         .section-marker {
-          margin-bottom: 28px;
+          margin-bottom: 20px;
         }
         .direct-booking {
-          padding: 52px 0;
+          padding: 40px 0;
         }
         .cta {
           padding: 52px 0;
@@ -901,7 +901,7 @@
         align-items: flex-end;
         justify-content: space-between;
         gap: 18px 40px;
-        margin-bottom: 40px;
+        margin-bottom: 28px;
       }
       .reviews-title {
         font-family: "EB Garamond", Georgia, serif;
@@ -1021,7 +1021,7 @@
 
       /* ============== ABOUT ============== */
       .section {
-        padding: 100px 0;
+        padding: 64px 0;
         position: relative;
       }
 
@@ -1029,7 +1029,7 @@
         display: flex;
         align-items: baseline;
         gap: 16px;
-        margin-bottom: 48px;
+        margin-bottom: 28px;
       }
 
       .section-marker .num {
@@ -1048,13 +1048,13 @@
 
       .about-grid {
         display: grid;
-        grid-template-columns: 1fr 1.4fr;
-        gap: 80px;
+        grid-template-columns: 1fr 1.3fr;
+        gap: 56px;
         align-items: start;
       }
 
       .about h2 {
-        font-size: clamp(36px, 5vw, 64px);
+        font-size: clamp(32px, 4vw, 50px);
         color: var(--ink);
       }
 
@@ -1063,13 +1063,22 @@
       }
 
       .about-text {
-        font-size: 17px;
-        line-height: 1.7;
+        font-size: 16px;
+        line-height: 1.65;
         color: var(--ink-soft);
       }
 
       .about-text p {
-        margin-bottom: 20px;
+        margin-bottom: 14px;
+      }
+
+      .about-photo {
+        display: block;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        margin-top: 28px;
       }
 
       .pullquote {
@@ -1086,7 +1095,10 @@
       @media (max-width: 900px) {
         .about-grid {
           grid-template-columns: 1fr;
-          gap: 40px;
+          gap: 20px;
+        }
+        .about-photo {
+          display: none;
         }
       }
 
@@ -1097,14 +1109,14 @@
 
       .features-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 0;
         border-top: 1px solid var(--line);
         border-left: 1px solid var(--line);
       }
 
       .feature {
-        padding: 40px 32px;
+        padding: 26px 22px;
         border-right: 1px solid var(--line);
         border-bottom: 1px solid var(--line);
         background: var(--bg-alt);
@@ -1116,15 +1128,15 @@
       }
 
       .feature-icon {
-        width: 36px;
-        height: 36px;
-        margin-bottom: 20px;
+        width: 30px;
+        height: 30px;
+        margin-bottom: 12px;
         color: var(--terra);
       }
 
       .feature h3 {
-        font-size: 22px;
-        margin-bottom: 8px;
+        font-size: 20px;
+        margin-bottom: 6px;
       }
 
       .feature p {
@@ -1140,8 +1152,22 @@
       }
 
       @media (max-width: 600px) {
-        .features-grid {
-          grid-template-columns: 1fr;
+        .feature {
+          padding: 16px 14px;
+        }
+        .feature-icon {
+          width: 24px;
+          height: 24px;
+          margin-bottom: 8px;
+        }
+        .feature h3 {
+          font-size: 16px;
+          line-height: 1.25;
+          margin-bottom: 4px;
+        }
+        .feature p {
+          font-size: 12.5px;
+          line-height: 1.5;
         }
       }
 
@@ -1425,7 +1451,7 @@
         color: var(--ink-muted);
         font-size: 14px;
         letter-spacing: 0.08em;
-        margin-bottom: 48px;
+        margin-bottom: 28px;
       }
 
       .pricing-grid {
@@ -1851,7 +1877,7 @@
       /* ============== DIRECT BOOKING ============== */
       .direct-booking {
         text-align: center;
-        padding: 120px 0;
+        padding: 64px 0;
       }
 
       .direct-booking .badge {
@@ -2361,6 +2387,76 @@
         font-size: 18px;
         opacity: 0.75;
       }
+
+      /* ===== "Rezerviraj ovdje" — sažeto: −10% + maslinovo ulje, ispod WhatsApp ===== */
+      .direct-booking h2 {
+        font-size: clamp(34px, 4.6vw, 58px);
+        margin-bottom: 28px;
+      }
+      .direct-booking .benefits {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+        gap: 20px;
+        max-width: 960px;
+        margin: 0 auto 32px;
+      }
+      .direct-booking .benefit-oil {
+        grid-column: auto;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+        gap: 26px;
+      }
+      .benefit-save {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .save-big {
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: clamp(48px, 5vw, 64px);
+        line-height: 1;
+        color: var(--terra);
+        margin-bottom: 14px;
+      }
+      .direct-ask {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 12px 18px;
+        margin-top: 28px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+        max-width: 760px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .direct-ask p {
+        font-size: 15px;
+        color: var(--ink-soft);
+      }
+      .direct-booking .cta-alt {
+        margin-top: 14px;
+        color: var(--ink-muted);
+      }
+      .direct-booking .cta-alt a {
+        color: var(--ink-soft);
+      }
+      @media (max-width: 700px) {
+        .direct-booking .benefits,
+        .direct-booking .benefit-oil {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Manji razmaci na mobitelu (mora biti na kraju da nadjača gornja pravila) */
+      @media (max-width: 900px) {
+        .section,
+        .direct-booking {
+          padding: 40px 0;
+        }
+        .section-marker {
+          margin-bottom: 20px;
+        }
+      }
     </style>
   </head>
   <body data-lang="en">
@@ -2748,6 +2844,7 @@
                 <span class="italic">auf der wilden Insel.</span></span
               >
             </h2>
+            <img class="about-photo" src="slika3.jpg" alt="Terrace with dining table under the pergola, House Verona" loading="lazy" width="1024" height="683" />
           </div>
           <div class="about-text">
             <p class="lang-en">
@@ -2804,25 +2901,6 @@
               der Terrasse; die Abende enden mit gegrilltem Fisch, Wein und
               Gesprächen ohne Blick auf die Uhr.
             </p>
-
-            <div class="pullquote">
-              <span class="lang-en"
-                >"The kind of place where you stop checking your phone by the
-                second day."</span
-              >
-              <span class="lang-hr"
-                >"Vrsta mjesta gdje već drugi dan prestaneš gledati u
-                telefon."</span
-              >
-              <span class="lang-it"
-                >"Il tipo di posto dove smetti di guardare il telefono già dal
-                secondo giorno."</span
-              >
-              <span class="lang-de"
-                >"Der Ort, an dem man spätestens am zweiten Tag aufhört, aufs
-                Handy zu schauen."</span
-              >
-            </div>
 
             <p class="lang-en">
               Cres is the wilder neighbour to its more famous cousins — quieter
@@ -3471,98 +3549,26 @@
 
     <section class="section direct-booking" id="book">
       <div class="container">
-        <div class="badge">
-          <span class="lang-en">Book direct &amp; save</span>
-          <span class="lang-hr">Rezerviraj direktno i uštedi</span>
-          <span class="lang-it">Prenota diretto e risparmia</span>
-          <span class="lang-de">Direkt buchen &amp; sparen</span>
-        </div>
         <h2>
-          <span class="lang-en"
-            >Skip the agencies. <span class="italic">Save 10%.</span></span
-          >
-          <span class="lang-hr"
-            >Bez agencija. <span class="italic">10% jeftinije.</span></span
-          >
-          <span class="lang-it"
-            >Senza agenzie. <span class="italic">Risparmia il 10%.</span></span
-          >
-          <span class="lang-de"
-            >Ohne Agenturen. <span class="italic">10% günstiger.</span></span
-          >
+          <span class="lang-en">Book here. <span class="italic">Save 10%.</span></span>
+          <span class="lang-hr">Rezerviraj ovdje. <span class="italic">10% jeftinije.</span></span>
+          <span class="lang-it">Prenota qui. <span class="italic">Risparmia il 10%.</span></span>
+          <span class="lang-de">Hier buchen. <span class="italic">10% günstiger.</span></span>
         </h2>
-        <p class="subtitle">
-          <span class="lang-en"
-            >Book your week right here on the website and you get
-            <strong>10% off</strong> — the same house and the same dates, just
-            without the platform commission. Prefer to talk first? Message us on
-            WhatsApp and we'll arrange everything together.</span
-          >
-          <span class="lang-hr"
-            >Rezerviraj tjedan ovdje na stranici i dobivaš
-            <strong>10% popusta</strong> — ista kuća, isti termini, samo bez
-            provizije platformi. Radije bi prvo popričao? Javi nam se na
-            WhatsApp pa ćemo sve dogovoriti.</span
-          >
-          <span class="lang-it"
-            >Prenota la tua settimana qui sul sito e hai
-            <strong>il 10% di sconto</strong> — la stessa casa, le stesse date,
-            solo senza la commissione delle piattaforme. Preferisci parlarne
-            prima? Scrivici su WhatsApp e ci accordiamo.</span
-          >
-          <span class="lang-de"
-            >Buche deine Woche direkt hier auf der Website und du bekommst
-            <strong>10% Rabatt</strong> — dasselbe Haus, dieselben Termine, nur
-            ohne Plattform-Provision. Lieber erst sprechen? Schreib uns auf
-            WhatsApp, dann vereinbaren wir alles.</span
-          >
-        </p>
         <div class="benefits">
-          <div class="benefit">
-            <div class="num">01</div>
+          <div class="benefit benefit-save">
+            <div class="save-big">−10%</div>
             <h4>
-              <span class="lang-en">10% lower rate</span>
-              <span class="lang-hr">10% niža cijena</span>
-              <span class="lang-it">Tariffa del 10% più bassa</span>
-              <span class="lang-de">10% günstigerer Preis</span>
+              <span class="lang-en">Lower price</span>
+              <span class="lang-hr">Niža cijena</span>
+              <span class="lang-it">Prezzo più basso</span>
+              <span class="lang-de">Günstigerer Preis</span>
             </h4>
             <p>
-              <span class="lang-en"
-                >When you book through this website — already included in the price.</span
-              >
-              <span class="lang-hr"
-                >Kad rezerviraš preko ove stranice — već je uračunato u cijenu.</span
-              >
-              <span class="lang-it"
-                >Prenotando su questo sito — già incluso nel prezzo.</span
-              >
-              <span class="lang-de"
-                >Bei Buchung über diese Website — schon im Preis enthalten.</span
-              >
-            </p>
-          </div>
-          <div class="benefit">
-            <div class="num">02</div>
-            <h4>
-              <span class="lang-en">Talk to the owner</span>
-              <span class="lang-hr">Razgovor s vlasnicom</span>
-              <span class="lang-it">Parla con la proprietaria</span>
-              <span class="lang-de">Direkt zur Eigentümerin</span>
-            </h4>
-            <p>
-              <span class="lang-en"
-                >Local tips, questions, special requests — no middleman.</span
-              >
-              <span class="lang-hr"
-                >Lokalni savjeti, pitanja, posebne želje — bez posrednika.</span
-              >
-              <span class="lang-it"
-                >Consigli locali, domande, richieste speciali — senza
-                intermediari.</span
-              >
-              <span class="lang-de"
-                >Lokale Tipps, Fragen, Sonderwünsche — ohne Vermittler.</span
-              >
+              <span class="lang-en">When you book on this website. Already included in the price.</span>
+              <span class="lang-hr">Kad rezerviraš na ovoj stranici. Već je uračunato u cijenu.</span>
+              <span class="lang-it">Prenotando su questo sito. Già incluso nel prezzo.</span>
+              <span class="lang-de">Bei Buchung auf dieser Website. Schon im Preis enthalten.</span>
             </p>
           </div>
           <div class="benefit benefit-oil">
@@ -3594,7 +3600,6 @@
         </div>
       </figure>
             <div class="oil-body">
-              <div class="num">03</div>
               <h4>
                 <span class="lang-en">A welcome gift: our homemade olive oil</span>
                 <span class="lang-hr">Poklon dobrodošlice: naše domaće maslinovo ulje</span>
@@ -3602,25 +3607,27 @@
                 <span class="lang-de">Willkommensgeschenk: unser hausgemachtes Olivenöl</span>
               </h4>
               <p>
-                <span class="lang-en">On Cres, olive trees have grown between the dry stone walls for centuries. When you book directly, our homemade olive oil is waiting for you on arrival — for fresh bread on the terrace, grilled fish or a simple tomato salad. The taste of the island.</span>
-                <span class="lang-hr">Na Cresu masline stoljećima rastu uz suhozide. Kad rezerviraš direktno, po dolasku te čeka naše domaće maslinovo ulje — za svjež kruh na terasi, ribu s roštilja ili salatu od rajčica. Okus otoka.</span>
-                <span class="lang-it">A Cres gli ulivi crescono da secoli tra i muretti a secco. Prenotando direttamente, all'arrivo ti aspetta il nostro olio d'oliva fatto in casa — per il pane fresco in terrazza, il pesce alla griglia o un'insalata di pomodori. Il sapore dell'isola.</span>
-                <span class="lang-de">Auf Cres wachsen Olivenbäume seit Jahrhunderten zwischen Trockensteinmauern. Bei Direktbuchung wartet bei der Ankunft unser hausgemachtes Olivenöl auf dich — für frisches Brot auf der Terrasse, gegrillten Fisch oder Tomatensalat. Der Geschmack der Insel.</span>
+                <span class="lang-en">When you book directly, a bottle from our own olive trees is waiting for you on arrival. The taste of the island.</span>
+                <span class="lang-hr">Kad rezerviraš direktno, po dolasku te čeka boca ulja s naših maslina. Okus otoka.</span>
+                <span class="lang-it">Prenotando direttamente, all'arrivo ti aspetta una bottiglia d'olio dei nostri ulivi. Il sapore dell'isola.</span>
+                <span class="lang-de">Bei Direktbuchung wartet bei der Ankunft eine Flasche Öl von unseren Olivenbäumen auf dich. Der Geschmack der Insel.</span>
               </p>
             </div>
           </div>
         </div>
-        <div class="direct-actions">
         <a href="#dostupnost" class="btn-primary direct-book-btn">
           <span class="lang-en">Book on the website −10%</span>
           <span class="lang-hr">Rezerviraj na stranici −10%</span>
           <span class="lang-it">Prenota sul sito −10%</span>
           <span class="lang-de">Auf der Website buchen −10%</span>
         </a>
-        <span class="direct-or">
-          <span class="lang-en">or</span><span class="lang-hr">ili</span
-          ><span class="lang-it">oppure</span><span class="lang-de">oder</span>
-        </span>
+        <div class="direct-ask">
+          <p>
+            <span class="lang-en">Any questions? You can always message us on WhatsApp.</span>
+            <span class="lang-hr">Imaš pitanje? Uvijek nam se možeš javiti na WhatsApp.</span>
+            <span class="lang-it">Hai domande? Puoi sempre scriverci su WhatsApp.</span>
+            <span class="lang-de">Fragen? Schreib uns jederzeit auf WhatsApp.</span>
+          </p>
         <a
           href="https://wa.me/385911260214?text=Hi%21%20I%27d%20like%20to%20enquire%20about%20availability%20at%20House%20Verona%20for%20%5Bdates%5D.%20Thanks%21"
           class="btn-whatsapp"
@@ -4160,7 +4167,8 @@
         const last = selection[n - 1];
         const ok = contiguous(selection);
         const base = ok ? stayPrice(first, n) : null;
-        const price = priceFor(base, bankOn ? payment() : "card");
+        // Popust za uplatu na račun prikazuje se tek kad gost otvori obrazac i odabere način plaćanja.
+        const price = priceFor(base, bankOn && !form.hidden ? payment() : "card");
         const money = (v) => (price ? formatEur(v) : "—");
         const dow = T.dow[lang()];
         $("sumFrom").textContent = `${dow} ${formatDate(first)}`;
@@ -4197,7 +4205,7 @@
         errorEl.hidden = true;
         form.hidden = false;
         document.body.classList.remove("has-sel");
-        setStep(1);
+        renderSummary();
         form.scrollIntoView({ behavior: "smooth", block: "start" });
         setTimeout(() => form.elements.name.focus({ preventScroll: true }), 400);
       }

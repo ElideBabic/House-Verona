@@ -102,7 +102,7 @@ informativan i nitko ne može poslati zahtjev.
 | `api/rezervacija.js` | gost šalje zahtjev → Stripe Checkout (`capture_method: manual`) |
 | `api/stripe-webhook.js` | Stripe javlja da je kartica unesena / poništena |
 | `api/admin.js` | popis, potvrda i odbijanje (samo za ADMIN_UID) |
-| `api/odluka.js` | gumbi **Potvrdi / Odbij** iz maila — potpisana poveznica, odluka tek nakon drugog klika |
+| `api/odluka.js` | stare poveznice Potvrdi/Odbij iz ranijih mailova: samo upućuje na admin, ništa ne mijenja |
 | `api/cron.js` | dnevni podsjetnik i automatsko odbijanje |
 | `api/dostupnost.js` | zauzeti tjedni i tjedni na upitu za javni kalendar |
 | `hvala.html` | stranica nakon plaćanja (`?nacin=racun` za uplatu na račun) |
@@ -146,8 +146,7 @@ Vercel → projekt → **Settings → Environment Variables** (Production):
 | `SMTP_USER` | Gmail adresa |
 | `SMTP_PASS` | lozinka za aplikaciju |
 | `ADMIN_EMAIL` | kamo stižu obavijesti o novim zahtjevima (može biti isti Gmail) |
-| `CRON_SECRET` | bilo koji dugi nasumični niz (npr. 40 slova i brojeva). Služi i za potpis gumba Potvrdi/Odbij u mailu — bez njega mail ima samo link na admin. Stavi ga i na Production i na Preview |
-| `LINK_SECRET` | nije obavezno; poseban ključ za gumbe u mailu (inače se koristi `CRON_SECRET`). Promjena ključa poništava gumbe u starim mailovima |
+| `CRON_SECRET` | bilo koji dugi nasumični niz (npr. 40 slova i brojeva). |
 | `SITE_URL` | `https://www.house-verona.com` |
 | `AUTO_RELEASE_HOURS` | nije obavezno, zadano `48` |
 | `BANK_IBAN` | IBAN za uplatu na račun (uključuje tu opciju) |

@@ -76,3 +76,9 @@ Nepromijenjeno (nisu u ovoj mapi): slike. Nepromijenjeno: `firebase-config.js`, 
   `maslinovo-ulje.jpg` u istoj mapi kao `index.html`. Dok te datoteke nema,
   prikazuje se nacrtana grančica masline.
 - Maknut i red s koracima rezervacije iznad kalendara (Odaberite termin · Vaši podaci · …).
+- Manje praznog prostora: razmaci između odjeljaka smanjeni (100 → 64 px na računalu, 40 px na mobitelu). Dio „Kuća” je kraći: ispod naslova je slika terase (slika3.jpg), citat o telefonu je maknut, a tekst je malo manji.
+- Na mobitelu se slika terase ispod naslova „Kuća” ne prikazuje (samo na računalu).
+- Odjeljak „Rezerviraj ovdje. 10% jeftinije.” (prije „Skip the agencies”) je sažet: samo −10% i maslinovo ulje, ispod gumb za rezervaciju, a WhatsApp je ispod kao „Imaš pitanje? Uvijek nam se možeš javiti”. Mail adresa je sad vidljiva (prije je bila svijetla na svijetloj pozadini).
+- Popust od 10 € za uplatu na račun više se ne oduzima čim gost klikne tjedan. Sažetak tada pokazuje običnu cijenu (s 10% popusta), a −10 € se pojavi tek kad gost otvori obrazac i odabere uplatu na račun.
+- Gumbi Potvrdi / Odbij u mailu su maknuti: mail za novi zahtjev i podsjetnik imaju samo poveznicu na admin, gdje se sve odlučuje. Poveznice iz starih mailova (`api/odluka.js`) sad samo upućuju na admin i ništa ne mijenjaju.
+- „Što kuća nudi” je kompaktniji: na računalu 4 kockice u redu umjesto 3, na mobitelu 2 u redu umjesto 1, s manjim ikonama i razmacima (na mobitelu je dio više nego upola kraći).

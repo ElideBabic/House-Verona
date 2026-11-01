@@ -2,7 +2,7 @@
    vlasnica uvijek na hrvatskom. */
 
 import { formatDate, formatEur, weekEnd } from "../../cijene.js";
-import { SITE_URL, bankDetails, bankDays, actionLink } from "./servisi.js";
+import { SITE_URL, bankDetails, bankDays } from "./servisi.js";
 
 const CONTACT = "WhatsApp: +385 91 126 0214 · e-mail: house.verona.cres@gmail.com";
 
@@ -542,50 +542,11 @@ ${details(b)}`,
   }),
 };
 
-/** Poveznice za odluku iz maila (null ako tajni ključ za poveznice nije postavljen). */
-function decisionLinks(b) {
-  const yes = actionLink(b.id, "confirm");
-  const no = actionLink(b.id, "reject");
-  return yes && no ? { yes, no } : null;
+/** Odluka se donosi u adminu (bez gumba u mailu). */
+function decisionText() {
+  return `Potvrdi ili odbij u adminu: ${SITE_URL()}/admin.html`;
 }
-
-function decisionText(b) {
-  const links = decisionLinks(b);
-  if (!links) return `Potvrdi ili odbij ovdje: ${SITE_URL()}/admin.html`;
-  return `POTVRDI: ${links.yes}
-
-ODBIJ: ${links.no}
-
-(ili u adminu: ${SITE_URL()}/admin.html)`;
-}
-
-const esc = (v) =>
-  String(v).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-
-const button = (href, label, bg) =>
-  `<a href="${esc(href)}" style="display:inline-block;padding:12px 22px;margin:0 8px 8px 0;background:${bg};color:#ffffff;text-decoration:none;font-weight:bold;border-radius:4px;font-family:Arial,sans-serif;font-size:15px">${label}</a>`;
-
-/** HTML inačica maila s gumbima Potvrdi / Odbij (tekst ostaje i za klijente bez HTML-a). */
-function decisionHtml(b, text) {
-  const links = decisionLinks(b);
-  if (!links) return undefined;
-  const body = esc(text.slice(0, text.indexOf("POTVRDI:")).trimEnd());
-  const tail = esc(text.slice(text.indexOf("(ili u adminu:")).replace(/^\([^)]*\)\s*/, ""));
-  return `<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.5;color:#26231e">
-<div style="white-space:pre-wrap">${body}</div>
-<p style="margin:20px 0 4px">${button(links.yes, "✓ Potvrdi rezervaciju", "#2e6b3a")}${button(links.no, "✕ Odbij", "#9b2c2c")}</p>
-<p style="font-size:13px;color:#6b645a;margin:0 0 16px">Nakon klika otvara se stranica na kojoj odluku još jednom potvrdiš.<br>Ili otvori <a href="${esc(SITE_URL())}/admin.html">admin</a>.</p>
-${tail ? `<div style="white-space:pre-wrap">${tail}</div>` : ""}
-</div>`;
-}
-
-const WITH_DECISION = new Set(["request", "reminder"]);
 
 export function adminMail(kind, booking) {
-  const mail = { ...ADMIN[kind](booking), replyTo: booking.email };
-  if (WITH_DECISION.has(kind)) {
-    const html = decisionHtml(booking, mail.text);
-    if (html) mail.html = html;
-  }
-  return mail;
+  return { ...ADMIN[kind](booking), replyTo: booking.email };
 }
