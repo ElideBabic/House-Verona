@@ -16,6 +16,17 @@ odabir tjedna), `vercel.json` (dnevni cron), `robots.txt`, `llms.txt`,
 Nepromijenjeno (nisu u ovoj mapi): slike. Nepromijenjeno: `firebase-config.js`, `firestore.rules`,
 `recenzija.html`, `sitemap.xml`.
 
+## 01.11.2026. (večer) — Potvrdi/Odbij iz maila, više admin računa
+
+- Mail "Novi zahtjev" (i podsjetnik) ima gumbe **Potvrdi rezervaciju** i
+  **Odbij**. Klik otvara kratku stranicu s pregledom i jednim gumbom za
+  potvrdu — bez prijave. Odluka se izvršava tek na tom drugom kliku, jer
+  Gmail/antivirusi znaju sami otvoriti poveznice iz maila. Poveznice su
+  potpisane (`CRON_SECRET` ili `LINK_SECRET`) i vrijede samo dok zahtjev čeka.
+  Nova datoteka: `api/odluka.js`.
+- Admin može imati više Google računa: `ADMIN_UIDS` u `firebase-config.js`,
+  popis u `firestore.rules`, a u Vercelu `ADMIN_UID` s UID-ovima odvojenim zarezom.
+
 ## 01.11.2026. — uplata na račun, tekst o popustu, maslinovo ulje
 
 - **Uplata na račun** kao druga opcija plaćanja (upute u `POSTAVLJANJE.md`,

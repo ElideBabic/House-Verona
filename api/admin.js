@@ -1,6 +1,6 @@
 /* POST /api/admin — admin sučelje: popis zahtjeva, potvrda i odbijanje,
    a za uplatu na račun i "označi plaćeno" / "otkaži — nije plaćeno".
-   Pristup samo s Firebase prijavom vlasničkog računa (ADMIN_UID). */
+   Pristup samo s Firebase prijavom vlasničkih računa (ADMIN_UID, više UID-ova odvojenih zarezom). */
 
 import { adminAuth, json } from "./_lib/servisi.js";
 import { bookingsCol, confirm, release, markPaid, cancelUnpaid, UserError } from "./_lib/rezervacije.js";
@@ -8,10 +8,11 @@ import { bookingRef } from "./_lib/mailovi.js";
 
 async function isAdmin(request) {
   const token = (request.headers.get("authorization") || "").replace(/^Bearer\s+/i, "");
-  if (!token || !process.env.ADMIN_UID) return false;
+  const allowed = (process.env.ADMIN_UID || "").split(",").map((s) => s.trim()).filter(Boolean);
+  if (!token || !allowed.length) return false;
   try {
     const decoded = await adminAuth().verifyIdToken(token);
-    return decoded.uid === process.env.ADMIN_UID;
+    return allowed.includes(decoded.uid);
   } catch {
     return false;
   }

@@ -33,15 +33,16 @@ pravila iz koraka 4.
    kalendar. Stranica će javiti *Nemate ovlasti* — to je očekivano.
 3. U Firebase konzoli: **Authentication → Users** → kopiraj **User UID** tog
    računa.
-4. Upiši ga u `firebase-config.js` kao `ADMIN_UID`.
+4. Upiši ga u `firebase-config.js` na popis `ADMIN_UIDS`. Može ih biti više
+   (npr. house.verona.cres i tvoj osobni Gmail) — svaki u svoj redak.
 
 ## 4. Sigurnosna pravila
 
-U `firestore.rules` zamijeni `ADMIN_UID` stvarnim UID-om, pa cijeli sadržaj
+U `firestore.rules` upiši iste UID-ove (popis u `isAdmin()`), pa cijeli sadržaj
 datoteke zalijepi u **Firestore Database → Rules → Publish**.
 
-Pravila znače: kalendar svatko može čitati, mijenjati ga smije isključivo taj
-jedan račun, i to samo u očekivanom obliku zapisa.
+Pravila znače: kalendar svatko može čitati, mijenjati ga smiju isključivo ti
+računi, i to samo u očekivanom obliku zapisa.
 
 ## 5. Dozvoljene domene
 
@@ -101,6 +102,7 @@ informativan i nitko ne može poslati zahtjev.
 | `api/rezervacija.js` | gost šalje zahtjev → Stripe Checkout (`capture_method: manual`) |
 | `api/stripe-webhook.js` | Stripe javlja da je kartica unesena / poništena |
 | `api/admin.js` | popis, potvrda i odbijanje (samo za ADMIN_UID) |
+| `api/odluka.js` | gumbi **Potvrdi / Odbij** iz maila — potpisana poveznica, odluka tek nakon drugog klika |
 | `api/cron.js` | dnevni podsjetnik i automatsko odbijanje |
 | `api/dostupnost.js` | zauzeti tjedni i tjedni na upitu za javni kalendar |
 | `hvala.html` | stranica nakon plaćanja (`?nacin=racun` za uplatu na račun) |
@@ -140,11 +142,12 @@ Vercel → projekt → **Settings → Environment Variables** (Production):
 | `STRIPE_SECRET_KEY` | iz koraka 1 |
 | `STRIPE_WEBHOOK_SECRET` | iz koraka 5 |
 | `FIREBASE_SERVICE_ACCOUNT` | cijeli JSON iz koraka 2 |
-| `ADMIN_UID` | isti UID kao u `firebase-config.js` |
+| `ADMIN_UID` | isti UID-ovi kao u `firebase-config.js`, više njih odvojeno zarezom |
 | `SMTP_USER` | Gmail adresa |
 | `SMTP_PASS` | lozinka za aplikaciju |
 | `ADMIN_EMAIL` | kamo stižu obavijesti o novim zahtjevima (može biti isti Gmail) |
-| `CRON_SECRET` | bilo koji dugi nasumični niz (npr. 40 slova i brojeva) |
+| `CRON_SECRET` | bilo koji dugi nasumični niz (npr. 40 slova i brojeva). Služi i za potpis gumba Potvrdi/Odbij u mailu — bez njega mail ima samo link na admin. Stavi ga i na Production i na Preview |
+| `LINK_SECRET` | nije obavezno; poseban ključ za gumbe u mailu (inače se koristi `CRON_SECRET`). Promjena ključa poništava gumbe u starim mailovima |
 | `SITE_URL` | `https://www.house-verona.com` |
 | `AUTO_RELEASE_HOURS` | nije obavezno, zadano `48` |
 | `BANK_IBAN` | IBAN za uplatu na račun (uključuje tu opciju) |

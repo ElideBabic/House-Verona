@@ -434,8 +434,9 @@
           <p class="uid-hint">
             Ako je ovo tvoj račun za upravljanje, njegov UID je:<br />
             <code id="deniedUid"></code><br />
-            Upiši ga kao <code>ADMIN_UID</code> u <code>firebase-config.js</code>,
-            <code>firestore.rules</code> i u Vercel (vidi POSTAVLJANJE.md).
+            Dodaj ga na popis <code>ADMIN_UIDS</code> u <code>firebase-config.js</code>,
+            u <code>firestore.rules</code> i u Vercel varijablu <code>ADMIN_UID</code>
+            (više UID-ova odvoji zarezom; vidi POSTAVLJANJE.md).
           </p>
           <button type="button" class="btn" id="logoutDenied">Odjava</button>
         </div>
@@ -511,7 +512,7 @@
       } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
       import { Calendar } from "./kalendar.js";
       import { formatDate, formatEur, weekEnd } from "./cijene.js";
-      import { firebaseConfig, ADMIN_UID, isConfigured } from "./firebase-config.js";
+      import { firebaseConfig, ADMIN_UIDS, isConfigured } from "./firebase-config.js";
 
       const views = {
         loading: document.getElementById("viewLoading"),
@@ -593,7 +594,7 @@
             show("login");
             return;
           }
-          if (user.uid !== ADMIN_UID) {
+          if (!ADMIN_UIDS.includes(user.uid)) {
             document.getElementById("deniedUid").textContent = user.uid;
             show("denied");
             return;

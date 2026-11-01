@@ -1,13 +1,16 @@
 rules_version = '2';
 
 // Zalijepi ovo u Firebase konzoli: Firestore Database → Rules → Publish.
-// Zamijeni ADMIN_UID stvarnim UID-om svog Google računa (isti kao u firebase-config.js).
+// Popis UID-ova mora biti isti kao ADMIN_UIDS u firebase-config.js.
 
 service cloud.firestore {
   match /databases/{database}/documents {
 
     function isAdmin() {
-      return request.auth != null && request.auth.uid == '9lS4aRecbLdOMX5Npn27KuCYfLH3';
+      return request.auth != null && request.auth.uid in [
+        '9lS4aRecbLdOMX5Npn27KuCYfLH3', // house.verona.cres@gmail.com
+        'zNjquEvSvQbsIllqMspJ6EJMy8L2'  // Elidin osobni Gmail
+      ];
     }
 
     function validWeeks() {
