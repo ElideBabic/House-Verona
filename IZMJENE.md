@@ -16,6 +16,11 @@ odabir tjedna), `vercel.json` (dnevni cron), `robots.txt`, `llms.txt`,
 Nepromijenjeno (nisu u ovoj mapi): slike. Nepromijenjeno: `firebase-config.js`, `firestore.rules`,
 `recenzija.html`, `sitemap.xml`.
 
+## 01.11.2026. (prije objave) — adresa stranice
+
+- `index.html`, `llms.txt`, `recenzija.html`, `robots.txt`, `sitemap.xml`:
+  adresa stranice je sad https://www.house-verona.com (umjesto house-verona.vercel.app).
+
 ## 01.11.2026. (večer) — Potvrdi/Odbij iz maila, više admin računa
 
 - Mail "Novi zahtjev" (i podsjetnik) ima gumbe **Potvrdi rezervaciju** i
