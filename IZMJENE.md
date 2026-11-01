@@ -82,3 +82,4 @@ Nepromijenjeno (nisu u ovoj mapi): slike. Nepromijenjeno: `firebase-config.js`, 
 - Popust od 10 € za uplatu na račun više se ne oduzima čim gost klikne tjedan. Sažetak tada pokazuje običnu cijenu (s 10% popusta), a −10 € se pojavi tek kad gost otvori obrazac i odabere uplatu na račun.
 - Gumbi Potvrdi / Odbij u mailu su maknuti: mail za novi zahtjev i podsjetnik imaju samo poveznicu na admin, gdje se sve odlučuje. Poveznice iz starih mailova (`api/odluka.js`) sad samo upućuju na admin i ništa ne mijenjaju.
 - „Što kuća nudi” je kompaktniji: na računalu 4 kockice u redu umjesto 3, na mobitelu 2 u redu umjesto 1, s manjim ikonama i razmacima (na mobitelu je dio više nego upola kraći).
+- Na stranici zahvale nakon zahtjeva s uplatom na račun maknuta je rečenica „Ako termin ipak nije slobodan, javit ćemo vam i ništa ne uplaćujete” (sva 4 jezika).
