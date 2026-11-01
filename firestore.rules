@@ -7,7 +7,7 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     function isAdmin() {
-      return request.auth != null && request.auth.uid == 'ADMIN_UID';
+      return request.auth != null && request.auth.uid == '9lS4aRecbLdOMX5Npn27KuCYfLH3';
     }
 
     function validWeeks() {

@@ -13,7 +13,7 @@ export const firebaseConfig = {
 };
 
 /** UID Google računa koji jedini smije uređivati kalendar. */
-export const ADMIN_UID = "";
+export const ADMIN_UID = "9lS4aRecbLdOMX5Npn27KuCYfLH3";
 
 export const isConfigured = () =>
   Boolean(firebaseConfig.apiKey && firebaseConfig.projectId);
