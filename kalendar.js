@@ -92,6 +92,8 @@ export async function fetchAvailability() {
     // Stariji server ne šalje načine plaćanja — tada je to samo kartica.
     methods: data.methods ?? { card: data.online === true, bank: false },
     bankDays: data.bankDays ?? 5,
+    // Cjenik iz admina; stariji server ga ne šalje — tada ostaje cjenik iz cijene.js.
+    seasons: Array.isArray(data.seasons) ? data.seasons : null,
   };
 }
 

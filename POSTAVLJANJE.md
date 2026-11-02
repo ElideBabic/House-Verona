@@ -98,7 +98,7 @@ informativan i nitko ne može poslati zahtjev.
 
 | Datoteka | Što radi |
 |---|---|
-| `cijene.js` | cjenik po sezonama (pune cijene), popust za direktnu rezervaciju (`DIRECT_DISCOUNT`, 10%), udio koji se naplaćuje (`DEPOSIT_SHARE`), najmanje dana do dolaska, najviše tjedana (`MAX_WEEKS`) |
+| `cijene.js` | zadani cjenik (`DEFAULT_SEASONS`, vrijedi dok se u adminu ne spremi drugi), popust za direktnu rezervaciju (`DIRECT_DISCOUNT`, 10%), udio koji se naplaćuje (`DEPOSIT_SHARE`), najmanje dana do dolaska, najviše tjedana (`MAX_WEEKS`) |
 | `api/rezervacija.js` | gost šalje zahtjev → Stripe Checkout (`capture_method: manual`) |
 | `api/stripe-webhook.js` | Stripe javlja da je kartica unesena / poništena |
 | `api/admin.js` | popis, potvrda i odbijanje (samo za ADMIN_UID) |
@@ -220,11 +220,15 @@ Kako teče uplata na račun:
 
 ## Napomene
 
-- **Cjenik za novu godinu**: dodaj redove u `SEASONS` u `cijene.js` (pune
-  cijene; popust se odbija sam). Cijene u kartama cjenika u `index.html` treba
-  ručno uskladiti. Tjedni
-  koji nisu cijeli u cjeniku prikazuju se kao slobodni, ali ih se ne može
-  rezervirati online (gost se javlja porukom).
+- **Cjenik** (i za novu godinu) mijenja se u adminu, odjeljak „Cjenik“: razdoblja
+  od subote do subote i puna cijena po noći (popust se odbija sam). Sprema se u
+  Firestore (`settings/prices`); server iz njega računa iznos, a stranica slaže
+  kartice cjenika i cijenu „od“. Dok u adminu ništa nije spremljeno, vrijedi
+  `DEFAULT_SEASONS` iz `cijene.js`. Svako spremanje ostaje zapisano u `priceHistory`
+  (u adminu „Stari cjenici“, samo pregled). Za spremanje moraju biti objavljena pravila iz
+  `firestore.rules` (s odjeljcima `settings/prices` i `priceHistory`). Tjedni koji nisu cijeli u
+  cjeniku prikazuju se kao slobodni, ali ih se ne može rezervirati online (gost
+  se javlja porukom).
 - **Ručno zatvaranje** (npr. rezervacija s Bookinga) i dalje radi klikom na
   tjedan u adminu. Ako za taj tjedan postoji zahtjev, odbij ga.
 - **Potvrda izravno u Stripeu** (Capture u Stripe sučelju) isto radi — server

@@ -8,6 +8,7 @@ import { FieldValue } from "firebase-admin/firestore";
 import { getStripe, json, SITE_URL, payMethods, sendMail, adminEmail } from "./_lib/servisi.js";
 import { bookedWeeks, pendingWeeks, bookingsCol } from "./_lib/rezervacije.js";
 import { guestMail, adminMail } from "./_lib/mailovi.js";
+import { loadSeasons } from "./_lib/cjenik.js";
 import { stayPrice, priceFor, isBookableOnline, weekEnd, weekList, formatDate, MAX_GUESTS } from "../cijene.js";
 
 const LANGS = ["hr", "en", "it", "de"];
@@ -61,6 +62,7 @@ export async function POST(request) {
   }
   if (!methods[method]) return json({ error: ERR.notOnline }, 409);
 
+  await loadSeasons();
   let price = priceFor(stayPrice(week, weeks), method);
   if (!price || !isBookableOnline(week)) return json({ error: ERR.notOnline }, 409);
 

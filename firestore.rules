@@ -28,6 +28,38 @@ service cloud.firestore {
       allow delete: if false;
     }
 
+    function validPrices() {
+      return request.resource.data.keys().hasOnly(['seasons', 'updatedAt', 'updatedBy'])
+        && request.resource.data.seasons is list
+        && request.resource.data.seasons.size() >= 1
+        && request.resource.data.seasons.size() <= 60
+        && request.resource.data.updatedBy == request.auth.uid
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    // Cjenik iz admina — cijene su ionako javne na stranici, mijenjati ih smije samo vlasnički račun.
+    match /settings/prices {
+      allow read: if true;
+      allow create, update: if isAdmin() && validPrices();
+      allow delete: if false;
+    }
+
+    function validPriceHistory() {
+      return request.resource.data.keys().hasOnly(['seasons', 'savedAt', 'savedBy', 'savedByEmail'])
+        && request.resource.data.seasons is list
+        && request.resource.data.seasons.size() >= 1
+        && request.resource.data.seasons.size() <= 60
+        && request.resource.data.savedBy == request.auth.uid
+        && request.resource.data.savedAt == request.time;
+    }
+
+    // Povijest cjenika: vidi je samo admin; zapisi se samo dodaju, ne mijenjaju se i ne brišu.
+    match /priceHistory/{id} {
+      allow read: if isAdmin();
+      allow create: if isAdmin() && validPriceHistory();
+      allow update, delete: if false;
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }
