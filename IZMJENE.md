@@ -105,3 +105,17 @@ Nepromijenjeno (nisu u ovoj mapi): slike. Nepromijenjeno: `firebase-config.js`, 
 - Dok u adminu ništa nije spremljeno, vrijedi dosadašnji cjenik (`DEFAULT_SEASONS` u `cijene.js`).
 - `firestore.rules` ima novi odjeljak `settings/prices` (čitanje javno, pisanje samo admin). **Treba ga objaviti u Firebase konzoli** (Firestore Database → Rules → zalijepi cijeli `firestore.rules` → Publish).
 - Povijest cjenika: svako spremanje zapisuje se i u Firestore kolekciju `priceHistory` (datum, tko je spremio). U adminu je ispod cjenika „Stari cjenici“ samo za pregled, bez vraćanja. Na dnu je uvijek početni cjenik. Zapisi se ne mogu mijenjati ni brisati (pravila u `firestore.rules`).
+
+## Tekst o maslinovom ulju i napomena uz karticu
+- Novi tekst o maslinovom ulju (Elidin engleski tekst, prijevodi na HR/IT/DE).
+- Uz opciju „Kartica“ sitnim slovima: iznos se najprije samo rezervira na kartici, naplaćuje se tek nakon naše potvrde (4 jezika).
+- Napomena uz karticu smanjena (sitnija slova, manji razmaci), kućica za karticu sad je otprilike iste visine kao za uplatu na račun.
+
+## Kompaktniji kalendar
+- Na računalu su dva mjeseca jedan pored drugog, a na mobitelu se prikazuje jedan mjesec (strelicama dalje).
+- Redovi su niži, a oznaka „Slobodno/Zauzeto“ u svakom retku je maknuta (stanje se vidi po boji i legendi ispod). Kalendar je otprilike upola niži. Admin kalendar je ostao isti.
+- Oznaka „Slobodno / Zauzeto / Na upitu / Odabrano“ u retku ipak je vraćena, samo manja.
+- U kalendaru na stranici brojke zauzetih tjedana i tjedana na upitu su lagano prekrižene.
+
+## Zastavice uz jezike
+- Uz EN / HR / IT / DE u izborniku i u izboru jezika na mobitelu dodane su male zastavice (UK, Hrvatska, Italija, Njemačka). Nacrtane su kao slike u kodu, pa se vide i na Windowsima (emoji zastavice se tamo ne prikazuju).
