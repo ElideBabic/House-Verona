@@ -1,11 +1,12 @@
-/* GET /api/dostupnost — zauzeti tjedni i tjedni koji čekaju potvrdu, za javni kalendar. */
+/* GET /api/dostupnost — zauzeti tjedni, tjedni koji čekaju potvrdu i cjenik, za javni kalendar. */
 
 import { json, payMethods, bankDays } from "./_lib/servisi.js";
 import { bookedWeeks, pendingWeeks } from "./_lib/rezervacije.js";
+import { loadSeasons } from "./_lib/cjenik.js";
 
 export async function GET() {
   try {
-    const [booked, pending] = await Promise.all([bookedWeeks(), pendingWeeks()]);
+    const [booked, pending, seasons] = await Promise.all([bookedWeeks(), pendingWeeks(), loadSeasons()]);
     const methods = payMethods();
     return json(
       {
@@ -16,6 +17,8 @@ export async function GET() {
         online: methods.card || methods.bank,
         methods,
         bankDays: bankDays(),
+        // Cjenik iz admina (pune cijene po noći), da stranica prikazuje iste cijene kao server.
+        seasons,
       },
       200,
       { "cache-control": "public, s-maxage=20, stale-while-revalidate=60" },

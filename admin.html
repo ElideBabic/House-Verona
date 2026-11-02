@@ -382,6 +382,153 @@
         word-break: break-all;
       }
 
+      .prices-block {
+        margin-top: 56px;
+      }
+      table.prices {
+        width: 100%;
+        max-width: 760px;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      table.prices th,
+      table.prices td {
+        text-align: left;
+        padding: 8px 8px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: middle;
+      }
+      table.prices th {
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-muted);
+        font-weight: 500;
+      }
+      table.prices input {
+        font: inherit;
+        padding: 7px 8px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: #fffdf8;
+        color: var(--ink);
+        width: 100%;
+        min-width: 0;
+      }
+      table.prices input[type="number"] {
+        max-width: 110px;
+      }
+      table.prices input.bad {
+        border-color: var(--terra);
+        background: #fbebe4;
+      }
+      table.prices .guest {
+        color: var(--ink-soft);
+        white-space: nowrap;
+        font-size: 13px;
+      }
+      table.prices .del {
+        background: none;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        color: var(--ink-soft);
+        font-size: 16px;
+        line-height: 1;
+      }
+      table.prices .del:hover {
+        color: var(--terra);
+        border-color: var(--terra);
+      }
+      .prices-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 16px;
+      }
+      .prices-actions .btn.ghost {
+        padding: 12px 20px;
+      }
+      #pricesHistoryBlock {
+        margin-top: 36px;
+      }
+      #pricesHistoryBlock .hint {
+        margin-bottom: 12px;
+      }
+      .old-prices {
+        border-top: 1px solid var(--line);
+        padding: 12px 0;
+      }
+      .old-prices h3 {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+      .old-prices h3 .tag {
+        margin-left: 6px;
+        font-weight: 500;
+      }
+      .old-prices table {
+        border-collapse: collapse;
+        font-size: 13px;
+        color: var(--ink-soft);
+      }
+      .old-prices td {
+        padding: 2px 16px 2px 0;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 640px) {
+        /* Na mobitelu je svaki red mala kartica: od / do, cijena, gost plaća */
+        table.prices thead {
+          display: none;
+        }
+        table.prices,
+        table.prices tbody {
+          display: block;
+        }
+        table.prices tr {
+          display: grid;
+          grid-template-columns: 1fr 1fr auto;
+          gap: 6px 10px;
+          padding: 12px 0;
+          border-bottom: 1px solid var(--line);
+        }
+        table.prices td {
+          border: 0;
+          padding: 0;
+        }
+        table.prices td[data-label]::before {
+          content: attr(data-label);
+          display: block;
+          font-size: 10px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: var(--ink-muted);
+          margin-bottom: 2px;
+        }
+        table.prices td:nth-child(5) {
+          grid-column: 3;
+          grid-row: 1;
+          align-self: end;
+        }
+        table.prices td:nth-child(3) {
+          grid-column: 1;
+        }
+        table.prices td.guest {
+          grid-column: 2 / 4;
+          align-self: end;
+          white-space: normal;
+          padding-bottom: 8px;
+        }
+        table.prices input[type="number"] {
+          max-width: none;
+        }
+      }
+
       [hidden] {
         display: none !important;
       }
@@ -474,6 +621,36 @@
         <div id="calendar"></div>
         <p class="error" id="appError" hidden></p>
 
+        <div class="prices-block" id="pricesBlock">
+          <h2 class="section">Cjenik</h2>
+          <p class="lead">
+            Svaki red je jedno razdoblje, od subote dolaska do subote odlaska. Upiši
+            <strong>punu cijenu po noći</strong> — stranica gostima sama prikazuje cijenu s 10% popusta
+            (stupac „Gost plaća“). Termini koji nisu u cjeniku na stranici su „na upit“.
+            Nakon spremanja nove cijene se na stranici vide za otprilike minutu. Već poslani zahtjevi
+            i potvrđene rezervacije zadržavaju svoj iznos.
+          </p>
+          <div class="table-wrap">
+            <table class="prices">
+              <thead>
+                <tr><th>Od (subota)</th><th>Do (subota odlaska)</th><th>Puna cijena / noć</th><th>Gost plaća</th><th></th></tr>
+              </thead>
+              <tbody id="pricesBody"></tbody>
+            </table>
+          </div>
+          <div class="prices-actions">
+            <button type="button" class="btn ghost" id="pricesAdd">+ Dodaj razdoblje</button>
+            <button type="button" class="btn" id="pricesSave">Spremi cjenik</button>
+          </div>
+          <p class="error" id="pricesError" hidden></p>
+
+          <details class="history" id="pricesHistoryBlock">
+            <summary>Stari cjenici</summary>
+            <p class="hint">Svako spremanje cjenika ovdje ostaje zapisano s datumom, samo za pregled.</p>
+            <div id="pricesHistory"><p class="empty">Učitavanje…</p></div>
+          </details>
+        </div>
+
         <details class="history" id="historyBlock" hidden>
           <summary>Povijest zahtjeva</summary>
           <div class="table-wrap">
@@ -509,9 +686,25 @@
         serverTimestamp,
         arrayUnion,
         arrayRemove,
+        collection,
+        getDocs,
+        query,
+        orderBy,
+        limit,
+        writeBatch,
       } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
       import { Calendar } from "./kalendar.js";
-      import { formatDate, formatEur, weekEnd } from "./cijene.js";
+      import {
+        formatDate,
+        formatEur,
+        weekEnd,
+        isoAddDays,
+        isSaturday,
+        validateSeasons,
+        discounted,
+        DEFAULT_SEASONS,
+        NIGHTS,
+      } from "./cijene.js";
       import { firebaseConfig, ADMIN_UIDS, isConfigured } from "./firebase-config.js";
 
       const views = {
@@ -603,6 +796,7 @@
           show("app");
 
           await loadCalendar();
+          loadPrices();
           await loadRequests();
         });
 
@@ -620,6 +814,164 @@
             appError.hidden = false;
           }
         }
+
+        // ---------- Cjenik (Firestore settings/prices) ----------
+        // U bazi je "to" zadnja noć razdoblja; ovdje se prikazuje subota odlaska.
+
+        const pricesRef = doc(db, "settings", "prices");
+        const pricesBody = document.getElementById("pricesBody");
+        const pricesError = document.getElementById("pricesError");
+
+        // Subota odlaska zadnjeg tjedna koji je cijeli u razdoblju (zadnja subota ≤ to + 1 dan).
+        function departure(to) {
+          let d = isoAddDays(to, 1);
+          for (let i = 0; i < 6 && !isSaturday(d); i++) d = isoAddDays(d, -1);
+          return d;
+        }
+
+        function priceRow(r = {}) {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td data-label="Od (subota)"><input type="date" class="p-from" value="${r.from ?? ""}" aria-label="Od"></td>
+            <td data-label="Do (odlazak)"><input type="date" class="p-to" value="${r.to ? departure(r.to) : ""}" aria-label="Do"></td>
+            <td data-label="Puna cijena / noć"><input type="number" class="p-night" min="1" max="10000" step="0.5" inputmode="decimal" value="${r.night ?? ""}" aria-label="Cijena po noći"></td>
+            <td class="guest"></td>
+            <td><button type="button" class="del" title="Obriši red" aria-label="Obriši red">×</button></td>`;
+          tr.querySelector(".del").addEventListener("click", () => tr.remove());
+          tr.addEventListener("input", () => updateGuest(tr));
+          updateGuest(tr);
+          return tr;
+        }
+
+        function updateGuest(tr) {
+          const night = Number(tr.querySelector(".p-night").value);
+          tr.querySelector(".guest").textContent =
+            night > 0 ? `${formatEur(discounted(night))} / noć · ${formatEur(Math.round(discounted(night) * NIGHTS * 100) / 100)} / tjedan` : "";
+          tr.querySelectorAll("input").forEach((i) => i.classList.remove("bad"));
+        }
+
+        function renderPrices(list) {
+          pricesBody.innerHTML = "";
+          list.forEach((r) => pricesBody.appendChild(priceRow(r)));
+        }
+
+        async function loadPrices() {
+          try {
+            const snap = await getDoc(pricesRef);
+            const saved = snap.exists() ? snap.data().seasons : null;
+            const v = saved ? validateSeasons(saved) : null;
+            renderPrices(v && v.ok ? v.seasons : DEFAULT_SEASONS);
+            pricesError.hidden = true;
+            loadPriceHistory();
+          } catch (err) {
+            renderPrices(DEFAULT_SEASONS);
+            loadPriceHistory();
+            pricesError.textContent =
+              "Spremljeni cjenik se ne može učitati (" + err.code + "). Prikazan je zadani cjenik — provjeri jesu li u Firebaseu objavljena nova pravila (firestore.rules).";
+            pricesError.hidden = false;
+          }
+        }
+
+        // Povijest cjenika: samo za pregled (bez vraćanja).
+        function oldPricesHtml(title, seasons, tag = "") {
+          const rows = seasons
+            .map(
+              (r) =>
+                `<tr><td>${formatDate(r.from)} – ${formatDate(departure(r.to))}</td><td>${formatEur(r.night)} / noć</td><td>gost: ${formatEur(discounted(r.night))}</td></tr>`,
+            )
+            .join("");
+          return `<div class="old-prices"><h3>${title}${tag ? ` <span class="tag">${tag}</span>` : ""}</h3><table>${rows}</table></div>`;
+        }
+
+        async function loadPriceHistory() {
+          const box = document.getElementById("pricesHistory");
+          try {
+            const snap = await getDocs(query(collection(db, "priceHistory"), orderBy("savedAt", "desc"), limit(50)));
+            const fmt = new Intl.DateTimeFormat("hr-HR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" });
+            const items = snap.docs.map((d, i) => {
+              const h = d.data();
+              const when = h.savedAt?.toDate ? fmt.format(h.savedAt.toDate()) : "upravo";
+              const by = h.savedByEmail ? ` · ${h.savedByEmail}` : "";
+              const v = validateSeasons(h.seasons);
+              return v.ok ? oldPricesHtml(`Spremljeno ${when}${by}`, v.seasons, i === 0 ? "trenutni" : "") : "";
+            });
+            items.push(oldPricesHtml("Početni cjenik (prije prvog spremanja u adminu)", DEFAULT_SEASONS, snap.empty ? "trenutni" : ""));
+            box.innerHTML = items.join("");
+          } catch (err) {
+            box.innerHTML = "";
+            const p = document.createElement("p");
+            p.className = "error";
+            p.textContent = "Stari cjenici se ne mogu učitati (" + err.code + "). Provjeri jesu li u Firebaseu objavljena nova pravila (firestore.rules).";
+            box.appendChild(p);
+          }
+        }
+
+        function readPrices() {
+          const rows = [];
+          let problem = null;
+          const mark = (input, msg) => {
+            input.classList.add("bad");
+            problem ??= msg;
+          };
+          [...pricesBody.querySelectorAll("tr")].forEach((tr) => {
+            const from = tr.querySelector(".p-from");
+            const to = tr.querySelector(".p-to");
+            const night = tr.querySelector(".p-night");
+            if (!from.value && !to.value && !night.value) return; // prazan red se preskače
+            if (!isSaturday(from.value)) return mark(from, "Početak razdoblja mora biti subota.");
+            if (!isSaturday(to.value)) return mark(to, "Kraj razdoblja (dan odlaska) mora biti subota.");
+            if (to.value <= from.value) return mark(to, "Kraj mora biti nakon početka.");
+            const n = Number(night.value);
+            if (!(n >= 1 && n <= 10000)) return mark(night, "Upiši cijenu po noći (u eurima).");
+            rows.push({ from: from.value, to: isoAddDays(to.value, -1), night: n });
+          });
+          if (problem) return { ok: false, error: problem };
+          return validateSeasons(rows);
+        }
+
+        document.getElementById("pricesAdd").addEventListener("click", () => {
+          const rows = [...pricesBody.querySelectorAll(".p-to")].map((i) => i.value).filter(Boolean).sort();
+          const last = rows.at(-1);
+          pricesBody.appendChild(priceRow(last ? { from: last } : {}));
+        });
+
+        document.getElementById("pricesSave").addEventListener("click", async (e) => {
+          const btn = e.currentTarget;
+          const v = readPrices();
+          if (!v.ok) {
+            pricesError.textContent = v.error;
+            pricesError.hidden = false;
+            return;
+          }
+          btn.disabled = true;
+          try {
+            // Trenutni cjenik i zapis u povijest spremaju se zajedno (oboje ili ništa).
+            const batch = writeBatch(db);
+            batch.set(pricesRef, {
+              seasons: v.seasons,
+              updatedAt: serverTimestamp(),
+              updatedBy: auth.currentUser.uid,
+            });
+            batch.set(doc(collection(db, "priceHistory")), {
+              seasons: v.seasons,
+              savedAt: serverTimestamp(),
+              savedBy: auth.currentUser.uid,
+              savedByEmail: auth.currentUser.email ?? "",
+            });
+            await batch.commit();
+            renderPrices(v.seasons);
+            loadPriceHistory();
+            pricesError.hidden = true;
+            toast("Cjenik spremljen");
+          } catch (err) {
+            console.error(err);
+            pricesError.textContent =
+              "Spremanje nije uspjelo (" + err.code + "). Ako piše permission-denied, u Firebaseu treba objaviti nova pravila iz firestore.rules.";
+            pricesError.hidden = false;
+          } finally {
+            btn.disabled = false;
+          }
+        });
 
         // ---------- Zahtjevi za rezervaciju (serverski dio, /api/admin) ----------
 

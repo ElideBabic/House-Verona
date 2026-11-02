@@ -83,3 +83,25 @@ Nepromijenjeno (nisu u ovoj mapi): slike. Nepromijenjeno: `firebase-config.js`, 
 - Gumbi Potvrdi / Odbij u mailu su maknuti: mail za novi zahtjev i podsjetnik imaju samo poveznicu na admin, gdje se sve odlučuje. Poveznice iz starih mailova (`api/odluka.js`) sad samo upućuju na admin i ništa ne mijenjaju.
 - „Što kuća nudi” je kompaktniji: na računalu 4 kockice u redu umjesto 3, na mobitelu 2 u redu umjesto 1, s manjim ikonama i razmacima (na mobitelu je dio više nego upola kraći).
 - Na stranici zahvale nakon zahtjeva s uplatom na račun maknuta je rečenica „Ako termin ipak nije slobodan, javit ćemo vam i ništa ne uplaćujete” (sva 4 jezika).
+- Novi mali blok „Domaćica: Ana” iznad podnožja: mala okrugla slika (`domacin.jpg`), dvije rečenice, ocjena domaćina 10 na Bookingu i jezici (sva 4 jezika).
+- Recenzije: dodane 4 s Bookinga (Robina, Stefi, Tamás, Margareth), izmiješane s onima s Googlea. Robina i Tamás su Bookingov prijevod pa uz njih piše „prijevod”. Prvo se vidi 6 recenzija (na mobitelu 3), ostale nakon klika na „Prikaži još recenzija”.
+- Robina i Tamás sad su u originalu (njemački / engleski), oznaka „prijevod” više ne treba.
+- Proba ukrasnog motiva u pozadini: tanka, blijeda grančica masline iza dijela „Kuća” (tekst ide preko). Klasa `.bg-motif` / `.bg-olive` u CSS-u.
+- Ukrasni crteži u pozadini (grančica s 8 maslina; tanka linija, jedva vidljivi, tekst ide preko): nova grančica masline iza „Kuća”, galebovi uz galeriju i „Rezerviraj ovdje”, valovi na dnu „Rezerviraj ovdje”, kompas u „Na otoku” i koordinate Martinšćice 44° 49′ N · 14° 21′ E ispod udaljenosti.
+- Naslovnica na mobitelu: na slici je samo naslov, a kockice (6 osoba, 3 spavaće sobe, 2 kupaonice, pogled na more, plaža <1 min) su manje i ispod slike. Parking je na mobitelu maknut s kockica. Prva slika je pomaknuta da oznaka „We are here” ne pada na naslov. Na računalu je sve ostalo isto.
+- Kockice ispod naslovne slike na mobitelu: parking je vraćen, a kockice su tanje i uže.
+- Cjenik na mobitelu: „€ / noć” je ispod cijene, u jednom redu.
+- Novi odjeljak „07 — Česta pitanja” (iznad bloka s domaćicom), na klik se otvara odgovor: dolazak od 16 h (javimo ako je kuća spremna ranije), odlazak do 10 h, trajanje boravka, parking, plaža, ljubimci, dječji krevetić, boravišna pristojba, plaćanje. U izborniku su dodana „Česta pitanja”, a „Zašto direktno” je preimenovano u „Rezerviraj ovdje”.
+- Česta pitanja: dodano „Ima li posteljine i ručnika?” (uključeni, a dodatni na upit). Pitanje o trajanju sad je „Kojim danima je dolazak?”: rezervacije su moguće samo od subote do subote.
+- Još manje praznog prostora: razmaci između odjeljaka 44 px na računalu i 28 px na mobitelu, manji razmak ispod oznaka „01 — …” i iznad podnožja.
+
+## Izbor jezika na vrhu izbornika
+- Gumbi EN / HR / IT / DE premješteni su s dna bočnog izbornika na vrh, odmah ispod naziva kuće (na mobitelu i na računalu).
+
+## Cjenik u adminu
+- Admin ima novi odjeljak „Cjenik“: razdoblja od subote dolaska do subote odlaska i puna cijena po noći, uz stupac „Gost plaća“ (s 10% popusta). Redovi se mogu dodati, obrisati i spremiti.
+- Cjenik se sprema u Firestore (`settings/prices`). Server (`api/_lib/cjenik.js`) iz njega računa iznos rezervacije, a `/api/dostupnost` ga šalje stranici.
+- Kartice cjenika na stranici, naslov „Cijene 2027“ i cijena „od … / tjedan“ slažu se same iz spremljenog cjenika. Ako ima cijena za više godina, svaka godina ima svoj red kartica.
+- Dok u adminu ništa nije spremljeno, vrijedi dosadašnji cjenik (`DEFAULT_SEASONS` u `cijene.js`).
+- `firestore.rules` ima novi odjeljak `settings/prices` (čitanje javno, pisanje samo admin). **Treba ga objaviti u Firebase konzoli** (Firestore Database → Rules → zalijepi cijeli `firestore.rules` → Publish).
+- Povijest cjenika: svako spremanje zapisuje se i u Firestore kolekciju `priceHistory` (datum, tko je spremio). U adminu je ispod cjenika „Stari cjenici“ samo za pregled, bez vraćanja. Na dnu je uvijek početni cjenik. Zapisi se ne mogu mijenjati ni brisati (pravila u `firestore.rules`).

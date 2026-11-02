@@ -5,9 +5,10 @@
    Tjedan se može rezervirati online samo ako je svih 7 noći unutar neke sezone;
    ostali tjedni (npr. zimi) prikazuju se kao "na upit".
 
-   Za novu godinu samo dodaj redove. */
+   Cjenik se mijenja u adminu (odjeljak "Cjenik"); spremljen je u Firestoreu (settings/prices).
+   Ova tablica je samo zadana vrijednost dok u adminu ništa nije spremljeno. */
 
-export const SEASONS = [
+export const DEFAULT_SEASONS = [
   // 2027
   { from: "2027-03-20", to: "2027-06-18", night: 275 },
   { from: "2027-06-19", to: "2027-07-09", night: 315 },
@@ -17,6 +18,44 @@ export const SEASONS = [
   { from: "2027-08-21", to: "2027-08-27", night: 315 },
   { from: "2027-08-28", to: "2027-10-30", night: 275 },
 ];
+
+/** Trenutni cjenik. Isti niz se puni iz admina (setSeasons), pa ga svi koji ga uvoze vide promijenjenog. */
+export const SEASONS = DEFAULT_SEASONS.map((s) => ({ ...s }));
+
+const isIsoDate = (iso) => {
+  if (typeof iso !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return false;
+  const [y, m, d] = iso.split("-").map(Number);
+  return new Date(Date.UTC(y, m - 1, d)).toISOString().slice(0, 10) === iso;
+};
+
+/**
+ * Provjera cjenika iz admina. Vraća { ok: true, seasons } (sortirano) ili { ok: false, error }.
+ * Pravila: 1–60 redova, ispravni datumi, od ≤ do, cijena 1–10000 €, redovi se ne preklapaju.
+ */
+export function validateSeasons(list) {
+  if (!Array.isArray(list) || list.length < 1 || list.length > 60) return { ok: false, error: "Cjenik mora imati od 1 do 60 redova." };
+  const rows = [];
+  for (const r of list) {
+    if (!r || !isIsoDate(r.from) || !isIsoDate(r.to)) return { ok: false, error: "Neki datum nije ispravan." };
+    if (r.from > r.to) return { ok: false, error: `Red ${formatDate(r.from)}: početak je nakon kraja.` };
+    const night = Number(r.night);
+    if (!Number.isFinite(night) || night < 1 || night > 10000) return { ok: false, error: `Red ${formatDate(r.from)}: cijena nije ispravna.` };
+    rows.push({ from: r.from, to: r.to, night: round2(night) });
+  }
+  rows.sort((a, b) => (a.from < b.from ? -1 : 1));
+  for (let i = 1; i < rows.length; i++) {
+    if (rows[i].from <= rows[i - 1].to) return { ok: false, error: `Redovi ${formatDate(rows[i - 1].from)} i ${formatDate(rows[i].from)} se preklapaju.` };
+  }
+  return { ok: true, seasons: rows };
+}
+
+/** Postavi cjenik (npr. onaj spremljen u adminu). Neispravan cjenik se ignorira. Vraća true ako je postavljen. */
+export function setSeasons(list) {
+  const v = validateSeasons(list);
+  if (!v.ok) return false;
+  SEASONS.splice(0, SEASONS.length, ...v.seasons);
+  return true;
+}
 
 /** Popust za direktnu rezervaciju preko stranice (0.1 = 10%). Cijene u SEASONS su pune cijene. */
 export const DIRECT_DISCOUNT = 0.1;
