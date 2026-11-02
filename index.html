@@ -1810,6 +1810,20 @@
         color: var(--ink-soft);
         line-height: 1.45;
       }
+      .pay-opt-body small.pay-fine {
+        margin-top: 4px;
+        font-size: 10.5px;
+        color: var(--ink-muted);
+        line-height: 1.35;
+        letter-spacing: 0;
+      }
+      #payOptCard {
+        padding-top: 11px;
+        padding-bottom: 11px;
+      }
+      #payOptCard .pay-opt-body small:not(.pay-fine) {
+        font-size: 12.5px;
+      }
       .pay-opt[hidden] {
         display: none;
       }
@@ -2761,6 +2775,112 @@
           padding-top: 12px;
         }
       }
+      /* Kompaktniji kalendar na naslovnici: niži redovi, manja oznaka stanja,
+         na računalu dva mjeseca jedan pored drugog. */
+      .planner .cal-head {
+        margin-bottom: 14px;
+        gap: 14px;
+      }
+      .planner .cal-nav {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+      }
+      .planner .cal-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+      }
+      .planner .cal-month-name {
+        font-size: 17px;
+        margin-bottom: 6px;
+      }
+      .planner .cal-dow,
+      .planner .cal-week {
+        grid-template-columns: repeat(7, 1fr) minmax(52px, auto);
+        gap: 0;
+      }
+      .planner .cal-dow {
+        margin-bottom: 4px;
+      }
+      .planner .cal-dow-cell {
+        font-size: 9px;
+        letter-spacing: 0.08em;
+      }
+      .planner .cal-chip {
+        font-size: 7.5px;
+        letter-spacing: 0.06em;
+        padding: 0 4px;
+      }
+      .planner .cal-week {
+        padding: 1px;
+        margin-bottom: 3px;
+      }
+      .planner .cal-day {
+        padding: 4px 0;
+        font-size: 12.5px;
+      }
+      /* Zauzeti i tjedni na upitu: brojke lagano prekrižene */
+      .planner .cal-week.is-booked .cal-day,
+      .planner .cal-week.is-pending .cal-day {
+        text-decoration: line-through;
+        text-decoration-thickness: 1px;
+        text-decoration-color: rgba(27, 24, 20, 0.4);
+        color: rgba(27, 24, 20, 0.55);
+      }
+      .planner .cal-legend {
+        margin-top: 12px;
+        gap: 8px 16px;
+        font-size: 10px;
+      }
+      .planner-head {
+        margin-bottom: 18px;
+      }
+      @media (max-width: 640px) {
+        .planner .cal-grid {
+          grid-template-columns: 1fr;
+        }
+        .planner .cal-day {
+          padding: 6px 0;
+          font-size: 13px;
+        }
+      }
+      /* Zastavice uz oznake jezika */
+      .sidebar .lang-toggle {
+        gap: 4px;
+        flex-wrap: wrap;
+      }
+      .sidebar .lang-toggle button {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 6px;
+        font-size: 11.5px;
+      }
+      .lang-toggle .flag {
+        width: 14px;
+        height: 10px;
+        flex: none;
+        border-radius: 1px;
+        box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.25);
+      }
+      .lang-pick select {
+        background-repeat: no-repeat, no-repeat;
+        background-position: left 12px center, right 12px center;
+        background-size: 16px 11px, auto;
+        padding-left: 34px !important;
+      }
+      body[data-lang="en"] .lang-pick select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30' preserveAspectRatio='xMidYMid slice'%3E%3CclipPath id='ukT'%3E%3Cpath d='M30,15h30v15zv15h-30zh-30v-15zv-15h30z'/%3E%3C/clipPath%3E%3Cpath d='M0,0v30h60v-30z' fill='%23012169'/%3E%3Cpath d='M0,0L60,30M60,0L0,30' stroke='%23fff' stroke-width='6'/%3E%3Cpath d='M0,0L60,30M60,0L0,30' clip-path='url(%23ukT)' stroke='%23C8102E' stroke-width='4'/%3E%3Cpath d='M30,0v30M0,15h60' stroke='%23fff' stroke-width='10'/%3E%3Cpath d='M30,0v30M0,15h60' stroke='%23C8102E' stroke-width='6'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%231b1814' stroke-width='1.5'/%3E%3C/svg%3E");
+      }
+      body[data-lang="hr"] .lang-pick select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'%3E%3Crect width='30' height='6.67' fill='%23FF0000'/%3E%3Crect y='6.67' width='30' height='6.67' fill='%23fff'/%3E%3Crect y='13.33' width='30' height='6.67' fill='%23171796'/%3E%3Crect x='11.6' y='4.8' width='6.8' height='7.9' rx='0.6' fill='%23fff'/%3E%3Crect x='12.0' y='5.2' width='1.2' height='1.2' fill='%23FF0000'/%3E%3Crect x='13.2' y='5.2' width='1.2' height='1.2' fill='%23fff'/%3E%3Crect x='14.4' y='5.2' width='1.2' height='1.2' fill='%23FF0000'/%3E%3Crect x='15.6' y='5.2' width='1.2' height='1.2' fill='%23fff'/%3E%3Crect x='16.8' y='5.2' width='1.2' height='1.2' fill='%23FF0000'/%3E%3Crect x='12.0' y='6.4' width='1.2' height='1.2' fill='%23fff'/%3E%3Crect x='13.2' y='6.4' width='1.2' height='1.2' fill='%23FF0000'/%3E%3Crect x='14.4' y='6.4' width='1.2' height='1.2' fill='%23fff'/%3E%3Crect x='15.6' y='6.4' width='1.2' height='1.2' fill='%23FF0000'/%3E%3Crect x='16.8' y='6.4' width='1.2' height='1.2' fill='%23fff'/%3E%3Crect x='12.0' y='7.6' width='1.2' height='1.2' fill='%23FF0000'/%3E%3Crect x='13.2' y='7.6' width='1.2' height='1.2' fill='%23fff'/%3E%3Crect x='14.4' y='7.6' width='1.2' height='1.2' fill='%23FF0000'/%3E%3Crect x='15.6' y='7.6' width='1.2' height='1.2' fill='%23fff'/%3E%3Crect x='16.8' y='7.6' width='1.2' height='1.2' fill='%23FF0000'/%3E%3Crect x='12.0' y='8.8' width='1.2' height='1.2' fill='%23fff'/%3E%3Crect x='13.2' y='8.8' width='1.2' height='1.2' fill='%23FF0000'/%3E%3Crect x='14.4' y='8.8' width='1.2' height='1.2' fill='%23fff'/%3E%3Crect x='15.6' y='8.8' width='1.2' height='1.2' fill='%23FF0000'/%3E%3Crect x='16.8' y='8.8' width='1.2' height='1.2' fill='%23fff'/%3E%3Crect x='12.0' y='10.0' width='1.2' height='1.2' fill='%23FF0000'/%3E%3Crect x='13.2' y='10.0' width='1.2' height='1.2' fill='%23fff'/%3E%3Crect x='14.4' y='10.0' width='1.2' height='1.2' fill='%23FF0000'/%3E%3Crect x='15.6' y='10.0' width='1.2' height='1.2' fill='%23fff'/%3E%3Crect x='16.8' y='10.0' width='1.2' height='1.2' fill='%23FF0000'/%3E%3Crect x='12.0' y='11.2' width='1.2' height='1.2' fill='%23fff'/%3E%3Crect x='13.2' y='11.2' width='1.2' height='1.2' fill='%23FF0000'/%3E%3Crect x='14.4' y='11.2' width='1.2' height='1.2' fill='%23fff'/%3E%3Crect x='15.6' y='11.2' width='1.2' height='1.2' fill='%23FF0000'/%3E%3Crect x='16.8' y='11.2' width='1.2' height='1.2' fill='%23fff'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%231b1814' stroke-width='1.5'/%3E%3C/svg%3E");
+      }
+      body[data-lang="it"] .lang-pick select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='1' height='2' fill='%23009246'/%3E%3Crect x='1' width='1' height='2' fill='%23fff'/%3E%3Crect x='2' width='1' height='2' fill='%23CE2B37'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%231b1814' stroke-width='1.5'/%3E%3C/svg%3E");
+      }
+      body[data-lang="de"] .lang-pick select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 3'%3E%3Crect width='5' height='1' fill='%23000'/%3E%3Crect y='1' width='5' height='1' fill='%23DD0000'/%3E%3Crect y='2' width='5' height='1' fill='%23FFCE00'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%231b1814' stroke-width='1.5'/%3E%3C/svg%3E");
+      }
     </style>
   </head>
   <body data-lang="en">
@@ -2790,10 +2910,10 @@
         <a href="#top" class="side-logo">House Verona<span>.</span></a>
         <p class="side-place">Martinšćica · Cres · ★★★★</p>
         <div class="lang-toggle side-lang">
-          <button onclick="setLang('en')" id="btn-en" class="active">EN</button>
-          <button onclick="setLang('hr')" id="btn-hr">HR</button>
-          <button onclick="setLang('it')" id="btn-it">IT</button>
-          <button onclick="setLang('de')" id="btn-de">DE</button>
+          <button onclick="setLang('en')" id="btn-en" class="active"><svg class="flag" aria-hidden="true" focusable="false" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice"><clipPath id="ukT"><path d="M30,15h30v15zv15h-30zh-30v-15zv-15h30z"/></clipPath><path d="M0,0v30h60v-30z" fill="#012169"/><path d="M0,0L60,30M60,0L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0L60,30M60,0L0,30" clip-path="url(#ukT)" stroke="#C8102E" stroke-width="4"/><path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#C8102E" stroke-width="6"/></svg>EN</button>
+          <button onclick="setLang('hr')" id="btn-hr"><svg class="flag" aria-hidden="true" focusable="false" viewBox="0 0 30 20"><rect width="30" height="6.67" fill="#FF0000"/><rect y="6.67" width="30" height="6.67" fill="#fff"/><rect y="13.33" width="30" height="6.67" fill="#171796"/><rect x="11.6" y="4.8" width="6.8" height="7.9" rx="0.6" fill="#fff"/><rect x="12.0" y="5.2" width="1.2" height="1.2" fill="#FF0000"/><rect x="13.2" y="5.2" width="1.2" height="1.2" fill="#fff"/><rect x="14.4" y="5.2" width="1.2" height="1.2" fill="#FF0000"/><rect x="15.6" y="5.2" width="1.2" height="1.2" fill="#fff"/><rect x="16.8" y="5.2" width="1.2" height="1.2" fill="#FF0000"/><rect x="12.0" y="6.4" width="1.2" height="1.2" fill="#fff"/><rect x="13.2" y="6.4" width="1.2" height="1.2" fill="#FF0000"/><rect x="14.4" y="6.4" width="1.2" height="1.2" fill="#fff"/><rect x="15.6" y="6.4" width="1.2" height="1.2" fill="#FF0000"/><rect x="16.8" y="6.4" width="1.2" height="1.2" fill="#fff"/><rect x="12.0" y="7.6" width="1.2" height="1.2" fill="#FF0000"/><rect x="13.2" y="7.6" width="1.2" height="1.2" fill="#fff"/><rect x="14.4" y="7.6" width="1.2" height="1.2" fill="#FF0000"/><rect x="15.6" y="7.6" width="1.2" height="1.2" fill="#fff"/><rect x="16.8" y="7.6" width="1.2" height="1.2" fill="#FF0000"/><rect x="12.0" y="8.8" width="1.2" height="1.2" fill="#fff"/><rect x="13.2" y="8.8" width="1.2" height="1.2" fill="#FF0000"/><rect x="14.4" y="8.8" width="1.2" height="1.2" fill="#fff"/><rect x="15.6" y="8.8" width="1.2" height="1.2" fill="#FF0000"/><rect x="16.8" y="8.8" width="1.2" height="1.2" fill="#fff"/><rect x="12.0" y="10.0" width="1.2" height="1.2" fill="#FF0000"/><rect x="13.2" y="10.0" width="1.2" height="1.2" fill="#fff"/><rect x="14.4" y="10.0" width="1.2" height="1.2" fill="#FF0000"/><rect x="15.6" y="10.0" width="1.2" height="1.2" fill="#fff"/><rect x="16.8" y="10.0" width="1.2" height="1.2" fill="#FF0000"/><rect x="12.0" y="11.2" width="1.2" height="1.2" fill="#fff"/><rect x="13.2" y="11.2" width="1.2" height="1.2" fill="#FF0000"/><rect x="14.4" y="11.2" width="1.2" height="1.2" fill="#fff"/><rect x="15.6" y="11.2" width="1.2" height="1.2" fill="#FF0000"/><rect x="16.8" y="11.2" width="1.2" height="1.2" fill="#fff"/></svg>HR</button>
+          <button onclick="setLang('it')" id="btn-it"><svg class="flag" aria-hidden="true" focusable="false" viewBox="0 0 3 2"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#CE2B37"/></svg>IT</button>
+          <button onclick="setLang('de')" id="btn-de"><svg class="flag" aria-hidden="true" focusable="false" viewBox="0 0 5 3"><rect width="5" height="1" fill="#000"/><rect y="1" width="5" height="1" fill="#DD0000"/><rect y="2" width="5" height="1" fill="#FFCE00"/></svg>DE</button>
         </div>
       </div>
 
@@ -3079,6 +3199,12 @@
                   <span class="lang-hr">Platite odmah, sigurno preko Stripea.</span>
                   <span class="lang-it">Pagate subito, in modo sicuro con Stripe.</span>
                   <span class="lang-de">Jetzt bezahlen, sicher über Stripe.</span>
+                </small>
+                <small class="pay-fine">
+                  <span class="lang-en">Please note: Your payment is initially pre-authorised (reserved) on your card. The amount will only be charged once we have confirmed your reservation and availability. Your booking is confirmed only after our final confirmation.</span>
+                  <span class="lang-hr">Napomena: iznos se najprije samo rezervira (blokira) na vašoj kartici. Naplaćuje se tek kad potvrdimo rezervaciju i dostupnost termina. Rezervacija je potvrđena tek nakon naše konačne potvrde.</span>
+                  <span class="lang-it">Nota: l'importo viene inizialmente solo preautorizzato (bloccato) sulla vostra carta. Verrà addebitato solo dopo che avremo confermato la prenotazione e la disponibilità. La prenotazione è confermata solo dopo la nostra conferma definitiva.</span>
+                  <span class="lang-de">Hinweis: Der Betrag wird zunächst nur auf Ihrer Karte vorautorisiert (reserviert). Abgebucht wird er erst, wenn wir Ihre Buchung und die Verfügbarkeit bestätigt haben. Die Buchung gilt erst nach unserer endgültigen Bestätigung als bestätigt.</span>
                 </small>
               </span>
             </label>
@@ -3976,10 +4102,10 @@
                 <span class="lang-de">Willkommensgeschenk: unser hausgemachtes Olivenöl</span>
               </h4>
               <p>
-                <span class="lang-en">When you book directly, a bottle from our own olive trees is waiting for you on arrival. The taste of the island.</span>
-                <span class="lang-hr">Kad rezerviraš direktno, po dolasku te čeka boca ulja s naših maslina. Okus otoka.</span>
-                <span class="lang-it">Prenotando direttamente, all'arrivo ti aspetta una bottiglia d'olio dei nostri ulivi. Il sapore dell'isola.</span>
-                <span class="lang-de">Bei Direktbuchung wartet bei der Ankunft eine Flasche Öl von unseren Olivenbäumen auf dich. Der Geschmack der Insel.</span>
+                <span class="lang-en">When you book directly, enjoy a complimentary gift of our own organically grown extra virgin olive oil. A little taste of the island, from our trees to your table.</span>
+                <span class="lang-hr">Kad rezervirate izravno, na poklon dobivate naše ekstra djevičansko maslinovo ulje iz ekološkog uzgoja. Mali okus otoka, s naših stabala na vaš stol.</span>
+                <span class="lang-it">Prenotando direttamente, riceverete in omaggio il nostro olio extravergine d'oliva da agricoltura biologica. Un piccolo assaggio dell'isola, dai nostri alberi alla vostra tavola.</span>
+                <span class="lang-de">Bei Direktbuchung erhalten Sie als Geschenk unser eigenes natives Olivenöl extra aus biologischem Anbau. Ein kleiner Geschmack der Insel – von unseren Bäumen auf Ihren Tisch.</span>
               </p>
             </div>
           </div>
@@ -4829,6 +4955,8 @@
         const online = data.online;
         $("calendar").innerHTML = "";
         calendar = new Calendar($("calendar"), {
+          // Na mobitelu jedan mjesec (strelicama dalje), na računalu dva jedan pored drugog.
+          monthsShown: window.matchMedia("(max-width: 640px)").matches ? 1 : 2,
           isSelectable: online ? isFree : null,
           onSelect,
         });
