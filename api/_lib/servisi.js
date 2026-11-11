@@ -79,8 +79,8 @@ export function bankDetails() {
   };
 }
 
-/** Koliko dana gost ima za uplatu nakon potvrde (BANK_DAYS, zadano 5). */
-export const bankDays = () => Math.max(1, Number(process.env.BANK_DAYS || 5));
+/** Koliko dana gost ima za uplatu nakon potvrde (BANK_DAYS, zadano 2). */
+export const bankDays = () => Math.max(1, Number(process.env.BANK_DAYS || 2));
 
 /** Koji su načini plaćanja uključeni — ovisno o tome što je postavljeno u Vercelu. */
 export function payMethods() {
