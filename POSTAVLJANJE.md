@@ -153,7 +153,7 @@ Vercel → projekt → **Settings → Environment Variables** (Production):
 | `BANK_OWNER` | ime i prezime vlasnika tog računa |
 | `BANK_BIC` | nije obavezno, BIC/SWIFT banke (korisno gostima izvan EU) |
 | `BANK_NAME` | nije obavezno, naziv banke |
-| `BANK_DAYS` | nije obavezno, rok za uplatu u danima, zadano `5` |
+| `BANK_DAYS` | nije obavezno, rok za uplatu u danima, zadano `2` |
 
 Za drugi SMTP (ne Gmail) dodaj još `SMTP_HOST` i `SMTP_PORT`.
 

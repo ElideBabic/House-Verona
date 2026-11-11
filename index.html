@@ -2846,15 +2846,18 @@
       }
       /* Zastavice uz oznake jezika */
       .sidebar .lang-toggle {
-        gap: 4px;
-        flex-wrap: wrap;
+        gap: 3px;
+        flex-wrap: nowrap;
+        justify-content: space-between;
       }
       .sidebar .lang-toggle button {
         display: inline-flex;
         align-items: center;
-        gap: 4px;
-        padding: 4px 6px;
-        font-size: 11.5px;
+        gap: 3px;
+        padding: 4px 5px;
+        font-size: 11px;
+        letter-spacing: 0.02em;
+        white-space: nowrap;
       }
       .lang-toggle .flag {
         width: 14px;
@@ -3180,10 +3183,10 @@
                   ><span class="bank-save"> · −<span class="bank-discount">10 €</span></span></span
                 >
                 <small>
-                  <span class="lang-en"><span class="bank-save"><span class="bank-discount">10 €</span> cheaper. </span>You pay after we confirm, within <span class="bank-days">5</span> days.</span>
-                  <span class="lang-hr"><span class="bank-save"><span class="bank-discount">10 €</span> jeftinije. </span>Plaćate nakon naše potvrde, u roku od <span class="bank-days">5</span> dana.</span>
-                  <span class="lang-it"><span class="bank-save"><span class="bank-discount">10 €</span> in meno. </span>Pagate dopo la nostra conferma, entro <span class="bank-days">5</span> giorni.</span>
-                  <span class="lang-de"><span class="bank-save"><span class="bank-discount">10 €</span> günstiger. </span>Sie zahlen nach unserer Bestätigung, innerhalb von <span class="bank-days">5</span> Tagen.</span>
+                  <span class="lang-en"><span class="bank-save"><span class="bank-discount">10 €</span> cheaper. </span>You pay after we confirm, within <span class="bank-days">2</span> days.</span>
+                  <span class="lang-hr"><span class="bank-save"><span class="bank-discount">10 €</span> jeftinije. </span>Plaćate nakon naše potvrde, u roku od <span class="bank-days">2</span> dana.</span>
+                  <span class="lang-it"><span class="bank-save"><span class="bank-discount">10 €</span> in meno. </span>Pagate dopo la nostra conferma, entro <span class="bank-days">2</span> giorni.</span>
+                  <span class="lang-de"><span class="bank-save"><span class="bank-discount">10 €</span> günstiger. </span>Sie zahlen nach unserer Bestätigung, innerhalb von <span class="bank-days">2</span> Tagen.</span>
                 </small>
               </span>
             </label>
@@ -3213,16 +3216,16 @@
           <label class="booking-terms"
             ><input type="checkbox" name="terms" required />
             <span class="pay-card">
-              <span class="lang-en">I agree that the amount is reserved on my card.</span>
-              <span class="lang-hr">Slažem se da se iznos rezervira na mojoj kartici.</span>
-              <span class="lang-it">Accetto che l'importo venga bloccato sulla mia carta.</span>
-              <span class="lang-de">Ich bin einverstanden, dass der Betrag auf meiner Karte reserviert wird.</span>
+              <span class="lang-en">I agree that the amount is reserved on my card. Cancellations made 30 days or less before arrival are non-refundable.</span>
+              <span class="lang-hr">Slažem se da se iznos rezervira na mojoj kartici. Ako otkažem 30 ili manje dana prije dolaska, uplata se ne vraća.</span>
+              <span class="lang-it">Accetto che l'importo venga bloccato sulla mia carta. In caso di cancellazione 30 giorni o meno prima dell'arrivo, l'importo non è rimborsabile.</span>
+              <span class="lang-de">Ich bin einverstanden, dass der Betrag auf meiner Karte reserviert wird. Bei Stornierung 30 Tage oder weniger vor Anreise wird der Betrag nicht erstattet.</span>
             </span>
             <span class="pay-bank">
-              <span class="lang-en">I agree to transfer the full amount within <span class="bank-days">5</span> days of confirmation, otherwise the booking may be cancelled.</span>
-              <span class="lang-hr">Slažem se da ću cijeli iznos uplatiti u roku od <span class="bank-days">5</span> dana od potvrde, inače se rezervacija može otkazati.</span>
-              <span class="lang-it">Mi impegno a versare l'intero importo entro <span class="bank-days">5</span> giorni dalla conferma, altrimenti la prenotazione può essere annullata.</span>
-              <span class="lang-de">Ich überweise den vollen Betrag innerhalb von <span class="bank-days">5</span> Tagen nach Bestätigung, sonst kann die Buchung storniert werden.</span>
+              <span class="lang-en">I agree to transfer the full amount within <span class="bank-days">2</span> days of confirmation, otherwise the booking may be cancelled. Cancellations made 30 days or less before arrival are non-refundable.</span>
+              <span class="lang-hr">Slažem se da ću cijeli iznos uplatiti u roku od <span class="bank-days">2</span> dana od potvrde, inače se rezervacija može otkazati. Ako otkažem 30 ili manje dana prije dolaska, uplata se ne vraća.</span>
+              <span class="lang-it">Mi impegno a versare l'intero importo entro <span class="bank-days">2</span> giorni dalla conferma, altrimenti la prenotazione può essere annullata. In caso di cancellazione 30 giorni o meno prima dell'arrivo, l'importo non è rimborsabile.</span>
+              <span class="lang-de">Ich überweise den vollen Betrag innerhalb von <span class="bank-days">2</span> Tagen nach Bestätigung, sonst kann die Buchung storniert werden. Bei Stornierung 30 Tage oder weniger vor Anreise wird der Betrag nicht erstattet.</span>
             </span>
           </label>
 
@@ -3609,18 +3612,18 @@
             <p>
               <span class="lang-en"
                 >Air conditioning, Wi-Fi, washing machine, dishwasher,
-                hairdryer.</span
+                hairdryer, two coffee machines (filter and Dolce Gusto capsules).</span
               >
               <span class="lang-hr"
                 >Klima, Wi-Fi, perilica rublja, perilica posuđa, sušilo za
-                kosu.</span
+                kosu, dva aparata za kavu (filter i kapsule Dolce Gusto).</span
               >
               <span class="lang-it"
                 >Aria condizionata, Wi-Fi, lavatrice, lavastoviglie,
-                asciugacapelli.</span
+                asciugacapelli, due macchine da caffè (filtro e capsule Dolce Gusto).</span
               >
               <span class="lang-de"
-                >Klimaanlage, WLAN, Waschmaschine, Geschirrspüler, Föhn.</span
+                >Klimaanlage, WLAN, Waschmaschine, Geschirrspüler, Föhn, zwei Kaffeemaschinen (Filter und Dolce-Gusto-Kapseln).</span
               >
             </p>
           </div>
@@ -4228,6 +4231,10 @@
           <details class="faq-item">
             <summary><span class="lang-en">Which days can I arrive?</span><span class="lang-hr">Kojim danima je dolazak?</span><span class="lang-it">In quali giorni si arriva?</span><span class="lang-de">An welchen Tagen ist Anreise?</span></summary>
             <p><span class="lang-en">Bookings are possible only from Saturday to Saturday.</span><span class="lang-hr">Rezervacije su moguće samo od subote do subote.</span><span class="lang-it">Le prenotazioni sono possibili solo da sabato a sabato.</span><span class="lang-de">Buchungen sind nur von Samstag bis Samstag möglich.</span></p>
+          </details>
+          <details class="faq-item">
+            <summary><span class="lang-en">What is the cancellation policy?</span><span class="lang-hr">Što ako moram otkazati?</span><span class="lang-it">Quali sono le condizioni di cancellazione?</span><span class="lang-de">Wie sind die Stornobedingungen?</span></summary>
+            <p><span class="lang-en">If you cancel more than 30 days before arrival, we refund the full amount. For card payments we deduct only the card processing fee (about 2%); bank transfers are refunded in full. Payment is non-refundable for cancellations made 30 days or less before arrival.</span><span class="lang-hr">Ako rezervaciju otkažete više od 30 dana prije dolaska, vraćamo vam cijeli iznos. Kod plaćanja karticom umanjujemo ga samo za proviziju kartičnog plaćanja (oko 2 %), a uplatu na račun vraćamo u cijelosti. Ako otkažete 30 ili manje dana prije dolaska, uplata se ne vraća.</span><span class="lang-it">Se cancellate più di 30 giorni prima dell'arrivo, rimborsiamo l'intero importo. Per i pagamenti con carta tratteniamo solo la commissione della carta (circa 2%); i bonifici vengono rimborsati per intero. In caso di cancellazione 30 giorni o meno prima dell'arrivo, il pagamento non è rimborsabile.</span><span class="lang-de">Bei Stornierung mehr als 30 Tage vor Anreise erstatten wir den vollen Betrag. Bei Kartenzahlung ziehen wir nur die Kartengebühr ab (ca. 2 %); Banküberweisungen werden vollständig erstattet. Bei Stornierung 30 Tage oder weniger vor Anreise wird die Zahlung nicht erstattet.</span></p>
           </details>
           <details class="faq-item">
             <summary><span class="lang-en">Is parking available?</span><span class="lang-hr">Ima li parkinga?</span><span class="lang-it">C'è un parcheggio?</span><span class="lang-de">Gibt es Parkplätze?</span></summary>
@@ -4967,7 +4974,7 @@
         }
         if (first) calendar.view = new Date(first.getFullYear(), first.getMonth(), 1);
         calendar.setBooked(booked, pending);
-        setupPayment(data.methods ?? { card: online, bank: false }, data.bankDays ?? 5);
+        setupPayment(data.methods ?? { card: online, bank: false }, data.bankDays ?? 2);
         $("plannerSubOnline").hidden = !online;
         $("plannerSubOffline").hidden = online;
         $("summaryHintOnline").hidden = !online;

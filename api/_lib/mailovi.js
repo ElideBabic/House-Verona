@@ -44,6 +44,7 @@ const GUEST = {
 
 hvala na rezervaciji za House Verona od ${dates(b)} (subota – subota)!
 
+Iznos od ${formatEur(b.amount)} zasad je samo rezerviran na vašoj kartici, a naplatit ćemo ga tek kad potvrdimo rezervaciju.
 Potvrdu rezervacije poslat ćemo vam na ovaj mail unutar 24 sata.
 
 Za pitanja nam se slobodno javite — ${CONTACT}
@@ -57,6 +58,7 @@ House Verona`,
 
 thank you for booking House Verona from ${dates(b)} (Saturday to Saturday)!
 
+For now the amount of ${formatEur(b.amount)} is only reserved on your card. It will be charged only once we confirm your booking.
 We will send your booking confirmation to this address within 24 hours.
 
 Questions? Just get in touch — ${CONTACT}
@@ -70,6 +72,7 @@ House Verona`,
 
 grazie per aver prenotato House Verona dal ${dates(b)} (da sabato a sabato)!
 
+Per ora l'importo di ${formatEur(b.amount)} è solo bloccato sulla sua carta e verrà addebitato solo quando confermeremo la prenotazione.
 Le invieremo la conferma della prenotazione a questo indirizzo entro 24 ore.
 
 Per qualsiasi domanda — ${CONTACT}
@@ -83,6 +86,7 @@ House Verona`,
 
 vielen Dank für Ihre Buchung von House Verona vom ${dates(b)} (Samstag bis Samstag)!
 
+Der Betrag von ${formatEur(b.amount)} ist vorerst nur auf Ihrer Karte reserviert und wird erst abgebucht, wenn wir Ihre Buchung bestätigen.
 Die Buchungsbestätigung senden wir Ihnen innerhalb von 24 Stunden an diese Adresse.
 
 Bei Fragen melden Sie sich gerne — ${CONTACT}
